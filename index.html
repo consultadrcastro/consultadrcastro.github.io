@@ -1238,7 +1238,7 @@ add({ id:"apellido1", mode:"primera", also:"seguimiento", section:"Ficha básica
 add({ id:"apellido2", mode:"primera", also:"seguimiento", section:"Ficha básica", huli:"ficha",
   type:"text", required:false, title:"Segundo apellido",
   hint:"Si no tienes, déjalo en blanco.", placeholder:"Segundo apellido" });
-add({ id:"fnac", mode:"primera", section:"Ficha básica", huli:"ficha",
+add({ id:"fnac", mode:"primera", also:"seguimiento", section:"Ficha básica", huli:"ficha",
   type:"date", required:true, title:"Fecha de nacimiento" });
 add({ id:"sexo_bio", mode:"primera", section:"Ficha básica", huli:"ficha",
   type:"mc", required:true, title:"Sexo asignado al nacimiento",
@@ -5472,7 +5472,7 @@ async function copyEvolucion() {
 }
 
 
-const HC_JSON_MAX = 45000;
+const HC_JSON_MAX = 30000;
 const HC_FORM = {
   url: "https://docs.google.com/forms/d/e/1FAIpQLSe59hO38T92IFdkOeJmmYRPmtnwXrc3OtsJOjVdJnz-Ygu5HQ/formResponse",
   e: {
@@ -5559,6 +5559,8 @@ function buildHcPayload() {
     if (a !== "" && a >= 0 && a < 130) state.answers.edad = String(a);
   }
   const p = new URLSearchParams();
+  p.append("fvv", "1");
+  p.append("pageHistory", "0,1");
   appendIf(p, HC_FORM.e.nombre, fullName());
   const iso = String(val("fnac") || "").trim();
   const parts = iso.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
