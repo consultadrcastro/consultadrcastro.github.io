@@ -240,6 +240,11 @@ header.top {
 .choices-grid.sexo-grid .sex-mark{width:44px;height:44px;font-size:1.7rem}
 .fnac-err{color:#b3261e;min-height:1em;margin:6px 0 0;font-size:.9rem}
 .fnac-curp-hint{color:var(--amber,#8a5a10);margin:6px 0 0;font-size:.9rem}
+.fnac-row{display:grid;grid-template-columns:minmax(3.6rem,.7fr) minmax(8.2rem,1.4fr) minmax(4.8rem,.9fr);gap:8px;align-items:start;width:100%;max-width:26rem}
+.fnac-col{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fnac-col-lbl{display:block;font-size:.78rem;font-weight:600;line-height:1.2;height:1.2em;margin:0;padding:0;color:var(--ink-soft,#5c5c5c)}
+.fnac-col .field{width:100%;box-sizing:border-box;text-align:center;height:3.25rem;margin:0;vertical-align:top}
+.fnac-col.fnac-mes .field{text-align:left}
 .fecha-mes option[value=""]{font-style:italic}
 .masc-pet-ico{display:block;width:52px;height:52px;margin:0 auto 6px;object-fit:contain}
 .masc-cell.on .masc-pet-ico{animation:rvDown .45s cubic-bezier(.2,.8,.2,1) both}
@@ -562,6 +567,22 @@ select.field { appearance: auto; background: #fff; }
 .booty-mask .booty-anim-c{position:absolute;inset:0;width:100%;height:100%;display:block}
 .booty-mask.booty-anim-on .capa{visibility:hidden}
 .booty-mask.ratio-480-600{aspect-ratio:480/600}
+.booty-mask.ratio-480-540{aspect-ratio:480/540}
+.booty-mask.ratio-480-288{aspect-ratio:480/288}
+/* Booty en pantallas de inicio, botones y gracias (25/11/2026) */
+.booty-fx{position:relative;width:min(200px,52vw);aspect-ratio:480/600;margin:0 auto}
+.booty-fx .booty-mask{position:absolute;inset:0;width:100%;height:100%;margin:0}
+.booty-fx img.booty-fx-capa{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;border:0;background:transparent}
+#screen-done .booty-fx{width:min(180px,48vw);margin:0 auto 6px}
+.mode-square .mode-booty{width:auto;height:68%;aspect-ratio:1;max-width:90%}
+.mode-square .mode-booty .booty-mask{width:100%;height:100%;margin:0}
+.pct-fig.pct-fig-booty{height:auto;align-items:center}
+.pct-fig.pct-fig-booty .booty-mask{width:min(140px,38vw);margin:0 auto}
+.choice.masc-con-ico{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px}
+.masc-pet-ico.booty-mask{width:56px;height:56px;margin:0 auto 2px;aspect-ratio:1;flex:0 0 auto}
+.ahf-escena.con-booty{display:flex!important;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:4px 8px;margin:0 0 12px}
+.ahf-escena.con-booty .booty-mask{width:72px;margin:0}
+.ahf-escena.con-booty .booty-mask.ratio-480-288{width:108px}
 .dev-btn {
   display: inline-block; margin-top: 10px;
   background: none; border: none; color: var(--muted);
@@ -860,17 +881,17 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
   <section id="screen-home" class="screen">
     <div class="hero">
       <div class="home-booty">
-        <span class="booty-capas"><img class="booty-home-gif" data-capa="base" width="200" height="250" alt="Booty bailando con brillo" decoding="async"><img class="booty-efecto" data-capa="brillo" alt="" aria-hidden="true" decoding="async"></span>
+        <div class="booty-fx" id="home-booty-fx" data-slot="booty_inicio_base" data-capa-color="assets/booty_icons/APROBADO_booty_capa_brillo_color_original.webp" role="img" aria-label="Booty bailando con brillos"></div>
       </div>
       <h1>Escoge tu tipo de consulta</h1>
     </div>
     <div class="modes">
       <button class="mode-card mode-square" id="btn-primera" type="button">
-        <img class="mode-img booty-home-gif" id="img-primera" src="booty_bebe_chupon_v2.gif" alt="Booty bebé con chupón" decoding="async">
+        <div class="mode-img mode-booty" id="img-primera" data-slot="booty_bebe_chupon" role="img" aria-label="Booty bebé con chupón"></div>
         <h2>Primera vez</h2>
       </button>
       <button class="mode-card mode-square" id="btn-seguimiento" type="button">
-        <img class="mode-img booty-home-gif" id="img-seguimiento" src="booty_patines_v2.gif" alt="Booty patinando" decoding="async">
+        <div class="mode-img mode-booty" id="img-seguimiento" data-slot="booty_patines" role="img" aria-label="Booty patinando"></div>
         <h2>Seguimiento</h2>
       </button>
     </div>
@@ -903,7 +924,8 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 
   <section id="screen-done" class="screen hidden">
     <div class="thanks" id="thanks">
-      <span class="booty-capas"><img class="booty-done-gif" data-capa="base" width="180" height="225" alt="Booty bailando porque terminaste" decoding="async"><img class="booty-efecto" data-capa="confeti" alt="" aria-hidden="true" decoding="async"></span>
+      <div class="booty-fx" id="done-booty-fx" data-slot="booty_inicio_base" data-capa-color="assets/booty_icons/APROBADO_booty_capa_confeti_color_original.webp" role="img" aria-label="Booty bailando porque terminaste"></div>
+      <div id="booty-fiesta" hidden></div>
       <h1 tabindex="-1" id="thanks-title">Gracias</h1>
       <p id="thanks-msg">Al terminar, tus respuestas se envían al Dr. Agus.</p>
     </div>
@@ -1316,10 +1338,16 @@ const Q = [];
 function add(q) { Q.push(q); return q; }
 
 
+// Opciones fijas (Dr. Agus 25/11/2026): si elige Médico se pregunta cuál; si elige Otro, también ("¿Cuál?").
 add({ id:"quien_refiere", mode:"primera", section:"Ficha básica", huli:"personalizadas",
-  type:"text", required:false,
+  type:"mc", required:true, other:true, otherLbl:"¿Cuál?", otherFocus:true,
   title:"¿Quién te refirió?",
-  placeholder:"Por ejemplo: un amigo, otro médico, o vine por mi cuenta" });
+  options:["Médico","Google","Instagram","Facebook","Conocido"] });
+add({ id:"quien_refiere_medico", mode:"primera", section:"Ficha básica", huli:"personalizadas",
+  type:"text", required:true,
+  title:"¿Qué médico?",
+  placeholder:"Nombre del médico o de la médica",
+  showIf:{ id:"quien_refiere", in:["Médico"] } });
 add({ id:"hobbies", mode:"primera", section:"Ficha básica", huli:"motivo",
   type:"textarea", required:true,
   title:"¿Qué te gusta hacer?",
@@ -1499,19 +1527,29 @@ add({ id:"bristol", mode:"primera", section:"Hábito intestinal", huli:"gi",
   options:[{v:"1",img:"bristol_1"},{v:"2",img:"bristol_2"},{v:"3",img:"bristol_3"},{v:"4",img:"bristol_4"},{v:"5",img:"bristol_5"},{v:"6",img:"bristol_6"},{v:"7",img:"bristol_7"}],
   optionHint: BRISTOL });
 
+// Pujo y tenesmo (Dr. Agus 25/11/2026): primero Sí/No; el porcentaje solo aparece si contesta Sí
+// (antes el porcentaje salía aunque no lo tuviera, caso de Fernando). Pujo = esfuerzo intenso, no el pujo leve normal.
+add({ id:"pujar_tiene", mode:"primera", section:"Hábito intestinal", huli:"gi",
+  type:"mc", required:true, options:["No","Sí"],
+  title:"¿Necesitas pujar muy fuerte, con mucho esfuerzo y durante toda la evacuación, para poder evacuar?",
+  hint:"Hacer un poco de fuerza al evacuar es normal y aquí no cuenta. El pujo es tener que pujar con mucha fuerza (por ejemplo, contener la respiración y apretar el abdomen con todas tus fuerzas) durante toda la evacuación. Si solo pujas un poco, contesta «No».",
+  image:"illus_pujo_tenesmo", imageClass:"q-illus",
+  imageAlt:"Dos recuadros: el pujo es pujar muy fuerte durante toda la evacuación; el tenesmo es la sensación de que el recto sigue lleno al terminar." });
 add({ id:"pujar", mode:"primera", section:"Hábito intestinal", huli:"gi",
   required:true, type:"pct", left:"0%: nunca", right:"100%: siempre",
-  title:"De todas las veces que evacúas, ¿en qué porcentaje necesitas pujar muy fuerte y durante toda la evacuación?",
-  hint:"Todos necesitamos pujar un poco al evacuar. Aquí te preguntamos si necesitas pujar muy fuerte y durante toda la evacuación. No lo confundas con el tenesmo: el pujo es el esfuerzo, no la sensación de que todavía queda algo.",
+  title:"De todas las veces que evacúas, ¿en qué porcentaje necesitas pujar así de fuerte?",
+  showIf:{ id:"pujar_tiene", in:["Sí"] } });
+
+add({ id:"tenesmo_tiene", mode:"primera", section:"Hábito intestinal", huli:"gi",
+  type:"mc", required:true, options:["No","Sí"],
+  title:"Al terminar de evacuar, ¿sientes que el recto sigue lleno y que aún quieres evacuar?",
+  hint:"Lo sientes en el recto (la parte final del intestino, justo arriba del ano), no en el abdomen o la panza. No lo confundas con pujar: esto es la sensación de que sigue lleno cuando ya terminaste.",
   image:"illus_pujo_tenesmo", imageClass:"q-illus",
   imageAlt:"Dos recuadros: el pujo es pujar muy fuerte durante toda la evacuación; el tenesmo es la sensación de que el recto sigue lleno al terminar." });
-
 add({ id:"tenesmo", mode:"primera", section:"Hábito intestinal", huli:"gi",
   required:true, type:"pct", left:"0%: nunca", right:"100%: siempre",
-  title:"De todas las veces que evacúas, ¿en qué porcentaje sientes, al terminar, que el recto sigue lleno y que aún quieres evacuar?",
-  hint:"Lo sientes en el recto (la parte final del intestino, justo arriba del ano), no en el abdomen o la panza. Si no te pasa, toca 0%. No lo confundas con pujar: esto es la sensación de que sigue lleno cuando ya terminaste.",
-  image:"illus_pujo_tenesmo", imageClass:"q-illus",
-  imageAlt:"Dos recuadros: el pujo es pujar muy fuerte durante toda la evacuación; el tenesmo es la sensación de que el recto sigue lleno al terminar." });
+  title:"De todas las veces que evacúas, ¿en qué porcentaje sientes eso?",
+  showIf:{ id:"tenesmo_tiene", in:["Sí"] } });
 
 add({ id:"sangre", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true, other:true,
@@ -1589,6 +1627,7 @@ add({ id:"agua", mode:"primera", section:"Hábito intestinal", huli:"gi",
 
 add({ id:"comidas", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true, /* solo 1, 2, 3 y Más de 3, sin "Otro" (Dr. Agus 20/11/2026) */
+  showIfFn: () => false /* retirada a petición del Dr. Agus 25/11/2026: la fibra se valora solo con frutas y verduras */,
   title:"¿Cuántas comidas haces al día?", chips:true,
   options:["1","2","3","Más de 3"] });
 add({ id:"fruta", mode:"primera", section:"Hábito intestinal", huli:"gi",
@@ -1608,6 +1647,23 @@ add({ id:"verdura", mode:"primera", section:"Hábito intestinal", huli:"gi",
 
 add({ id:"dolor_evac", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true, title:"¿Hay dolor al evacuar?", options:["No","Sí"] });
+// Recurrencia del dolor al evacuar, igual que el sangrado (Dr. Agus 25/11/2026): inicio del episodio,
+// si ya le había pasado, desde hace cuánto y cuántos episodios al año. Van en la pantalla de dolor_evac.
+add({ id:"dolor_inicio", mode:"primera", section:"Hábito intestinal", huli:"gi",
+  type:"text", required:true, dur:["días","semanas","meses","años"],
+  title:"¿Hace cuánto empezó este episodio de dolor?",
+  showIf:{ id:"dolor_evac", in:["Sí"] } });
+add({ id:"dolor_previo", mode:"primera", section:"Hábito intestinal", huli:"gi",
+  type:"mc", required:true, title:"¿Te había pasado antes de este episodio?", options:["No","Sí"],
+  showIf:{ id:"dolor_evac", in:["Sí"] } });
+add({ id:"dolor_previo_desde", mode:"primera", section:"Hábito intestinal", huli:"gi",
+  type:"text", required:true, dur:["días","meses","años"],
+  title:"¿Desde hace cuánto te pasa?",
+  showIf:{ id:"dolor_previo", in:["Sí"] } });
+add({ id:"dolor_episodios_anio", mode:"primera", section:"Hábito intestinal", huli:"gi",
+  type:"number", required:true, suffix:"al año",
+  title:"¿Cuántos episodios tienes al año?",
+  showIf:{ id:"dolor_previo", in:["Sí"] } });
 
 add({ id:"dolor_eva", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"scale", required:false, min:0, max:10, eva:true,
@@ -1725,7 +1781,7 @@ add({ id:"toallas", mode:"primera", section:"Hábito intestinal", huli:"gi",
   options:["No","A veces","Siempre"] });
 
 add({ id:"meds_topicos", mode:"primera", section:"Hábito intestinal", huli:"gi",
-  type:"mc", required:true,
+  type:"mc", required:true, bootySlot:"booty_pomada",
   title:"¿Te aplicas alguna crema, pomada o medicamento en el ano?",
   options:["No","Sí"] });
 
@@ -1873,12 +1929,12 @@ add({ id:"sii_evacuar", mode:"primera", section:"Hábito intestinal", huli:"gi",
   options:[{v:"Sí",img:"ic_si"},{v:"No",img:"ic_no"}],
   showIf:{ id:"sii_dolor", in:["Sí"] } });
 add({ id:"sii_frecuencia", mode:"primera", section:"Hábito intestinal", huli:"gi",
-  type:"mc", required:true, cards:true, cardsSmall:true, bootySlot:"booty_sii_frecuencia",
-  title:"¿Desde que empezó el dolor cambió cuántas veces evacúas?",
-  options:[{v:"Sí",img:"ic_si"},{v:"No",img:"ic_no"}],
+  type:"mc", required:true, bootySlot:"booty_sii_frecuencia",
+  title:"Cuando tienes ese dolor, ¿vas al baño a evacuar más veces, menos veces o igual que de costumbre?",
+  options:["Más veces","Menos veces","Igual"],
   showIf:{ id:"sii_dolor", in:["Sí"] } });
 add({ id:"sii_forma", mode:"primera", section:"Hábito intestinal", huli:"gi",
-  type:"mc", required:true, cards:true, cardsSmall:true, bootySlot:"booty_sii_forma",
+  type:"mc", required:true, cards:true, cardsSmall:true,
   title:"¿Cambió la forma o consistencia de tus heces?",
   options:[{v:"Sí",img:"ic_si"},{v:"No",img:"ic_no"}],
   showIf:{ id:"sii_dolor", in:["Sí"] } });
@@ -2878,8 +2934,8 @@ add({ id:"anorreceptivo", mode:"primera", section:"Preguntas personalizadas", hu
   showIfFn: muestraSexualidadAnal });
 add({ id:"dispareunia", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
   type:"mc", required:true, chips:true, chipsRow2:[],
-  bootySlot:"booty_reposo",
-  bootyPick: function(){ return val("dispareunia") === "Sí" ? "booty_dolor" : "booty_reposo"; },
+  bootySlot:"booty_sonriendo",
+  bootyPick: function(){ return val("dispareunia") === "Sí" ? "booty_dolor" : "booty_sonriendo"; },
   title:"¿Te duele, o suele dolerte de vez en cuando, en el sexo anal?",
   options:["No","Sí"],
   showIf:{ id:"anorreceptivo", in:["Sí"] },
@@ -3347,7 +3403,7 @@ add({ id:"sg_psyllium_apego", mode:"seguimiento", section:"Desde la última cons
   showIf:{ id:"sg_psyllium", in:["No"] } });
 
 add({ id:"sg_banos_ind", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
-  type:"mc", required:true,
+  type:"mc", required:true, bootySlot:"booty_bano_asiento",
   title:"Si te indicó baños de asiento, ¿cuántas veces al día te los indicó?",
   options:["No me los indicó","1","2","3","Más de 3"] });
 add({ id:"sg_banos_hecho", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
@@ -3357,7 +3413,7 @@ add({ id:"sg_banos_hecho", mode:"seguimiento", section:"Desde la última consult
   showIfNot:{ id:"sg_banos_ind", only:["No me los indicó"] } });
 
 add({ id:"sg_meds_ind", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
-  type:"mc", required:true,
+  type:"mc", required:true, bootySlot:"booty_pomada",
   title:"¿El doctor te indicó alguna crema, pomada o medicamento en la consulta anterior?",
   options:["No","Sí"] });
 add({ id:"sg_meds_ind_cual", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
@@ -3381,6 +3437,27 @@ add({ id:"sg_meds_otros_cual", mode:"seguimiento", section:"Desde la última con
   title:"¿Cuál usas, desde cuándo y qué tan seguido?",
   placeholder:"Por ejemplo: pomada con esteroide, desde hace 2 meses, diario",
   showIf:{ id:"sg_meds_otros", in:["Sí"] } });
+// Dilatadores (Dr. Agus 25/11/2026): Sí/No. Si contesta No, pasa directo al siguiente rubro.
+// Si contesta Sí: diámetro actual (mm), veces por semana y si duele o sangra. Va a la nota de seguimiento.
+add({ id:"sg_dilat", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
+  type:"mc", required:true, options:["No","Sí"],
+  title:"¿Usas dilatadores anales?",
+  hint:"Son los conos o tubos que se introducen en el ano para ampliarlo poco a poco, por ejemplo después de una cirugía o por estrechez del ano." });
+add({ id:"sg_dilat_mm", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
+  type:"number", required:true, suffix:"mm",
+  title:"¿De qué diámetro es el dilatador que usas ahora?",
+  hint:"Viene marcado en el dilatador, en milímetros (mm).",
+  showIf:{ id:"sg_dilat", in:["Sí"] } });
+add({ id:"sg_dilat_semana", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
+  type:"number", required:true, suffix:"veces por semana",
+  title:"¿Cuántas veces por semana lo usas?",
+  showIf:{ id:"sg_dilat", in:["Sí"] } });
+add({ id:"sg_dilat_molestias", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
+  type:"check", required:true, exclusive:["Ninguna"],
+  title:"Al usarlo, ¿tienes alguna molestia?",
+  hint:"Puedes marcar más de una.",
+  options:["Ninguna","Dolor","Sangrado"],
+  showIf:{ id:"sg_dilat", in:["Sí"] } });
 
 add({ id:"sg_motivo", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
   type:"text", required:true,
@@ -3472,7 +3549,7 @@ addSgPack({
 addSgPack({
   key:"pujo", kind:"n7", skipActual:true,
   had:"¿Cuando te vio el doctor la vez pasada, necesitabas pujar muy fuerte y durante toda la evacuación?",
-  hadHint:"Todos necesitamos pujar un poco al evacuar. Aquí te preguntamos si necesitabas pujar muy fuerte y durante toda la evacuación.",
+  hadHint:"Hacer un poco de fuerza al evacuar es normal y aquí no cuenta. El pujo es tener que pujar con mucha fuerza (contener la respiración y apretar el abdomen con todas tus fuerzas) durante toda la evacuación. Si solo pujabas un poco, contesta «No».",
   init:"En esa ocasión, ¿qué porcentaje de los días necesitabas pujar?",
   reduc:"¿Qué tanto sientes que se redujo el pujo?",
   bajo:"¿Cuándo empezó a bajar el pujo, después de la consulta?",
@@ -3630,13 +3707,13 @@ add({ id:"sg_bristol", mode:"seguimiento", section:"Evacuaciones de ahora", huli
   hint:"Escala de Bristol. Toca la imagen que más se parezca.",
   options:[{v:"1",img:"bristol_1"},{v:"2",img:"bristol_2"},{v:"3",img:"bristol_3"},{v:"4",img:"bristol_4"},{v:"5",img:"bristol_5"},{v:"6",img:"bristol_6"},{v:"7",img:"bristol_7"}],
   optionHint: BRISTOL });
-add({ id:"sg_pujar", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
+add({ id:"sg_pujar", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi", showIf:{ id:"sg_pujo_tenia", in:["Sí"] } /* Dr. Agus 25/11/2026 */,
   required:true, type:"pct", left:"0%: nunca", right:"100%: siempre",
   title:"Ahora, de todas las veces que evacúas, ¿en qué porcentaje necesitas pujar muy fuerte y durante toda la evacuación?",
   hint:"Todos necesitamos pujar un poco al evacuar. Aquí te preguntamos si necesitas pujar muy fuerte y durante toda la evacuación. No lo confundas con el tenesmo: el pujo es el esfuerzo, no la sensación de que todavía queda algo.",
   image:"illus_pujo_tenesmo", imageClass:"q-illus",
   imageAlt:"Dos recuadros: el pujo es pujar muy fuerte durante toda la evacuación; el tenesmo es la sensación de que el recto sigue lleno al terminar." });
-add({ id:"sg_tenesmo", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
+add({ id:"sg_tenesmo", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi", showIf:{ id:"sg_tenesmo_tenia", in:["Sí"] } /* Dr. Agus 25/11/2026 */,
   required:true, type:"pct", left:"0%: nunca", right:"100%: siempre",
   title:"Ahora, de todas las veces que evacúas, ¿en qué porcentaje sientes, al terminar, que el recto sigue lleno y que aún quieres evacuar?",
   hint:"Lo sientes en el recto (la parte final del intestino, justo arriba del ano), no en el abdomen o la panza. Si no te pasa, toca 0%. No lo confundas con pujar: esto es la sensación de que sigue lleno cuando ya terminaste.",
@@ -3646,6 +3723,7 @@ add({ id:"sg_tenesmo", mode:"seguimiento", section:"Evacuaciones de ahora", huli
 add({ id:"sg_comidas", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
   type:"mc", required:true, chips:true, /* solo 1, 2, 3 y Más de 3 (Dr. Agus 20/11/2026) */
   title:"¿Cuántas comidas al día haces?",
+  showIfFn: () => false /* retirada a petición del Dr. Agus 25/11/2026 */,
   options:["1","2","3","Más de 3"],
   });
 add({ id:"sg_fruta", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
@@ -3737,10 +3815,10 @@ const SEC_INTRO_KICKER = "Ahora hablaremos de:";
 })();
 const BLOCK_OF = {};
 [
-  ["contacto", ["quien_refiere","hobbies","nombre","apellido1","apellido2","fnac","sexo_bio","identidad","orientacion","genero","estado_nac","estado_nac_otro","estado_res","estado_res_otro","tiene_curp","curp","telefono","correo"]],
+  ["contacto", ["quien_refiere","quien_refiere_medico","hobbies","nombre","apellido1","apellido2","fnac","sexo_bio","identidad","orientacion","genero","estado_nac","estado_nac_otro","estado_res","estado_res_otro","tiene_curp","curp","telefono","correo"]],
   ["ficha", ["civil","trabajo","tipo_sangre","estudios","estudios_en","religion","mascotas","mascotas_cual","mascotas_nombres"]],
   ["motivo", ["motivo","relato"]],
-  ["habito", ["evac_dia","evac_cada","bristol","pujar","tenesmo","sangre","sangre_color","sangre_inicio","sangre_ultimo","coagulos","sangre_donde","moco","moco_desde","tiempo_bano","agua","comidas","fruta","verdura","dolor_evac","dolor_eva","dolor_tipo","dolor_cuando","dolor_duracion","dolor_espontaneo","dfa_duracion","dfa_entre","dfa_frecuencia","dfa_3meses","dfa_6meses","dfa_caracter","dfa_desencadena","dolor_noche","irritantes","suplementos","suplementos_cual","suplementos_tiempo","comezon","comezon_inicio","comezon_rascado","toallas","meds_topicos","meds_topicos_cual","humedad","humedad_det","aseo_vigoroso","cuerpo_extranio","cuerpo_extranio_inicio","cuerpo_extranio_tamano","cuerpo_extranio_sale","cuerpo_extranio_duele","ce_dolor_desde","ce_dolor_eva","ce_dolor_tipo","cuerpo_extranio_dolor","fiebre","fiebre_det","fiebre_veces","fiebre_cuando","perdida_peso","perdida_peso_det","perdida_peso_kg","perdida_peso_tiempo","ejercicio","sii_dolor","sii_evacuar","sii_frecuencia","sii_forma","sii_6meses"]],
+  ["habito", ["evac_dia","evac_cada","bristol","pujar_tiene","pujar","tenesmo_tiene","tenesmo","sangre","sangre_color","sangre_inicio","sangre_ultimo","coagulos","sangre_donde","moco","moco_desde","tiempo_bano","agua","comidas","fruta","verdura","dolor_evac","dolor_inicio","dolor_previo","dolor_previo_desde","dolor_episodios_anio","dolor_eva","dolor_tipo","dolor_cuando","dolor_duracion","dolor_espontaneo","dfa_duracion","dfa_entre","dfa_frecuencia","dfa_3meses","dfa_6meses","dfa_caracter","dfa_desencadena","dolor_noche","irritantes","suplementos","suplementos_cual","suplementos_tiempo","comezon","comezon_inicio","comezon_rascado","toallas","meds_topicos","meds_topicos_cual","humedad","humedad_det","aseo_vigoroso","cuerpo_extranio","cuerpo_extranio_inicio","cuerpo_extranio_tamano","cuerpo_extranio_sale","cuerpo_extranio_duele","ce_dolor_desde","ce_dolor_eva","ce_dolor_tipo","cuerpo_extranio_dolor","fiebre","fiebre_det","fiebre_veces","fiebre_cuando","perdida_peso","perdida_peso_det","perdida_peso_kg","perdida_peso_tiempo","ejercicio","sii_dolor","sii_evacuar","sii_frecuencia","sii_forma","sii_6meses"]],
   ["gineco", ["fum_estado","fum","gestas","partos","partos_cesarea","abortos","macrosomia","parto_instrumentado","pap","pap_cuando","pap_conoce","pap_precancer","mamo","mamo_cuando","mamo_hallazgo"]],
   ["wexner", ["wexner_solidas","wexner_liquidas","wexner_gases","wexner_toallas","wexner_estilo"]],
   ["antecedentes", ["ahf","ahf_otros_ca"].concat(AHF_ENF.flatMap(([k]) => ["ahf_"+k+"_quien","ahf_"+k+"_edad"].concat(AHF_FAM.map(f => "ahf_"+k+"_edad_"+f[0])).concat(["ahf_"+k+"_vive","ahf_"+k+"_fallece"]))).concat(["ahf_notas","app_pat"].concat(APP_ENF.flatMap(([k]) => ["app_"+k+"_desde","app_"+k+"_med"])).concat(["app_otro_desde","app_otro_med"]).concat(["app_vih_cd4","app_vih_cd4_fecha","app_vih_cv","app_vih_cv_fecha","app_detalle","app_notas","alergias"].concat(Array.from({length:5},(_,i)=>i+1).flatMap(n=>["alerg"+n+"_cual","alerg"+n+"_reac","alerg"+n+"_otra"])).concat(["cx_tiene","cx1_tipo","cx1_cual","cx1_tecnica","cx1_lado_hernia","cx1_malla","cx1_lado","cx1_cuando","cx1_porque","cx1_compl","cx1_otra","cx2_tipo","cx2_cual","cx2_tecnica","cx2_lado_hernia","cx2_malla","cx2_lado","cx2_cuando","cx2_porque","cx2_compl","cx2_otra","cx3_tipo","cx3_cual","cx3_tecnica","cx3_lado_hernia","cx3_malla","cx3_lado","cx3_cuando","cx3_porque","cx3_compl","cx_mas","hosp","vacunas","vac_vph_tipo","vac_vph_dosis","vac_vph_anio","vac_mpox_dosis","vac_mpox_anio","vac_menb_dosis","vac_menb_anio","vac_hepa_dosis","vac_hepa_anio","vac_hepb_dosis","vac_hepb_anio","fracturas","transfusiones","transf_anio","fuma","fuma_anios","fuma_cant","fuma_dejo","alcohol","alcohol_que","alcohol_freq","drogas","droga_dur_otro","drogas_notas"])))],
@@ -3748,7 +3826,7 @@ const BLOCK_OF = {};
   ["obs", ["temas"]],
   ["abuso", ["abuso_aviso","abuso_sexual","abuso_edad","abuso_repetido"]],
   ["cierre", ["observaciones"]],
-  ["seguimiento", ["sg_cirugia", "sg_cirugia_cuando", "sg_psyllium", "sg_psyllium_apego", "sg_banos_ind", "sg_banos_hecho", "sg_meds_ind", "sg_meds_ind_cual", "sg_meds_ind_apego", "sg_meds_otros", "sg_meds_otros_cual", "sg_motivo"]],
+  ["seguimiento", ["sg_cirugia", "sg_cirugia_cuando", "sg_psyllium", "sg_psyllium_apego", "sg_banos_ind", "sg_banos_hecho", "sg_meds_ind", "sg_meds_ind_cual", "sg_meds_ind_apego", "sg_meds_otros", "sg_meds_otros_cual", "sg_dilat", "sg_dilat_mm", "sg_dilat_semana", "sg_dilat_molestias", "sg_motivo"]],
   ["sg_sintomas", ["sg_sangrado_color", "sg_sangrado_coagulos", "sg_sangrado_donde", "sg_dolor_tipo", "sg_dolor_cuando", "sg_dolor_duracion", "sg_dolor_noche"]],
   ["sg_evac", ["sg_evac_dia", "sg_evac_cada", "sg_bristol", "sg_pujar", "sg_tenesmo", "sg_comidas", "sg_fruta", "sg_verdura", "sg_agua", "sg_tiempo_antes", "sg_tiempo_ahora", "sg_toallas_usaba", "sg_toallas_suspendio"]]
 ].forEach(pair => pair[1].forEach(id => { BLOCK_OF[id] = pair[0]; }));
@@ -3776,16 +3854,51 @@ var CHAIN_CTX = null;
    solo cuando la anterior ya tiene respuesta. Si el doctor no pidió una dirección, se alterna (abajo / de lado). */
 /* Animaciones de Booty teñidas con el tema: capa "línea" + capa "rubor" (máscaras blancas con alfa). Ver booty/formulario/NOTA_CONSULTA_rubor_fiebre.md v4 */
 const BOOTY_MASK = {
+  // ===== Piezas aprobadas por el Dr. Agus (24-25/11/2026), integradas el 25/11/2026. Una tinta: línea en color de tema, relleno blanco. =====
+  booty_bano_asiento: { base:"assets/booty_icons/APROBADO_booty_bano_asiento_v3", label:"Booty sentado en la tina de baño de asiento", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_bano_asiento_v3_t.png" },
+  booty_pomada: { base:"assets/booty_icons/APROBADO_booty_pomada_v2", label:"Tubo de pomada", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_pomada_v2_t.png" },
+  booty_condon: { base:"assets/booty_icons/APROBADO_booty_condon", label:"Condón con carita sonriente", capas:["relleno","linea"], fallback:"assets/booty_icons/APROBADO_booty_condon_t.png" },
+  booty_ejercicio: { base:"assets/booty_icons/APROBADO_booty_ejercicio_v2", label:"Booty con una mancuerna", capas:["relleno","rubor","linea"], fallback:"assets/booty_icons/APROBADO_booty_ejercicio_v2_t.png" },
+  booty_pensando: { base:"assets/booty_icons/APROBADO_booty_pensando", label:"Booty pensando", capas:["relleno","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_pensando_t.png" },
+  // Respaldo aprobado para doxy_malestar No (la pieza principal sigue siendo el bailarín):
+  booty_panza_bien: { base:"assets/booty_icons/APROBADO_booty_panza_bien", label:"Booty sobándose la panza, contento", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_panza_bien_t.png" },
+  booty_sii_frecuencia: { base:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3", label:"Booty con dolor y una escala de cuántas veces evacúa", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3_t.png" },
+  booty_sii_semana: { base:"assets/booty_icons/APROBADO_booty_sii_semana_v2", label:"Booty con dolor y un calendario de 4 semanas", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_semana_v2_t.png" },
+  booty_sii_3meses: { base:"assets/booty_icons/APROBADO_booty_sii_3meses_v2", label:"Booty con tres hojas de calendario", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_3meses_v2_t.png" },
+  booty_sii_6meses: { base:"assets/booty_icons/APROBADO_booty_sii_6meses_v2", label:"Booty con seis hojas de calendario", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_6meses_v2_t.png" },
+  booty_no_leche: { base:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2", label:"Booty rechaza una caja de leche", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2_t.png" },
+  booty_sonriendo: { base:"assets/booty_icons/APROBADO_booty_sonriendo_v3", label:"Booty sonriendo", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sonriendo_v3_t.png" },
+  booty_mascota_perro: { base:"assets/booty_icons/APROBADO_booty_mascota_perro", label:"Perrito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_perro_t.png" },
+  booty_mascota_gato: { base:"assets/booty_icons/APROBADO_booty_mascota_gato", label:"Gatito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_gato_t.png" },
+  booty_mascota_ave: { base:"assets/booty_icons/APROBADO_booty_mascota_ave", label:"Pajarito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_ave_t.png" },
+  booty_mascota_pez: { base:"assets/booty_icons/APROBADO_booty_mascota_pez", label:"Pececito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_pez_t.png" },
+  booty_mascota_conejo: { base:"assets/booty_icons/APROBADO_booty_mascota_conejo", label:"Conejito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_conejo_t.png" },
+  booty_mascota_hamster: { base:"assets/booty_icons/APROBADO_booty_mascota_hamster", label:"Hámster en su rueda", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_hamster_t.png" },
+  booty_mascota_tortuga: { base:"assets/booty_icons/APROBADO_booty_mascota_tortuga", label:"Tortuguita", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_tortuga_t.png" },
+  booty_mascota_reptil: { base:"assets/booty_icons/APROBADO_booty_mascota_reptil", label:"Lagartija", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_reptil_t.png" },
+  booty_fam_abuela: { base:"assets/booty_icons/APROBADO_booty_fam_abuela", label:"Booty abuela", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_abuela_t.png" },
+  booty_fam_abuelo: { base:"assets/booty_icons/APROBADO_booty_fam_abuelo", label:"Booty abuelo", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_abuelo_t.png" },
+  booty_fam_mama: { base:"assets/booty_icons/APROBADO_booty_fam_mama", label:"Booty mamá", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_mama_t.png" },
+  booty_fam_papa: { base:"assets/booty_icons/APROBADO_booty_fam_papa", label:"Booty papá", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_papa_t.png" },
+  booty_fam_hermanos: { base:"assets/booty_icons/APROBADO_booty_fam_hermanos", label:"Booty hermana y hermano", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hermanos_t.png" },
+  booty_fam_hijos: { base:"assets/booty_icons/APROBADO_booty_fam_hijos_v2", label:"Booty hija e hijo", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hijos_v2_t.png" },
+  booty_inicio_base: { base:"assets/booty_icons/APROBADO_booty_inicio_base", label:"Booty bailando", capas:["relleno","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_inicio_base_t.png" },
+  booty_bebe_chupon: { base:"assets/booty_icons/APROBADO_booty_bebe_chupon", label:"Booty bebé con chupón", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_bebe_chupon_t.png" },
+  booty_patines: { base:"assets/booty_icons/APROBADO_booty_patines", label:"Booty patinando", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_patines_t.png" },
   booty_fiebre: { base:"assets/booty_icons/APROBADO_booty_fiebre_v4", label:"Booty con fiebre, termómetro y bolsa de hielo" },
   booty_peso: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_v3", label:"Booty y la pérdida de peso", sinRubor:true }, // una sola capa (v3 aprobada, bikini)
   // variante drag (aprobada): pacientes LGBT. Si faltara el archivo, no se muestra imagen
   booty_bano_tiempo: { base:"assets/booty_icons/APROBADO_booty_bano_tiempo", label:"Booty en el baño", sinRubor:true },
-  booty_cirujano: { base:"assets/booty_icons/booty_cirujano_v1", label:"Booty vestido de cirujano", sinRubor:true },
+  // 4 piezas aprobadas por Booty (24/11/2026, 14:18). Tres capas como v7b: relleno → rubor → línea, color de tema. Rubor vacío a propósito.
+  booty_cirujano: { base:"assets/booty_icons/APROBADO_booty_cirujano_v2", label:"Booty vestido de cirujano", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_cirujano_v2_t.png" },
+  booty_doxy_reloj: { base:"assets/booty_icons/APROBADO_booty_doxy_tomar", label:"Booty con pastilla y reloj", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_doxy_tomar_t.png" },
+  booty_sii_dolor: { base:"assets/booty_icons/APROBADO_booty_sii_dolor", label:"Booty con dolor de panza tipo cólico", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_dolor_t.png" },
+  booty_sii_evacuar: { base:"assets/booty_icons/APROBADO_booty_sii_evacuar", label:"Booty en el baño, con alivio", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_evacuar_t.png" },
   // Graduado oficial (Dr. Agus 24/11/2026), en «Último grado de estudios». Tres capas como v7b: relleno (blanco) → rubor → línea, color de tema. Animado (borla).
-  booty_graduacion: { base:"assets/booty_icons/APROBADO_booty_graduado", label:"Booty graduado, con birrete", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_graduado_t.webp" },
+  booty_graduacion: { base:"assets/booty_icons/APROBADO_booty_graduado", label:"Booty graduado, con birrete", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_graduado_alfa.webp" },
   booty_perdida_peso_drag: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_drag", label:"Booty y la pérdida de peso", sinRubor:true },
-  // Apenado v7b (oficial, Dr. Agus 24/11/2026). Tres capas: relleno → rubor → línea, color de tema, precarga sincronizada.
-  booty_apenado: { base:"assets/booty_icons/APROBADO_booty_apenado_v7b", label:"Booty apenado, cubriéndose la cara con las aletas", capas:["relleno","rubor","linea"], fallback:"assets/booty_icons/APROBADO_booty_apenado_v7b_t.png" },
+  // Apenado v7d (oficial, Dr. Agus 24/11/2026, rubor al 45%). Tres capas: relleno → rubor → línea, color de tema, animado. Fallback: _alfa.webp, luego GIF.
+  booty_apenado: { base:"assets/booty_icons/APROBADO_booty_apenado_v7d", label:"Booty apenado, cubriéndose la cara con las aletas", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_apenado_v7d_alfa.webp" },
   // Reposo oficial (Dr. Agus 24/11/2026). Tres capas como apenado v7b: relleno (blanco) → rubor → línea, color de tema, precarga sincronizada. El rubor está vacío a propósito.
   booty_reposo: { base:"assets/booty_icons/APROBADO_booty_reposo", label:"Booty en reposo, sonriendo", capas:["relleno","rubor","linea"], fallback:"assets/booty_icons/APROBADO_booty_reposo_t.png" },
   // Dolor oficial (Dr. Agus 24/11/2026). Tres capas como apenado v7b y reposo: relleno (blanco) → rubor → línea, color de tema. El rubor está vacío a propósito.
@@ -3821,7 +3934,7 @@ var MASK_REUSE = { key:"", node:null };
    Mientras Booty las rehace, la imagen se oculta (ambas variantes) y los botones conservan su ancho corto.
    Para reactivar: poner en true y subir los 4 webp correctos a assets/booty_icons/. */
 const PESO_MASCARAS_LISTAS = true;
-function bootyOculto(slot) { return !PESO_MASCARAS_LISTAS && (slot === "booty_peso" || slot === "booty_perdida_peso_drag"); }
+function bootyOculto(slot) { if (BOOTY_MASK[slot] && BOOTY_MASK[slot].pending) return true; return !PESO_MASCARAS_LISTAS && (slot === "booty_peso" || slot === "booty_perdida_peso_drag"); }
 function bootyMaskUrlOk(u) {
   return new Promise(ok => {
     const im = new Image();
@@ -3833,13 +3946,34 @@ function bootyMaskUrlOk(u) {
 function bootyMaskFirst(urls) {
   return urls.reduce((p, u) => p.then(got => got || (u ? bootyMaskUrlOk(u) : "")), Promise.resolve(""));
 }
+const BOOTY_ASSET_V = "20261125a";
+function bootyAssetUrl(path) {
+  if (!path) return "";
+  return path + (path.indexOf("?") >= 0 ? "&" : "?") + "v=" + BOOTY_ASSET_V;
+}
+function bootyAnimFallbackCandidates(d) {
+  const cands = [];
+  const add = u => { if (u && cands.indexOf(u) < 0) cands.push(u); };
+  if (d.base) add(d.base + "_alfa.webp");
+  add(d.fallback);
+  if (d.base) { add(d.base + "_t.webp"); add(d.base + "_t.png"); add(d.base + ".gif"); }
+  return cands.map(bootyAssetUrl);
+}
 function bootyAnimImgFallback(box, d) {
-  const u = d.fallback || (d.base ? d.base + "_t.webp" : "");
-  if (!u) return;
+  const urls = bootyAnimFallbackCandidates(d);
+  if (!urls.length) return;
   box.querySelectorAll(".capa").forEach(n => n.remove());
+  const canv = box.querySelector(".booty-anim-c");
+  if (canv) canv.remove();
   box.classList.add("booty-img");
   box.classList.remove("booty-anim-on");
-  const im = el("img"); im.src = u; im.alt = d.label || ""; im.setAttribute("decoding","async");
+  const im = el("img"); im.alt = d.label || ""; im.setAttribute("decoding","async");
+  let i = 0;
+  im.onerror = function () {
+    i++;
+    if (i < urls.length) im.src = urls[i];
+  };
+  im.src = urls[0];
   box.appendChild(im);
 }
 function bootyStartAnim(box, d, urls) {
@@ -3881,29 +4015,30 @@ function bootyStartAnim(box, d, urls) {
       function tick() {
         if (dead || !box.isConnected) { stop(); return; }
         const tema = (getComputedStyle(box).getPropertyValue("--tema") || "").trim() || bootyTemaColor();
-        ctx.clearRect(0, 0, w, h);
         let delay = 40;
-        const jobs = [];
-        for (let li = 0; li < capas.length; li++) {
+        const jobs = capas.map(function (capa, li) {
           const dec = decs[li];
-          if (!dec) continue;
-          const color = capas[li] === "relleno" ? "#fff" : tema;
+          if (!dec) return Promise.resolve(null);
           const fc = (dec.tracks && dec.tracks.selectedTrack && dec.tracks.selectedTrack.frameCount) || n;
-          jobs.push(dec.decode({ frameIndex: i % fc }).then(function (r) {
+          return dec.decode({ frameIndex: i % fc }).catch(() => null);
+        });
+        Promise.all(jobs).then(function (res) {
+          if (dead || !box.isConnected) { res.forEach(r => { if (r) r.image.close(); }); return; }
+          ctx.clearRect(0, 0, w, h);
+          res.forEach(function (r, li) {
+            if (!r) return;
             if (r.image.duration) delay = Math.max(delay, r.image.duration / 1000);
-            octx.clearRect(0, 0, w, h);
             octx.globalCompositeOperation = "source-over";
+            octx.clearRect(0, 0, w, h);
             octx.drawImage(r.image, 0, 0, w, h);
             octx.globalCompositeOperation = "source-in";
-            octx.fillStyle = color;
+            octx.fillStyle = capas[li] === "relleno" ? "#fff" : tema;
             octx.fillRect(0, 0, w, h);
+            octx.globalCompositeOperation = "source-over";
             ctx.drawImage(off, 0, 0);
             r.image.close();
-          }).catch(() => {}));
-        }
-        Promise.all(jobs).then(function () {
+          });
           i++;
-          if (dead) return;
           timer = setTimeout(tick, Math.max(20, Math.min(delay || 40, 200)));
         });
       }
@@ -3911,6 +4046,27 @@ function bootyStartAnim(box, d, urls) {
     });
   }).catch(fallback);
 }
+/* Pantallas de inicio y gracias (Dr. Agus 25/11/2026): baile base con máscaras en color de tema
+   + capa encima a color (brillos en inicio, confeti en gracias; excepción decorativa aprobada). */
+function montarBootyFx(host) {
+  if (!host) return;
+  host.innerHTML = "";
+  host.style.setProperty("--tema", bootyTemaColor());
+  const m = bootyMask(host.getAttribute("data-slot"));
+  if (m) { m.setAttribute("aria-hidden", "true"); host.appendChild(m); }
+  const capa = host.getAttribute("data-capa-color");
+  if (capa) { const im = el("img", { className:"booty-fx-capa" }); im.alt = ""; im.setAttribute("aria-hidden", "true"); im.setAttribute("decoding", "async"); im.src = bootyAssetUrl(capa); host.appendChild(im); }
+}
+function montarBootyBotones() {
+  document.querySelectorAll(".mode-booty[data-slot]").forEach(h => {
+    h.innerHTML = ""; const m = bootyMask(h.getAttribute("data-slot")); if (m) { m.setAttribute("aria-hidden", "true"); h.appendChild(m); }
+  });
+}
+function montarInicio() { montarBootyFx(document.getElementById("home-booty-fx")); montarBootyBotones(); }
+document.addEventListener("DOMContentLoaded", montarInicio);
+/* Gancho para la fiesta de varios Booty al dar clic en «Terminar cuestionario».
+   La pieza está pausada (Booty, 25/11/2026): cuando el Dr. Agus la apruebe, se monta aquí dentro de #booty-fiesta. */
+function bootyFiesta(host) { /* pendiente de aprobación: no hace nada todavía */ }
 function bootyMask(slot) {
   const d = BOOTY_MASK[slot];
   if (!d) return null;
@@ -3928,7 +4084,7 @@ function bootyMask(slot) {
     return box;
   }
   const suf = (window.devicePixelRatio || 1) > 1.25 ? "" : "_240";
-  const v = "?v=" + Date.now();
+  const v = "?v=" + BOOTY_ASSET_V;
   const layerUrl = (capa) => [
     d.base + "_" + capa + "_mascara" + suf + ".webp" + v,
     d.base + "_" + capa + "_mascara" + (suf ? "" : "_240") + ".webp" + v
@@ -4042,7 +4198,7 @@ const ABAJO = ids => Object.fromEntries(ids.map(i => [i, "down"]));
   ["transfusiones", ["transf_anio"]],
   ["drogas", pref("droga_dur_")],
   ["evac_dia", ["evac_cada"]],
-  ["dolor_evac", ["dolor_eva","dolor_tipo","dolor_cuando","dolor_duracion","dolor_espontaneo","dfa_duracion","dfa_entre","dfa_frecuencia","dfa_3meses","dfa_6meses","dfa_caracter","dfa_desencadena"]],
+  ["dolor_evac", ["dolor_inicio","dolor_previo","dolor_previo_desde","dolor_episodios_anio","dolor_eva","dolor_tipo","dolor_cuando","dolor_duracion","dolor_espontaneo","dfa_duracion","dfa_entre","dfa_frecuencia","dfa_3meses","dfa_6meses","dfa_caracter","dfa_desencadena"]],
   ["suplementos", ["suplementos_cual","suplementos_tiempo"]],
   ["comezon", ["comezon_inicio","comezon_rascado"]],
   ["cuerpo_extranio", ["cuerpo_extranio_inicio","cuerpo_extranio_tamano","cuerpo_extranio_sale","cuerpo_extranio_duele","ce_dolor_desde","ce_dolor_eva","ce_dolor_tipo","cuerpo_extranio_dolor"]],
@@ -4058,6 +4214,8 @@ const ABAJO = ids => Object.fromEntries(ids.map(i => [i, "down"]));
   ["sg_banos_ind", ["sg_banos_hecho"]],
   ["sg_meds_ind", ["sg_meds_ind_cual","sg_meds_ind_apego"]],
   ["sg_meds_otros", ["sg_meds_otros_cual"]],
+  ["quien_refiere", ["quien_refiere_medico"]],
+  ["sg_dilat", ["sg_dilat_mm","sg_dilat_semana","sg_dilat_molestias"]],
   ["sg_evac_dia", ["sg_evac_cada"]],
   ["sg_toallas_usaba", ["sg_toallas_suspendio"]]
 ].forEach(([h, ids]) => defChain(h, ids));
@@ -4069,6 +4227,9 @@ const SG_AHORA = { pujo:"sg_pujar", tenesmo:"sg_tenesmo" };
   defChain("sg_"+k+"_tenia", ids);
 });
 defChain("sg_tiempo_antes", ["sg_tiempo_ahora"]);
+// Pujo y tenesmo de primera vez: Sí/No y, solo si es Sí, el porcentaje en la misma pantalla (Dr. Agus 25/11/2026)
+defChain("pujar_tiene", ["pujar"]);
+defChain("tenesmo_tiene", ["tenesmo"]);
 // Estilos pedidos explícitamente: toallitas + aseo bajan; el bloque de medicamentos entra de lado
 defChain("toallas", ["aseo_vigoroso","meds_topicos","meds_topicos_cual"], { aseo_vigoroso:"down", meds_topicos:"side", meds_topicos_cual:"side" });
 // Sexo anal: todas sus preguntas en una pantalla, bajando; Booty (futuro) cruza los brazos al aparecer la de dolor
@@ -4277,7 +4438,7 @@ function renderChain(box, h) {
 
 const SENSITIVE_IDS = new Set([
   // tamizajes sin "Prefiero no responder", a petición del Dr. Agus 19/11/2026
-  "identidad","drogas","droga_dur_otro","drogas_notas","quien_refiere","orientacion","anorreceptivo","dispareunia","condon","condon_freq","doxy_pep","lubricante","enema_usa","enema","enema_cant","info_hisopo","hisopo_anal","hisopo_cual","hisopo_its_cuando","hisopo_its_res","hisopo_vph_cuando","hisopo_vph_res","hisopo_cito_cuando","hisopo_cito_res","debut","parejas","its","trabajo_sexual_recibido","trabajo_sexual_dado","sexo_anonimo","sexo_riesgo","fisting","doble_penetracion","exposiciones_otra","abuso_sexual"
+  "identidad","drogas","droga_dur_otro","drogas_notas","orientacion","anorreceptivo","dispareunia","condon","condon_freq","doxy_pep","lubricante","enema_usa","enema","enema_cant","info_hisopo","hisopo_anal","hisopo_cual","hisopo_its_cuando","hisopo_its_res","hisopo_vph_cuando","hisopo_vph_res","hisopo_cito_cuando","hisopo_cito_res","debut","parejas","its","trabajo_sexual_recibido","trabajo_sexual_dado","sexo_anonimo","sexo_riesgo","fisting","doble_penetracion","exposiciones_otra","abuso_sexual"
 ]);
 
 Q.forEach(q => {
@@ -4663,6 +4824,8 @@ function fnacIssue(iso) {
   if (!String(iso || "").trim()) return "Esta pregunta es obligatoria.";
   const p = parseISODate(iso);
   if (!p) return "Revisa la fecha.";
+  const yNow = Number(todayISO_MX().slice(0, 4));
+  if (p.y < 1900 || p.y > yNow) return "Revisa el año.";
   if (p.iso >= todayISO_MX()) return "La fecha no puede ser hoy ni una fecha futura.";
   const a = ageFromISO(p.iso);
   if (a > 110) return "Revisa la fecha: la edad no puede ser mayor de 110 años.";
@@ -4679,32 +4842,96 @@ function curpFechaISO(curp) {
   const tryY = y => { const iso = y + "-" + pad(mo) + "-" + pad(d); return !fnacIssue(iso) ? iso : ""; };
   return tryY(2000 + yy) || tryY(1900 + yy) || "";
 }
-function bindFnacInput(inp, navQ, opts) {
-  const b = fnacBounds();
-  inp.min = b.min; inp.max = b.max;
-  inp.setAttribute("aria-label", "Fecha de nacimiento");
+function renderFnacRow(box, navQ, opts) {
+  opts = opts || {};
+  const wrap = el("div", { className:"fnac-row" });
+  wrap.setAttribute("role", "group");
+  wrap.setAttribute("aria-label", "Fecha de nacimiento");
+  const col = (cls, lbl, node) => {
+    const c = el("div", { className:"fnac-col " + cls });
+    const l = el("label", { className:"fnac-col-lbl" });
+    l.textContent = lbl;
+    if (node.id) l.htmlFor = node.id;
+    c.appendChild(l); c.appendChild(node);
+    wrap.appendChild(c);
+  };
+  const day = el("input", { className:"field", type:"text", id:"inp-fnac-d" });
+  day.inputMode = "numeric"; day.maxLength = 2; day.placeholder = "Día";
+  day.setAttribute("inputmode", "numeric");
+  day.setAttribute("pattern", "[0-9]*");
+  day.setAttribute("aria-label", "Día");
+  day.autocomplete = "bday-day";
+  const mon = el("select", { className:"field fecha-mes", id:"inp-fnac-m" });
+  mon.setAttribute("aria-label", "Mes");
+  mon.autocomplete = "bday-month";
+  const ph = document.createElement("option"); ph.value = ""; ph.textContent = "Mes"; mon.appendChild(ph);
+  MESES_ES.forEach((name, i) => {
+    const o = document.createElement("option");
+    o.value = String(i + 1);
+    o.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+    mon.appendChild(o);
+  });
+  const year = el("input", { className:"field", type:"text", id:"inp-fnac-y" });
+  year.inputMode = "numeric"; year.maxLength = 4; year.placeholder = "Año";
+  year.setAttribute("inputmode", "numeric");
+  year.setAttribute("pattern", "[0-9]*");
+  year.setAttribute("aria-label", "Año");
+  year.autocomplete = "bday-year";
+  col("fnac-dia", "Día", day);
+  col("fnac-mes", "Mes", mon);
+  col("fnac-anio", "Año", year);
+  box.appendChild(wrap);
+  const fillFromIso = (iso) => {
+    const p = parseISODate(iso);
+    if (!p) return;
+    day.value = String(p.d);
+    mon.value = String(p.mo);
+    year.value = String(p.y);
+  };
   const sync = () => {
-    state.answers.fnac = inp.value;
-    if (opts && opts.manual) state.fnacFromCurp = false;
-    const issue = inp.value ? fnacIssue(inp.value) : "";
-    if (opts && opts.err) opts.err.textContent = issue;
-    if (!issue && inp.value) {
-      const a = ageFromISO(inp.value);
-      if (a !== "" && a >= 0 && a <= 110) state.answers.edad = String(a);
-      if (opts && opts.edad) opts.edad.textContent = "Edad calculada: " + a + " años";
+    if (opts.manual) {
+      let ds = String(day.value || "").replace(/\D/g, "").slice(0, 2);
+      if (ds && Number(ds) > 31) ds = "31";
+      if (ds !== day.value) day.value = ds;
+      let ys = String(year.value || "").replace(/\D/g, "").slice(0, 4);
+      if (ys !== year.value) year.value = ys;
+      const mo = mon.value;
+      if (ds && mo && ys.length === 4) {
+        state.answers.fnac = ys + "-" + String(Number(mo)).padStart(2, "0") + "-" + String(Number(ds)).padStart(2, "0");
+      } else {
+        delete state.answers.fnac;
+      }
+      state.fnacFromCurp = false;
     } else {
-      if (opts && opts.edad) opts.edad.textContent = "";
+      fillFromIso(val("fnac"));
     }
-    if (opts && opts.mismatch) {
+    const iso = String(val("fnac") || "");
+    let issue = "";
+    if (iso) issue = fnacIssue(iso);
+    else if (day.value || mon.value || year.value) {
+      issue = (year.value && String(year.value).length < 4) ? "Escribe el año con 4 dígitos." : "Revisa la fecha.";
+    }
+    if (opts.err) opts.err.textContent = issue;
+    if (!issue && iso) {
+      const a = ageFromISO(iso);
+      if (a !== "" && a >= 0 && a <= 110) state.answers.edad = String(a);
+      if (opts.edad) opts.edad.textContent = "Edad calculada: " + a + " años";
+    } else {
+      if (opts.edad) opts.edad.textContent = "";
+    }
+    if (opts.mismatch) {
       const ciso = curpFechaISO(val("curp"));
-      opts.mismatch.textContent = (inp.value && ciso && ciso !== inp.value)
+      opts.mismatch.textContent = (iso && ciso && ciso !== iso)
         ? "La fecha no coincide con los dígitos de tu CURP (AAMMDD). Si tu fecha es correcta, puedes seguir."
         : "";
     }
     if (navQ) updateNav(navQ);
   };
-  inp.addEventListener("change", () => { if (opts) opts.manual = true; sync(); });
-  inp.addEventListener("input", () => { if (opts) opts.manual = true; sync(); });
+  fillFromIso(val("fnac"));
+  const onUser = () => { opts.manual = true; sync(); };
+  day.addEventListener("input", onUser);
+  mon.addEventListener("change", onUser);
+  year.addEventListener("input", onUser);
   return sync;
 }
 
@@ -5165,16 +5392,17 @@ function renderInput(q) {
     sel.addEventListener("change", () => { state.answers[q.id] = sel.value; updateNav(q); });
     box.appendChild(sel);
   } else if (q.type === "date") {
-    const inp = el("input", { className:"field", type:"date", id:"inp" });
-    inp.value = rawVal;
-    box.appendChild(inp);
     if (q.id === "fnac") {
       const hint = el("p", { className:"q-hint", id:"edad-calc" });
       const err = el("p", { className:"fnac-err" });
-      box.appendChild(hint); box.appendChild(err);
       const st = { err, edad: hint, manual: true };
-      bindFnacInput(inp, q, st)();
+      const syncD = renderFnacRow(box, q, st);
+      box.appendChild(hint); box.appendChild(err);
+      syncD();
     } else {
+      const inp = el("input", { className:"field", type:"date", id:"inp" });
+      inp.value = rawVal;
+      box.appendChild(inp);
       inp.addEventListener("change", () => { state.answers[q.id] = inp.value; updateNav(q); });
       inp.addEventListener("input", () => { state.answers[q.id] = inp.value; updateNav(q); });
     }
@@ -5269,22 +5497,21 @@ function renderInput(q) {
       addTxt("apellido1", "Primer apellido", "Primer apellido", true);
       addTxt("apellido2", "Segundo apellido", "Segundo apellido", false);
       if (q.withFnac) {
-        const l4 = el("label", { className:"pair-lbl" }); l4.textContent = "Fecha de nacimiento"; l4.htmlFor = "inp-fnac";
-        const fi = el("input", { className:"field", type:"date", id:"inp-fnac" });
-        fi.value = String(val("fnac") || "");
+        const l4 = el("label", { className:"pair-lbl" }); l4.textContent = "Fecha de nacimiento"; l4.htmlFor = "inp-fnac-d";
         const edad = el("p", { className:"q-hint", id:"edad-calc" });
         const err = el("p", { className:"fnac-err" });
         const mis = el("p", { className:"fnac-curp-hint" });
         const stF = { err, edad, mismatch: mis, manual: !state.fnacFromCurp };
-        syncFnac = bindFnacInput(fi, q, stF);
+        top.appendChild(l4);
+        syncFnac = renderFnacRow(top, q, stF);
         maybePrefillFnac = () => {
           const iso = curpFechaISO(val("curp"));
-          if (!iso) return;
+          if (!iso) { syncFnac(); return; }
           if (!val("fnac") || state.fnacFromCurp) {
-            fi.value = iso; state.fnacFromCurp = true; stF.manual = false; syncFnac();
+            state.answers.fnac = iso; state.fnacFromCurp = true; stF.manual = false; syncFnac();
           } else syncFnac();
         };
-        top.appendChild(l4); top.appendChild(fi); top.appendChild(edad); top.appendChild(err); top.appendChild(mis);
+        top.appendChild(edad); top.appendChild(err); top.appendChild(mis);
         syncFnac();
       }
     }
@@ -5364,24 +5591,23 @@ function renderInput(q) {
     }
     if (q.withFnac && !sg) {
       box = parte(fnacOk);
-      const l4 = el("label", { className:"pair-lbl" }); l4.textContent = "Fecha de nacimiento"; l4.htmlFor = "inp-fnac";
-      const fi = el("input", { className:"field", type:"date", id:"inp-fnac" });
-      fi.value = String(val("fnac") || "");
+      const l4 = el("label", { className:"pair-lbl" }); l4.textContent = "Fecha de nacimiento"; l4.htmlFor = "inp-fnac-d";
       const edad = el("p", { className:"q-hint", id:"edad-calc" });
       const err = el("p", { className:"fnac-err" });
       const mis = el("p", { className:"fnac-curp-hint" });
       const st = { err, edad, mismatch: mis, manual: !state.fnacFromCurp };
-      const syncF = bindFnacInput(fi, q, st);
+      box.appendChild(l4);
+      const syncF = renderFnacRow(box, q, st);
       const maybePrefill = () => {
         const iso = curpFechaISO(val("curp"));
-        if (!iso) return;
+        if (!iso) { syncF(); return; }
         if (!val("fnac") || state.fnacFromCurp) {
-          fi.value = iso; state.fnacFromCurp = true; st.manual = false; syncF();
+          state.answers.fnac = iso; state.fnacFromCurp = true; st.manual = false; syncF();
         } else syncF();
       };
       if (cu) cu.addEventListener("input", maybePrefill);
       if (nc) nc.addEventListener("click", () => syncF());
-      box.appendChild(l4); box.appendChild(fi); box.appendChild(edad); box.appendChild(err); box.appendChild(mis);
+      box.appendChild(edad); box.appendChild(err); box.appendChild(mis);
       syncF(); maybePrefill();
     } else if (sg && q.withFnac && cu) {
       cu.addEventListener("input", maybePrefillFnac);
@@ -5513,6 +5739,9 @@ function renderInput(q) {
 
 /* ===== Antecedentes familiares: familiares + panel de edades (20/11/2026) ===== */
 // Gancho para figuras futuras: cada familiar fk usará IMAGES["booty_fam_" + fk] (aún no hay imágenes).
+const FAM_SLOT = { mama:"booty_fam_mama", papa:"booty_fam_papa", hermana:"booty_fam_hermanos", hermano:"booty_fam_hermanos",
+  hija:"booty_fam_hijos", hijo:"booty_fam_hijos", abuela_m:"booty_fam_abuela", abuela_p:"booty_fam_abuela",
+  abuelo_m:"booty_fam_abuelo", abuelo_p:"booty_fam_abuelo" };
 function ahfFamSel(k) { const l = asList("ahf_"+k+"_quien"); return AHF_FAM.filter(f => l.includes(f[1])); }
 function ahfPorFamiliar(k) { return AHF_FAM.some(([fk]) => val("ahf_"+k+"_fallece_"+fk) != null && val("ahf_"+k+"_fallece_"+fk) !== ""); }
 function ahfFamOk(k) {
@@ -5549,7 +5778,15 @@ function renderAhfFam(box, q) {
   const wrap = el("div", { className:"ahf-wrap" + (sel.length ? " con-panel" : "") });
   const left = el("div", { className:"ahf-left" });
   const esc = el("div", { className:"ahf-escena" }); esc.hidden = true; esc.setAttribute("aria-hidden", "true");
-  sel.forEach(([fk]) => { const f = el("div", { className:"ahf-fig" }); f.setAttribute("data-fam", fk); f.setAttribute("data-img", "booty_fam_" + fk); esc.appendChild(f); });
+  { const vistos = [];
+    sel.forEach(([fk]) => {
+      const sl = FAM_SLOT[fk];
+      if (!sl || !BOOTY_MASK[sl] || vistos.includes(sl)) return;
+      vistos.push(sl);
+      const f = el("div", { className:"ahf-fig" }); f.setAttribute("data-fam", fk); f.setAttribute("data-img", sl);
+      f.appendChild(bootyMask(sl)); esc.appendChild(f);
+    });
+    if (vistos.length) { esc.hidden = false; esc.classList.add("con-booty"); } }
   left.appendChild(esc);
   const g = el("div", { className:"choices choices-grid ahf-grid" });
   const opts = q.options.map(optionValue); if (!opts.includes("Otro")) opts.splice(opts.length - 1, 0, "Otro");
@@ -5593,7 +5830,7 @@ function renderAhfFam(box, q) {
       const r = el("div", { className:"ahf-row" });
       const hd = el("div", { className:"ahf-row-h" });
       const slot = el("div", { className:"ahf-slot" }); slot.setAttribute("aria-hidden", "true"); slot.setAttribute("data-img", "booty_fam_" + fk);
-      if (IMAGES["booty_fam_" + fk]) { const im = el("img"); im.src = IMAGES["booty_fam_" + fk]; im.alt = ""; slot.appendChild(im); }
+      slot.hidden = true; /* las figuras van en la escena de arriba (Dr. Agus 25/11/2026); primos y tíos no se animan */
       const nm = el("strong"); nm.textContent = flbl;
       hd.appendChild(slot); hd.appendChild(nm); r.appendChild(hd);
       const l1 = el("label", { className:"ahf-q" }); l1.textContent = "¿A qué edad le diagnosticaron?"; l1.htmlFor = "ahf-ed-" + fk; r.appendChild(l1);
@@ -5659,6 +5896,13 @@ function ecOtroInput(id, idInp, onIn) {
   oi.addEventListener("input", () => { state.others[id] = oi.value; onIn && onIn(); });
   ow.appendChild(oi); return ow;
 }
+const MASC_SLOT = { "Perro":"booty_mascota_perro", "Gato":"booty_mascota_gato", "Ave":"booty_mascota_ave", "Pez":"booty_mascota_pez",
+  "Conejo":"booty_mascota_conejo", "Hámster":"booty_mascota_hamster", "Tortuga":"booty_mascota_tortuga", "Reptil":"booty_mascota_reptil" };
+function mascIco(p, bt) {
+  const sl = MASC_SLOT[p];
+  if (sl && BOOTY_MASK[sl]) { const ic = bootyMask(sl); ic.classList.add("masc-pet-ico"); bt.classList.add("masc-con-ico"); bt.insertBefore(ic, bt.firstChild); }
+  return bt;
+}
 function renderMascRel(box, q) {
   const blk = el("div", { className:"mascrel seq-part" }); box.appendChild(blk);
   const rblk = el("div", { className:"seq-part" }); box.appendChild(rblk);
@@ -5683,13 +5927,13 @@ function renderMascRel(box, q) {
       cq.options.map(optionValue).concat(["Otro"]).forEach(p => {
         const on = sel.includes(p);
         const cell = el("div", { className:"masc-cell" + (on ? " on" : "") });
-        cell.appendChild(ecChoice(p, p, on, () => {
+        cell.appendChild(mascIco(p, ecChoice(p, p, on, () => {
           let a = asList("mascotas_cual").slice(); const n = Object.assign({}, mascNum());
           if (a.includes(p)) { a = a.filter(x => x !== p); delete n[p]; } else { a.push(p); if (!n[p]) n[p] = "1"; }
           state.answers.mascotas_cual = a; state.answers.mascotas_num = n;
           draw(); nav();
           if (!on) { const ni = blk.querySelector('.masc-num-inp[data-pet="' + p + '"]'); if (ni) ni.select(); }
-        }));
+        })));
         if (on) {
           const nb = el("label", { className:"masc-num" });
           const sp = el("span"); sp.textContent = "¿cuántos?"; nb.appendChild(sp);
@@ -5821,6 +6065,33 @@ const BOOTY_ICONS_LISTOS = new Set([]);
 function slugIcon(t) { return String(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 40).replace(/_+$/, ""); }
 function bootyIconSlot(q, opt, raw) { return (raw && typeof raw === "object" && raw.slot) || ("booty_icon_" + q.id + "_" + slugIcon(opt)); }
 function bootyIconSrc(slot) { return IMAGES[slot] || (BOOTY_ICONS_LISTOS.has(slot) ? "assets/booty_icons/" + slot + ".png" : ""); }
+/* Iconos a una sola tinta en el color de tema (Dr. Agus 25/11/2026). Excepción: los que indican positivo,
+   negativo o algo intermedio/indeterminado conservan su color semántico. Las fotos (Bristol, color de sangre) no cambian.
+   Trazos y rellenos oscuros -> tinta del tema; rellenos claros -> un tinte claro del mismo tema; el blanco se queda. */
+const ICON_SEMANTIC = new Set(["ic_si","ic_no","icono_pregunta","dx_leche_si","dx_leche_no","dx_leche_nosabia","prep_no","lub_no","irr_ninguno",
+  "colono_normal","colono_anormal","colono_otro","colono_polipos","dx_24","dx_72","dx_mas72"]);
+const ICON_TINTA_CACHE = {};
+function iconoTinta(key) {
+  const src = IMAGES[key];
+  if (!src || ICON_SEMANTIC.has(key) || !/^data:image\/svg\+xml/.test(src) || /;base64,/.test(src.slice(0, 40))) return src;
+  const tema = bootyTemaColor();
+  const ck = key + "|" + tema;
+  if (ICON_TINTA_CACHE[ck]) return ICON_TINTA_CACHE[ck];
+  const i = src.indexOf(",");
+  let svg;
+  try { svg = decodeURIComponent(src.slice(i + 1)); } catch (e) { return src; }
+  const t = (tema.match(/\d+(\.\d+)?/g) || ["10","120","220"]).slice(0, 3).map(Number);
+  const hx = a => "#" + a.map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0")).join("");
+  svg = svg.replace(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g, (m, h) => {
+    if (h.length === 3) h = h.split("").map(c => c + c).join("");
+    const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+    const L = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    if (L > 0.95) return m;
+    if (L > 0.62) { const k = 0.14 + (0.95 - L) * 0.5; return hx(t.map(c => 255 + (c - 255) * k)); }
+    return hx(t);
+  });
+  return (ICON_TINTA_CACHE[ck] = src.slice(0, i + 1) + encodeURIComponent(svg));
+}
 function renderChoices(box, q, multi) {
   if (q.ecMain && !multi) return renderCivil(box, q);
   if (q.ahfFam && multi) return renderAhfFam(box, q);
@@ -5856,7 +6127,7 @@ function renderChoices(box, q, multi) {
     else if (q.resIcons && RES_ICONS[opt]) { const ic = el("span", { className:"res-ico" }); ic.innerHTML = RES_ICONS[opt]; btn.appendChild(ic); }
     if (!slotSrc && raw && typeof raw === "object" && raw.img && IMAGES[raw.img]) {
       const im = el("img", { className:"swatch-img" + (/^bristol_/.test(raw.img) ? " bristol-img" : "") });
-      im.src = IMAGES[raw.img];
+      im.src = iconoTinta(raw.img);
       im.alt = opt;
       btn.appendChild(im);
     }
@@ -6010,7 +6281,11 @@ function renderPct(box, q) {
     else if (k === "ArrowLeft" || k === "ArrowDown") { setV(base - 10); e.preventDefault(); }
     else if (k === "Home") { setV(0); e.preventDefault(); } else if (k === "End") { setV(100); e.preventDefault(); }
   });
-  if (q.pctImg) {
+  if (q.pctImg && BOOTY_MASK[q.pctImg]) {
+    // pieza aprobada (condón, fija para no distraer del deslizador; Dr. Agus 25/11/2026)
+    const fig = el("div", { className:"pct-fig pct-fig-booty" }); fig.setAttribute("aria-hidden", "true");
+    fig.appendChild(bootyMask(q.pctImg)); box.appendChild(fig);
+  } else if (q.pctImg) {
     // marcador temporal neutro hasta que llegue el arte de Booty; crece del 40% al 100% con el valor
     const fig = el("div", { className:"pct-fig" }); fig.setAttribute("data-img", q.pctImg); fig.setAttribute("aria-hidden", "true");
     const sh = el("div", { className:"pct-fig-shape" }); fig.appendChild(sh); box.appendChild(fig);
@@ -6190,6 +6465,8 @@ function renderDone(opts) {
   if (!opts.alreadySent) { submitAndFinish(); return; }
   applyRainbow(null);
   showScreen("screen-done");
+  montarBootyFx(document.getElementById("done-booty-fx"));
+  bootyFiesta(document.getElementById("booty-fiesta"));
   const evo = state.mode === "seguimiento" ? composeNotaSeguimiento() : composeNotaEvolucion();
   const wrap = $("#evolucion-wrap");
   const evoText = $("#evolucion-text");
@@ -6495,7 +6772,7 @@ function composeSii() {
   if (d !== "Sí") return "No cumple criterios Roma IV para SII (sin dolor abdominal).";
   if (has("sii_semana") && ans("sii_semana") !== "Sí") return nc();
   if (has("sii_3meses") && ans("sii_3meses") !== "Sí") return nc();
-  const n = ["sii_evacuar","sii_frecuencia","sii_forma"].filter(id => ans(id) === "Sí").length;
+  const n = ["sii_evacuar","sii_forma"].filter(id => ans(id) === "Sí").length + (siiFrecCambio() ? 1 : 0);
   if (n < 2 || ans("sii_6meses") !== "Sí") return nc();
   const tipos = asList("bristol").map(x => parseInt(String(x).replace(/\D/g, ""), 10)).filter(x => x >= 1 && x <= 7);
   const duras = tipos.some(t => t <= 2), blandas = tipos.some(t => t >= 6);
@@ -6537,8 +6814,14 @@ function composeSiiCriterios() {
   if (has("sii_semana") || has("sii_3meses")) {
     p.push("dolor abdominal tipo cólico (sí)", "≥1 día/semana (" + sn("sii_semana") + ")", "en los últimos 3 meses (" + sn("sii_3meses") + ")");
   } else p.push("dolor abdominal ≥1 día/semana en los últimos 3 meses (sí)");
-  p.push("relacionado con la evacuación (" + sn("sii_evacuar") + ")", "cambio en frecuencia (" + sn("sii_frecuencia") + ")", "cambio en forma (" + sn("sii_forma") + ")", "inicio ≥6 meses (" + sn("sii_6meses") + ")");
+  p.push("relacionado con la evacuación (" + sn("sii_evacuar") + ")", "cambio en frecuencia (" + siiFrecNota() + ")", "cambio en forma (" + sn("sii_forma") + ")", "inicio ≥6 meses (" + sn("sii_6meses") + ")");
   return "Roma IV SII: " + p.join(", ") + ".";
+}
+// sii_frecuencia (Dr. Agus 25/11/2026): Más veces / Menos veces / Igual; "Sí" queda para respuestas anteriores
+function siiFrecCambio() { const v = val("sii_frecuencia"); return v === "Más veces" || v === "Menos veces" || v === "Sí"; }
+function siiFrecNota() {
+  const v = val("sii_frecuencia");
+  return v === "Más veces" ? "sí, evacua más veces" : v === "Menos veces" ? "sí, evacua menos veces" : (v === "Igual" || v === "No") ? "no" : v === "Sí" ? "sí" : "sin respuesta";
 }
 function composeAnalisis() { return [composeSii(), composeDolorFuncional(), composeColonoDue()].filter(Boolean).join(" "); }
 /* Colonoscopia previa para la nota (Dr. Agus 20/11/2026) */
@@ -6830,7 +7113,7 @@ function huliFields() {
   addF("Antecedentes no patológicos", "Alcohol", composeAlcohol());
   addF("Antecedentes no patológicos", "Drogas", composeDrogas());
   addF("Antecedentes no patológicos", "Notas", ans("drogas_notas"));
-  addF("Preguntas personalizadas", "Quien refiere", ans("quien_refiere"));
+  addF("Preguntas personalizadas", "Quien refiere", quienRefiereNota());
   { const v = composeCondon(); if (v) addF("Preguntas personalizadas", "Condon", v); }
   addF("Preguntas personalizadas", "Ultimo tamizaje Hepatitis B referido verbalmente", composeTamiz("hep_b"), "tamizaje_hep_b_si");
   addF("Preguntas personalizadas", "Ultimo tamizaje Hepatitis C referido verbalmente", composeTamiz("hep_c"), "tamizaje_hep_c_si");
@@ -6870,7 +7153,15 @@ function asRefiere(text) {
   if (/^Refiere\b/i.test(s)) return s;
   return "Refiere que " + lowerJoin(s);
 }
+// Si contestó que no tiene pujo o tenesmo, el porcentaje no se pregunta y la nota lo reporta negado (Dr. Agus 25/11/2026)
+const N7_TIENE = { pujar:"pujar_tiene", tenesmo:"tenesmo_tiene", sg_pujar:"sg_pujo_tenia", sg_tenesmo:"sg_tenesmo_tenia" };
+function quienRefiereNota() {
+  const v = val("quien_refiere");
+  if (v === "Médico") return "Médico" + (has("quien_refiere_medico") ? ": " + ans("quien_refiere_medico") : "");
+  return ans("quien_refiere");
+}
 function n7(id) {
+  if (N7_TIENE[id] && val(N7_TIENE[id]) === "No") return "negado";
   const v = ans(id);
   if (!v || v === "No responde") return "";
   if (/^\d+%$/.test(String(v))) return v === "0%" ? "negado" : v;
@@ -7009,7 +7300,7 @@ function porcionNum(v) {
 }
 function composeFibraNote(pre) {
   pre = pre || "";
-  const c = ans(pre + "comidas"), f = ans(pre + "fruta"), v = ans(pre + "verdura");
+  const c = "" /* número de comidas retirado (Dr. Agus 25/11/2026) */, f = ans(pre + "fruta"), v = ans(pre + "verdura");
   if (!c && !f && !v) return "";
   const fn = porcionNum(f), vn = porcionNum(v);
   let cal = "";
@@ -7024,9 +7315,23 @@ function composeFibraNote(pre) {
   if (v) bits.push("verdura " + (/^más/i.test(v) ? "más de 3" : (vn !== null ? vn : v)) + "/3 porciones");
   return (cal ? cal + " (" : "") + bits.join(", ") + (cal ? ")" : "");
 }
+function dolorInicioNota() {
+  const ini = String(val("dolor_inicio") || "");
+  if (!ini) return "";
+  const f = haceFechaAprox(ini);
+  let t = "episodio actual de " + ini + " de evolución" + (f ? " (inicio aprox. " + f + ")" : "");
+  const pv = val("dolor_previo");
+  if (pv === "No") t += ", primer episodio";
+  else if (pv === "Sí") {
+    const de = String(val("dolor_previo_desde") || ""), ep = String(val("dolor_episodios_anio") || "").replace(/\D/g, "");
+    t += ", episodios previos" + (de ? " desde hace " + de : "") + (ep ? ", aprox. " + ep + (ep === "1" ? " episodio" : " episodios") + " al año" : "");
+  }
+  return t;
+}
 function composeDolorNote() {
   if (!has("dolor_evac") || ans("dolor_evac") === "No") return "negado";
   const parts = [];
+  { const di = dolorInicioNota(); if (di) parts.push(di); }
   if (has("dolor_tipo")) {
     let tp = ans("dolor_tipo").replace(/^Otro:\s*/i, "");
     if (/^Como presión/i.test(tp)) tp = "presión";
@@ -7425,6 +7730,16 @@ function composeNotaSeguimiento() {
   if (ans("sg_meds_ind") === "Sí") pad.push("Medicamentos indicados" + (ans("sg_meds_ind_cual") ? " (" + ans("sg_meds_ind_cual") + ")" : "") + ": apego " + (sgPct("sg_meds_ind_apego") || "no referido") + ".");
   if (ans("sg_meds_otros") === "Sí") pad.push("Otros medicamentos no indicados en consulta: " + (ans("sg_meds_otros_cual") || "refiere, sin especificar") + ".");
   else if (ans("sg_meds_otros") === "No") pad.push("Otros medicamentos: niega.");
+  if (val("sg_dilat") === "Sí") {
+    const b = [];
+    const mm = String(val("sg_dilat_mm") || "").replace(/\D/g, ""), sem = String(val("sg_dilat_semana") || "").replace(/\D/g, "");
+    if (mm) b.push("diámetro actual " + mm + " mm");
+    if (sem) b.push(sem + (sem === "1" ? " vez" : " veces") + " por semana");
+    const mo = asList("sg_dilat_molestias");
+    if (mo.includes("Ninguna")) b.push("sin dolor ni sangrado");
+    else if (mo.length) b.push("con " + mo.filter(x => x === "Dolor" || x === "Sangrado").map(x => x.toLowerCase()).join(" y "));
+    pad.push("Dilatadores: en uso" + (b.length ? ", " + b.join(", ") : "") + ".");
+  } else if (val("sg_dilat") === "No") pad.push("Dilatadores: no los usa.");
   const ind = ans("sg_banos_ind");
   if (/no me los indicó/i.test(ind || "")) pad.push("Baños de asiento: no se los indicó.");
   else if (ind) {
@@ -7734,6 +8049,7 @@ const SIMULADO = {
     relato: "Desde hace tres meses nota sangre en el papel y comezón anal. Cree que pueden ser hemorroides y quiere una revisión.",
     evac_dia: "2",
     bristol: ["3"],
+    pujar_tiene: "Sí", tenesmo_tiene: "Sí",
     pujar: "60%",
     tenesmo: "40%",
     sangre: "A veces",
@@ -7796,7 +8112,7 @@ const SIMULADO = {
     droga_dur_marihuana: "2 años, dos veces al mes; lo dejó hace 3 años",
     droga_dur_poppers: "5 años, uso ocasional, todavía lo usa a veces",
     drogas_notas: "No usa cristal, cocaína ni otras sustancias.",
-    quien_refiere: "Un amigo que ya es paciente del consultorio",
+    quien_refiere: "Conocido",
     orientacion: "Homosexual",
     anorreceptivo: "Sí",
     dispareunia: "Sí",
