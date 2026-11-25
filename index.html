@@ -573,8 +573,9 @@ select.field { appearance: auto; background: #fff; }
 .booty-fx{position:relative;width:min(200px,52vw);aspect-ratio:480/600;margin:0 auto}
 .booty-fx .booty-mask{position:absolute;inset:0;width:100%;height:100%;margin:0}
 .booty-fx img.booty-fx-capa{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;border:0;background:transparent}
-#screen-done .booty-fx{width:min(180px,48vw);margin:0 auto 6px}
-.mode-square .mode-booty{width:auto;height:68%;aspect-ratio:1;max-width:90%}
+#screen-done .booty-fx{width:min(480px,100%);aspect-ratio:480/220;margin:0 auto 10px}
+.booty-mask.ratio-480-220{aspect-ratio:480/220}
+.mode-square .mode-booty{width:auto;height:68%;aspect-ratio:1;max-width:90%;background:transparent}
 .mode-square .mode-booty .booty-mask{width:100%;height:100%;margin:0}
 .pct-fig.pct-fig-booty{height:auto;align-items:center}
 .pct-fig.pct-fig-booty .booty-mask{width:min(140px,38vw);margin:0 auto}
@@ -715,6 +716,10 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 .cards .choice .k{display:none}
 .cards .choice img.swatch-img.bristol-img{width:100%;height:64px;object-fit:contain;margin:0}
 .cards .choice img.swatch-img:not(.bristol-img){width:100%;height:84px;object-fit:contain;margin:0;border:0;background:transparent;border-radius:10px}
+.choice .booty-mask.choice-booty{position:relative;flex:0 0 auto;width:56px;height:56px;margin:0;background:transparent}
+.cards .choice .booty-mask.choice-booty{width:100%;height:84px;margin:0 auto}
+.nq-units{display:flex;flex-wrap:wrap;gap:8px}
+.nq-units .uf-u{flex:1 1 0;min-width:0;padding:10px 8px;font-size:.92rem}
 .cards .choice .txt:only-of-type{font-weight:500}
 .cards.no-num .choice .txt{font-size:.9rem;font-weight:500;line-height:1.3}
 .cards .choice .txt{font-weight:700;font-size:1.05rem}
@@ -798,7 +803,7 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 .ab-bubble{position:relative;flex:1;margin:0 0 0 10px;padding:12px 14px;background:var(--green-soft);border:2px solid var(--green);border-radius:16px;color:var(--green-deep);font-weight:700;line-height:1.35}
 .ab-bubble::before{content:"";position:absolute;left:-12px;top:50%;margin-top:-9px;border:9px solid transparent;border-right:12px solid var(--green);border-left:0}
 .ab-bubble::after{content:"";position:absolute;left:-8px;top:50%;margin-top:-7px;border:7px solid transparent;border-right:9px solid var(--green-soft);border-left:0}
-.rvx-down{animation:rvDown .45s cubic-bezier(.2,.8,.2,1) both}
+.rvx-down{animation:rvDown .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
 .rvx-side{animation:rvSide .45s cubic-bezier(.2,.8,.2,1) both}
 @media (prefers-reduced-motion:reduce){.rvx-down,.rvx-side{animation:none!important}}
 .seq-part + .seq-part{margin-top:6px}
@@ -828,7 +833,7 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 .booty-mask .capa.relleno{background-color:#fff}
 .booty-mask .capa.rubor,.booty-mask .capa.linea{background-color:var(--tema,var(--green-deep))}
 .booty-mask.booty-emoji{display:flex;align-items:center;justify-content:center;font-size:92px;line-height:1;background:transparent}
-.booty-mask.booty-img img,.bq-lado .booty-mask img{width:100%;height:100%;object-fit:contain;background:transparent;border:none;display:block}
+.booty-mask.booty-img img,.bq-lado .booty-mask img,.mode-booty img{width:100%;height:100%;object-fit:contain;background:transparent;border:none;display:block}
 .ab-safe .ab-booty .booty-mask{width:96px;height:96px;max-width:96px}
 .nav.nav-finish{flex-wrap:wrap;align-items:stretch}
 .nav.nav-finish #btn-back{margin-right:auto}
@@ -924,7 +929,7 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 
   <section id="screen-done" class="screen hidden">
     <div class="thanks" id="thanks">
-      <div class="booty-fx" id="done-booty-fx" data-slot="booty_inicio_base" data-capa-color="assets/booty_icons/APROBADO_booty_capa_confeti_color_original.webp" role="img" aria-label="Booty bailando porque terminaste"></div>
+      <div class="booty-fx" id="done-booty-fx" data-slot="booty_fiesta" data-capa-color="assets/booty_icons/APROBADO_booty_capa_confeti_fiesta_color_original.webp" role="img" aria-label="Booty de fiesta, celebrando que terminaste"></div>
       <div id="booty-fiesta" hidden></div>
       <h1 tabindex="-1" id="thanks-title">Gracias</h1>
       <p id="thanks-msg">Al terminar, tus respuestas se envían al Dr. Agus.</p>
@@ -992,7 +997,8 @@ IMAGES.img_colonoscopia = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2w
 IMAGES.img_sangre_oculta = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wAARCAHgAoADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3GiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopCQBkkAepoAWiqkuo20Wfn3Y/u/41nz+JLOMkb4/xfP8qCXOK3Zt0VzD+LYAflIP0Q0g8Ww55/8ARZ/xosR7aHc6iisC38T2khAMiZ98r/Ote2u4bgDy25PY0FqcZbMsUUUUFBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUVG88Uf33Ue2arvfr/wAskZvfoKBXRPczrBEXbnsB6muI1nxHLJK0duQ2Djeeg+g/rXRX7yXcLozohKkKAehIrz2e3ltZDFOhRx2P9KaOavOS0Q6a5muDmaV3+p4qOkFOqjkDNFGKKBBWp4eu5o76OBGYxtk4/ukDORUFrpd3c4KxFE/vyfKK3NKtLa0dkibzZtvzyY4HsKTNacZXudhbuZIUdupHNSUyFdsSL6KKfUnooKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqKWeOL7x59B1pLiQqAiffbp7VVdhDkIMv3Y0CbJHuZWGUjCD+85qrLOW+/Mzey8CopXJ+aR/xJqpJdRr93LH2pXM3IsmTH3UA+vNNZmI+Y1TE80pxGoX9amh0+W4OWLuPrgUidWD3ESdXGfQc1Uv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YUBtqZWqXX2q6Z8/u14X6etdF4L08xWr6hKv7y54QH+GMdPz6/lXM2Fk2p6hDZLna53SkfwoOv59K9R0+3XcoVQI4wAAOnsKib6GmHhzS5mXbaPyogD1PJqaiipO4KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArG1rQLPVV/fwqzDowOGX6GtmigTSaszzm88GXMJJsrzI7R3K/wDsw/wrGu9O1KyBN3YybR/y0i+df0r14gEYIBFQvaxtyAVPtTUmc8sNF7aHjsc8T8K4z6d6lr0jUfDllfA/aLWGU/3tu1vzFc3e+CfLJNjeSwn+5MN6/n1qlNdTGWHmttTmwSDkEg+oq3DqV1D/AMtN49H5outE1i0z5lmJ0H8du279OtZ/nxhikmY3HVZBtP61V0zF3jvobsesRvxcQfivNSfb9OPOWHttNYXXkc0lA+dmxPq8aKVtYuf7zcfpWPPKzlpZWJPUk0hPc9KtaJpza1ehAD9iiIM79m/2R9aHoLWTsdH4M04wWTXkq4nu8EA9VT+Ef1rtrePyogvfqap2EILbsAKnAArQrHd3PSpxUY2CiiimWFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABSEAjmlooAie3jb+HB9RVC90eC7XbPFFOvpKgP61qUUrCaT3OKvPBNgxLQCe1b1ifK/kc1mv4MuQf3eq/L/tw8/wA69HprRo33lB/Cnd9zJ0IPoef2/gqDcGv72a4A/gUbAa6mwsI4YUgtYlihXoFGAK1hFGOiL+VPpO73KhSjHZDY0EaBV6CnUUUzQKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/2Q==";
 
 const PORCION_OPTS = ["0","1","2","3","4","5 o más"];
-const FV_OPTS = ["1","2","3","Más de 3"]; // frutas y verduras, a petición del Dr. Agus 19/11/2026
+const FV_FRUTA_OPTS = [{v:"1",label:"1 fruta"},{v:"2",label:"2 frutas"},{v:"3",label:"3 frutas"}];
+const FV_VERDURA_OPTS = [{v:"1",label:"1 verdura"},{v:"2",label:"2 verduras"},{v:"3",label:"3 verduras"}];
 const DOLOR_TIPO_HINT = {
   "Ardoroso": "Arde o quema, como chile o limón en una cortada",
   "Punzante": "Piquetes o pinchazos, como una aguja",
@@ -1012,9 +1018,11 @@ const DOLOR_DURA_OPTS = ["Menos de 5 minutos","De 5 a 30 minutos","De 30 minutos
 function ahfPatologiasTxt() {
   const base = asList("ahf");
   if (!base.length) return ans("ahf");
+  if (base.includes(AHF_NIEGA) || base.includes("Ninguno")) return AHF_NIEGA_NOTA;
   const otros = base.includes(AHF_OTROS_LBL) ? asList("ahf_otros_ca") : [];
   const out = [];
   base.forEach(x => {
+    if (x === AHF_NIEGA || x === "Ninguno") return;
     if (x === AHF_OTROS_LBL) { if (otros.length) out.push(...otros); else out.push(x); }
     else out.push(x);
   });
@@ -1585,9 +1593,9 @@ add({ id:"sangre_episodios_anio", mode:"primera", section:"Hábito intestinal", 
   showIf:{ id:"sangre_previo", in:["Sí"] }, showIfFn: () => false /* va en la pantalla de sangre_inicio */ });
 
 add({ id:"sangre_ultimo", mode:"primera", section:"Hábito intestinal", huli:"gi",
-  type:"text", required:false,
+  type:"text", required:true,
   title:"¿Cuándo lo viste por última vez?",
-  showIf:{ id:"sangre", in:["Sí","A veces"] } });
+  showIf:{ id:"sangre", in:["Sí","A veces"] }, showIfFn: () => false /* va en la pantalla de sangre_inicio, sin «No me acuerdo» */ });
 
 
 add({ id:"coagulos", mode:"primera", section:"Hábito intestinal", huli:"gi",
@@ -1617,8 +1625,6 @@ add({ id:"tiempo_bano", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true, grid:2, bootySlot:"booty_bano_tiempo",
   title:"¿Cuánto tiempo te quedas en el baño?",
   hint:"Lo ideal es evacuar y levantarte, en general en menos de 5 a 10 minutos. Si puedes, apoya los pies en un banquito para que las rodillas queden un poco más altas que las caderas.",
-  image:"illus_tiempo_postura", imageClass:"q-illus",
-  imageAlt:"Mejor: evacuar en 5 a 10 minutos con los pies en un banquito y las rodillas un poco más altas que las caderas. Evita quedarte en el baño más de 20 minutos, por ejemplo con el celular.",
   options:["Menos de 5 minutos","5 a 10 minutos","10 a 15 minutos","15 a 20 minutos","Más de 20 minutos"] });
 
 add({ id:"agua", mode:"primera", section:"Hábito intestinal", huli:"gi",
@@ -1633,17 +1639,11 @@ add({ id:"comidas", mode:"primera", section:"Hábito intestinal", huli:"gi",
 add({ id:"fruta", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true,
   title:"¿Cuántas porciones de fruta comes al día?",
-  hint:"Una porción es más o menos lo que cabe en tu mano.",
-  image:"illus_porcion", imageClass:"q-illus",
-  imageAlt:"Una porción es más o menos lo que cabe en tu mano: una pieza de fruta o un puñado de verdura.",
-  options: FV_OPTS });
+  options: FV_FRUTA_OPTS });
 add({ id:"verdura", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true,
   title:"¿Cuántas porciones de verdura comes al día?",
-  hint:"Una porción es más o menos lo que cabe en tu mano.",
-  image:"illus_porcion", imageClass:"q-illus",
-  imageAlt:"Una porción es más o menos lo que cabe en tu mano: una pieza de fruta o un puñado de verdura.",
-  options: FV_OPTS });
+  options: FV_VERDURA_OPTS });
 
 add({ id:"dolor_evac", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true, title:"¿Hay dolor al evacuar?", options:["No","Sí"] });
@@ -2077,10 +2077,12 @@ const AHF_BASE = [["dm", "Diabetes"], ["has", "Hipertensión"], ["colon", "Cánc
 const AHF_OTROS_CA = [["recto", "Cáncer de recto"], ["ano", "Cáncer de ano"], ["endometrio", "Cáncer de endometrio (matriz)"], ["ovario", "Cáncer de ovario"], ["estomago", "Cáncer de estómago"], ["intestino", "Cáncer de intestino delgado"], ["pancreas", "Cáncer de páncreas"], ["biliar", "Cáncer de vesícula o vías biliares"], ["urinario", "Cáncer de riñón, uréter o vejiga"], ["cerebro", "Cáncer o tumor de cerebro"], ["tiroides", "Cáncer de tiroides"], ["mama", "Cáncer de mama"], ["cacu", "Cáncer cervicouterino"]];
 const AHF_ENF = AHF_BASE.map(e => [e[0], e[1], "ahf"]).concat(AHF_OTROS_CA.map(e => [e[0], e[1], "ahf_otros_ca"]));
 const AHF_OTROS_LBL = "Otros cánceres";
+const AHF_NIEGA = "Niega antecedentes relevantes";
+const AHF_NIEGA_NOTA = "Niega antecedentes heredofamiliares relevantes";
 add({ id:"ahf", mode:"primera", section:"Antecedentes familiares", huli:"ahf",
-  type:"check", required:true, other:true, exclusive:["Niega antecedentes relevantes"], advanceOnExclusive:true,
+  type:"check", required:true, other:true, exclusive:[AHF_NIEGA], advanceOnExclusive:true,
   title:"En tu familia (papás, hermanos, abuelos, tíos), ¿alguien ha tenido alguna de estas enfermedades?",
-    options:AHF_BASE.map(e => e[1]).concat([AHF_OTROS_LBL, "Niega antecedentes relevantes"]) });
+    options:AHF_BASE.map(e => e[1]).concat([AHF_OTROS_LBL, {v:AHF_NIEGA, label:"Ninguno"}]) });
 add({ id:"ahf_otros_ca", mode:"primera", section:"Antecedentes familiares", huli:"ahf",
   type:"check", required:true, other:true,
   title:"¿Qué otro cáncer ha tenido tu familiar o familiares?",
@@ -2218,7 +2220,9 @@ const PROG = {
     Object.assign({ id:"sangre_previo_desde", kind:"unitfirst", units:["días","meses","años"], maxLen:2, cond: () => val("sangre_previo") === "Sí",
       label: () => "¿Desde hace cuánto te pasa?" }, uniCodec(["días","meses","años"])),
     { id:"sangre_episodios_anio", kind:"num", maxLen:3, suffix:"al año", cond: () => val("sangre_previo") === "Sí",
-      label: () => "¿Cuántos episodios tienes al año?", done: v => /^\d+$/.test(String(v || "")) && +v >= 1 }
+      label: () => "¿Cuántos episodios tienes al año?", done: v => /^\d+$/.test(String(v || "")) && +v >= 1 },
+    Object.assign({ id:"sangre_ultimo", kind:"unitfirst", units:["días","semanas","meses"], maxLen:2, hace:true,
+      label: () => "¿Cuándo lo viste por última vez?" }, haceCodec(["días","semanas","meses"]))
   ],
   alcohol: [
     { id:"alcohol", kind:"choice", cols:3, label: () => "¿Tomas alcohol?", done: v => !!v },
@@ -2281,7 +2285,7 @@ function renderProg(box, q) {
       inp.addEventListener("change", () => refresh(true));
       n.appendChild(inp);
     } else if (st.kind === "unitfirst") {
-      n.appendChild(unitFirst(st.id, st.units, { maxLen: st.maxLen, onChange: (u) => refresh(u) }));
+      n.appendChild(unitFirst(st.id, st.units, { maxLen: st.maxLen, hace: !!st.hace, onChange: (u) => refresh(u) }));
     } else if (st.kind === "numsel") {
       let [n0, u0] = st.dec(val(st.id));
       const row = el("div", { className:"tiempo-row" });
@@ -2351,7 +2355,7 @@ function renderMultiYear(box, q) {
       const row = el("div", { className:"my-row" });
       const inp = el("input", { className:"field", type:"text", inputMode:"numeric" });
       inp.setAttribute("pattern", "[0-9]*"); inp.maxLength = 4; inp.autocomplete = "off";
-      inp.placeholder = q.placeholder || "Año, por ejemplo: 2015";
+      inp.placeholder = q.placeholder || "Ej. 2015";
       inp.value = blocked ? "" : y;
       inp.disabled = blocked;
       inp.addEventListener("input", function(){
@@ -2561,7 +2565,7 @@ function renderAppCond(box, q) {
   box.appendChild(lab(k === "vih" ? "¿Tu carga viral ha estado indetectable?" : "¿Ha estado bajo control?"));
   const cblk = el("div"); box.appendChild(cblk);
   const cid = "app_"+k+"_control";
-  const drawC = () => { cblk.innerHTML = ""; const g = ecGrid(2); APP_CONTROL.forEach(o => g.appendChild(ecChoice(o, o, val(cid) === o, () => { state.answers[cid] = o; drawC(); nav(); }))); cblk.appendChild(g); };
+  const drawC = () => { cblk.innerHTML = ""; const g = ecGrid(2); APP_CONTROL.forEach(o => g.appendChild(ecChoice(o, o, val(cid) === o, () => { state.answers[cid] = o; drawC(); nav(); if (canProceed(q)) scheduleAdvance(); }))); cblk.appendChild(g); };
   drawC();
   const medOk = () => { const m = String(val(mid) || "").trim(); if (!m) return false; if (k === "vih" && m === "Otro") return !!String(state.others.app_vih_med || "").trim(); return true; };
   seqParts([{ node:P1, done: () => tiempoOk(val("app_"+k+"_desde")) }, { node:P2, done: medOk }, { node:P3, done: () => APP_CONTROL.includes(val(cid)) }]);
@@ -2745,8 +2749,8 @@ for (let n = 1; n <= CX_N; n++) {
     placeholder:"Por ejemplo: mama derecha. Si no aplica, déjalo vacío",
     showIfFn: () => act() && !!tipo() && !cxEsAbdominal(tipo()) && tipo() !== CX_ANAL && !cxEsOtra(tipo()) });
   add({ id:"cx"+n+"_cuando", mode:"primera", section:"Antecedentes patológicos", huli:"app",
-    type:"text", required:false, title:"¿En qué año fue, o qué edad tenías?",
-    placeholder:"Por ejemplo: 2015, o a los 20 años", showIfFn: act });
+    type:"text", required:false, yearInput:true, title:"¿Aproximadamente en qué año fue?",
+    placeholder:"Ej. 2015", showIfFn: act });
   add({ id:"cx"+n+"_porque", mode:"primera", section:"Antecedentes patológicos", huli:"app",
     type:"text", required:false, title:"Si lo sabes, ¿por qué te la hicieron?",
     placeholder:"Por ejemplo: por apendicitis", showIfFn: act });
@@ -2788,7 +2792,8 @@ function composeCirugias() {
       const m = ans("cx"+n+"_malla");
       if (m === "Con malla") t += " con malla"; else if (m === "Sin malla") t += " sin malla";
       const lado = ans("cx"+n+"_lado"); if (lado) t += " (" + lado + ")";
-      const c = ans("cx"+n+"_cuando"); if (c) t += ", " + (/^\d{4}$/.test(c.trim()) ? "en " + c.trim() : c);
+      const c = String(val("cx"+n+"_cuando") || "").trim();
+      if (c && c !== NR && !isPndToken(c)) t += ", " + (/^\d{4}$/.test(c) ? "en " + c : c);
       const pq = ans("cx"+n+"_porque"); if (pq) t += ", " + (/^por /i.test(pq) ? pq : "por " + pq);
       const cv = val("cx"+n+"_compl");
       if (cv === "No") t += ", sin complicaciones";
@@ -2816,8 +2821,8 @@ VAC.forEach(([k, nom]) => {
     type:"mc", required:false, other:true, title:"¿Cuántas dosis te pusiste de la vacuna de " + nom + "?",
     options:["1","2","3","No sé"], showIf:{ id:"vacunas", in:[nom] } });
   add({ id:"vac_"+k+"_anio", mode:"primera", section:"Antecedentes patológicos", huli:"app",
-    type:"text", required:false, title:"¿En qué año te pusiste la última dosis de " + nom + "?",
-    hint:"Si no te acuerdas, pon un año aproximado.", placeholder:"Por ejemplo: 2022",
+    type:"text", required:false, yearInput:true, title:"¿En qué año te pusiste la última dosis de " + nom + "?",
+    hint:"Si no te acuerdas, pon un año aproximado.", placeholder:"Ej. 2022",
     showIf:{ id:"vacunas", in:[nom] } });
 });
 function composeVacunas() {
@@ -2832,10 +2837,10 @@ function composeVacunas() {
     const k = e[0];
     let t = x;
     const tp = ans("vac_vph_tipo"); if (k === "vph" && tp && tp !== "No sé") t += " (" + tp + ")";
-    const d = ans("vac_"+k+"_dosis"), y = ans("vac_"+k+"_anio");
+    const d = ans("vac_"+k+"_dosis"), yRaw = String(val("vac_"+k+"_anio") || "").trim();
     const bits = [];
     if (d && d !== "No sé") bits.push(d + (d === "1" ? " dosis" : " dosis"));
-    if (y) bits.push("última en " + y);
+    if (yRaw && yRaw !== NR && !isPndToken(yRaw)) bits.push("última en " + yRaw);
     if (bits.length) t += ": " + bits.join(", ");
     out.push(t);
   });
@@ -2853,7 +2858,7 @@ add({ id:"transf_anio", mode:"primera", section:"Antecedentes patológicos", hul
   type:"text", required:false, multiYear:true, noRecuerdo:true,
   title:"¿En qué año fue tu transfusión?",
   hint:"Si hubo más de una, toca «Agregar otra transfusión».",
-  placeholder:"Por ejemplo: 2015",
+  placeholder:"Ej. 2015",
   showIf:{ id:"transfusiones", in:["Sí"] } });
 
 /* Antecedentes no patológicos */
@@ -3003,7 +3008,7 @@ add({ id:"enema", mode:"primera", section:"Preguntas personalizadas", huli:"pers
   options:[{v:"Jabón y agua",img:"ene_jabon"},{v:"Agua corriente",label:"Agua normal",img:"ene_llave"},{v:"Medicamento",img:"ene_med"},{v:"Café",img:"ene_cafe"}],
   showIf:{ id:"enema_usa", in:["Sí","A veces"] },
   showIfFn: muestraSexualidadAnal });
-const TAMIZ = [["hep_b","de hepatitis B y C"],["vih","de VIH"],["sifilis","de sífilis"]];
+const TAMIZ = [["hep_b","de hepatitis B"],["hep_c","de hepatitis C"],["vih","de VIH"],["sifilis","de sífilis"]];
 // Si ya dijo que vive con VIH, no se pregunta la prueba de VIH (Dr. Agus 20/11/2026)
 function viveConVih() { return asList("app_pat").includes("VIH"); }
 TAMIZ.forEach(([k, nom]) => {
@@ -3016,20 +3021,17 @@ TAMIZ.forEach(([k, nom]) => {
     type:"text", required:false,
     placeholder: k === "its" ? "Por ejemplo: clamidia y gonorrea, hace 4 meses" : "Por ejemplo: hace 4 meses, o marzo 2026",
     title: k === "its" ? "¿De qué fue y cuándo fue la última?" : "¿Cuándo fue la última vez?",
-    chainTitle: "¿Cuándo fue la última prueba " + nom + "?",
+    chainTitle: (k === "hep_b" || k === "hep_c") ? "¿Cuándo fue la última?" : ("¿Cuándo fue la última prueba " + nom + "?"),
     showIf:{ id:"tamizaje_"+k+"_si", in:["Sí"] }, ...extraVis });
   add({ id:"tamizaje_"+k+"_res", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
     type:"mc", required:false, cards:true, cardsSmall:true, resIcons:true,
-    title:"¿Qué resultado salió?", chainTitle: "¿Qué resultado salió en la prueba " + nom + "?",
+    title:"¿Qué resultado salió?",
+    chainTitle: (k === "hep_b" || k === "hep_c") ? "¿Qué resultado salió?" : ("¿Qué resultado salió en la prueba " + nom + "?"),
     options:["Negativo","Positivo","No sé"],
     showIf:{ id:"tamizaje_"+k+"_si", in:["Sí"] }, ...extraVis });
 });
-function syncHepCFromB() {
-  [["tamizaje_hep_b_si","tamizaje_hep_c_si"],["tamizaje_hep_b","tamizaje_hep_c"],["tamizaje_hep_b_res","tamizaje_hep_c_res"]].forEach(([b,c]) => {
-    if (state.answers[b] != null && state.answers[b] !== "") state.answers[c] = state.answers[b];
-    else delete state.answers[c];
-  });
-}
+/* Hepatitis B y C se preguntan por separado en la misma pantalla (Dr. Agus 25/11/2026).
+   Ya no se copia B → C. Las columnas de hoja existentes (hep_b y hep_c) se llenan cada una con su respuesta. */
 function composeTamiz(k) {
   if (k === "vih" && viveConVih()) return "No aplica (vive con VIH)";
   const si = ans("tamizaje_"+k+"_si");
@@ -3135,9 +3137,10 @@ add({ id:"debut", mode:"primera", section:"Preguntas personalizadas", huli:"pers
   hint:"Escribe la edad con números.",
    });
 add({ id:"parejas", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
-  type:"text", required:true,
+  type:"numqual", required:true, numQual:true, maxLen:4,
   title:"¿Cuántas parejas sexuales has tenido en tu vida?",
-  hint:"No hay una respuesta correcta; esto solo nos ayuda a cuidarte mejor. Puedes decirlo así: más de 10, menos de 30." });
+  hint:"No hay una respuesta correcta; esto solo nos ayuda a cuidarte mejor. Si no lo recuerdas con exactitud, elige «Más de» o «Menos de» y escribe un número aproximado.",
+  placeholder:"Ej. 15" });
 add({ id:"its", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
   type:"check", required:true, other:true, exclusive:["Ninguna"], advanceOnExclusive:true, grid:2, itsGrid:true,
   title:"¿Has tenido alguna infección de transmisión sexual?",
@@ -3321,13 +3324,13 @@ function sgTenia(key) { return { id:"sg_"+key+"_tenia", in:["Sí"] }; }
 // "Todavía no baja": se omiten "¿se quitó?", "¿cuándo?" y "última vez" de ese síntoma (Dr. Agus 20/11/2026)
 function sgYaBajo(key) { return function() { return val("sg_"+key+"_bajo_cuando") !== "Todavía no baja"; }; }
 function sgNoEliminado(key) {
-  return function() { return val("sg_"+key+"_tenia") === "Sí" && val("sg_"+key+"_elimino") !== "Sí"; };
+  return function() { return val("sg_"+key+"_tenia") === "Sí" && !sgSeQuito(key); };
 }
 function sgSiguePresente(key) {
   return function() {
     if (val("sg_"+key+"_tenia") !== "Sí") return false;
-    if (val("sg_"+key+"_elimino") === "Sí") return false;
-    const a = val("sg_"+key+"_actual");
+    if (sgSeQuito(key)) return false;
+    const a = val(sgActualId(key));
     if (a === "Ningún día" || a === "0" || a === 0 || a === "0%") return false;
     return true;
   };
@@ -3339,11 +3342,33 @@ function motivoCubreSintoma() {
 }
 function motivoEsOtro() { return has("sg_motivo") && !motivoCubreSintoma(); }
 
+function sgActualId(key) { return { pujo:"sg_pujar", tenesmo:"sg_tenesmo" }[key] || ("sg_" + key + "_actual"); }
+function sgValorCero(v) {
+  if (v == null || String(v).trim() === "") return false;
+  const s = String(v).trim().replace(/\s+/g, "");
+  if (s === "0" || s === "0%" || s === "Ningúndía" || s === "Ningundia") return true;
+  const n = parseFloat(String(v).replace("%", "").replace(",", "."));
+  return isFinite(n) && n === 0;
+}
+function sgReduccionCien(key) {
+  const v = String(val("sg_" + key + "_reduccion") || "").replace(/\s+/g, "");
+  return v === "100" || v === "100%";
+}
+function sgSeQuito(key) {
+  const actId = sgActualId(key);
+  const qAct = Q.find(q => q.id === actId);
+  if (qAct && !(qAct.showIfFn && /^\(\)\s*=>\s*false/.test(String(qAct.showIfFn)))) {
+    const v = val(actId);
+    if (v == null || String(v).trim() === "") return false;
+    return sgValorCero(v);
+  }
+  return sgReduccionCien(key);
+}
 function addSgPack(cfg) {
   const k = cfg.key;
   const pre = "sg_" + k + "_";
   add({ id: pre+"tenia", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-    type:"mc", required:true, title: cfg.had, hint: cfg.hadHint || "", options:["No","Sí"] });
+    type:"mc", required:true, title: cfg.had, hint: cfg.hadHint || "", options:["No","Sí"], bootySlot: cfg.bootySlot });
   const inicio = { id: pre+"inicio", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
     required:true, title: cfg.init, hint: cfg.initHint || "", showIf: sgTenia(k) };
   if (cfg.kind === "eva") {
@@ -3352,8 +3377,10 @@ function addSgPack(cfg) {
     Object.assign(inicio, { type:"pct", left:"0%: ningún día", right:"100%: todos los días" });
   }
   if (!cfg.skipInicio) add(inicio);
-  add({ id: pre+"reduccion", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-    type:"pct", left:"0%: nada", right:"100%: se quitó", required:true, title: cfg.reduc, showIf: sgTenia(k) });
+  if (!cfg.skipReduc) {
+    add({ id: pre+"reduccion", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
+      type:"pct", left:"0%: nada", right:"100%: se quitó", required:true, title: cfg.reduc, showIf: sgTenia(k) });
+  }
   if (!cfg.skipActual) {
     const actual = { id: pre+"actual", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
       required:true, title: cfg.now, showIf: sgTenia(k) };
@@ -3369,16 +3396,11 @@ function addSgPack(cfg) {
     title: cfg.bajo,
     hint:"Cuenta desde la consulta pasada: elige días, semanas o meses y escribe el número.",
     showIf: sgTenia(k) });
-  add({ id: pre+"elimino", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-    type:"mc", required:true, title: cfg.elimino, options:["No","Sí"], showIf: sgTenia(k), showIfFn: sgYaBajo(k) });
-  add({ id: pre+"elimino_cuando", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-    type:"text", required:true, dur:["días","semanas","meses"], title: cfg.eliminoCuando,
-    hint:"¿Cuánto tiempo después de la consulta pasada? Elige días, semanas o meses y escribe el número.",
-    showIf:{ id: pre+"elimino", in:["Sí"] } });
   add({ id: pre+"ultima", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-    type:"text", required:false, title: cfg.ultima,
-    hint:"Por ejemplo: hace 10 días, ayer, o esta semana.",
-    showIf: sgTenia(k), showIfFn: () => sgYaBajo(k)() && sgNoEliminado(k)() });
+    type:"text", required:true, dur:["días","semanas","meses"], noRecuerdo:true, nrLabel:"No me acuerdo", nrFirst:true,
+    haceDur:true, title: cfg.ultima,
+    hint:"Cuenta desde hoy: elige días, semanas o meses y escribe el número.",
+    showIf: sgTenia(k), showIfFn: () => sgYaBajo(k)() });
 }
 
 /* ===== Seguimiento ===== */
@@ -3465,7 +3487,7 @@ add({ id:"sg_motivo", mode:"seguimiento", section:"Síntomas desde la última co
   hint:"Con tus palabras. Por ejemplo: sangrado, dolor, comezón o lo que te llevó a consulta." });
 
 addSgPack({
-  key:"sangrado", kind:"n7",
+  key:"sangrado", kind:"n7", skipReduc:true,
   had:"¿Cuando te vio el doctor la vez pasada, tenías sangrado?",
   init:"En esa ocasión, ¿qué porcentaje de los días tenías sangrado?",
   reduc:"¿Qué tanto sientes que se redujo el sangrado?",
@@ -3492,7 +3514,7 @@ add({ id:"sg_sangrado_donde", mode:"seguimiento", section:"Síntomas desde la ú
   showIf: sgTenia("sangrado"), showIfFn: sgSiguePresente("sangrado") });
 
 addSgPack({
-  key:"dolor", kind:"eva",
+  key:"dolor", kind:"eva", skipReduc:true, bootySlot:"booty_dolor",
   had:"¿Cuando te vio el doctor la vez pasada, tenías dolor?",
   init:"¿Qué tanto dolor tenías entonces, de 0 a 10?",
   reduc:"¿Qué tanto sientes que se redujo el dolor?",
@@ -3525,7 +3547,7 @@ add({ id:"sg_dolor_noche", mode:"seguimiento", section:"Síntomas desde la últi
   showIf: sgTenia("dolor"), showIfFn: sgSiguePresente("dolor") });
 
 addSgPack({
-  key:"comezon", kind:"n7",
+  key:"comezon", kind:"n7", skipReduc:true,
   had:"¿Cuando te vio el doctor la vez pasada, te daba comezón en el ano?",
   init:"En esa ocasión, ¿qué porcentaje de los días te daba comezón?",
   reduc:"¿Qué tanto sientes que se redujo la comezón?",
@@ -3536,7 +3558,7 @@ addSgPack({
   ultima:"¿Cuándo fue la última vez que te dio comezón?"
 });
 addSgPack({
-  key:"moco", kind:"n7",
+  key:"moco", kind:"n7", skipReduc:true,
   had:"¿Cuando te vio el doctor la vez pasada, tenías moco al evacuar o al limpiarte?",
   init:"En esa ocasión, ¿qué porcentaje de los días tenías moco?",
   reduc:"¿Qué tanto sientes que se redujo el moco?",
@@ -3547,7 +3569,7 @@ addSgPack({
   ultima:"¿Cuándo fue la última vez que tuviste moco?"
 });
 addSgPack({
-  key:"pujo", kind:"n7", skipActual:true,
+  key:"pujo", kind:"n7", skipActual:true, skipReduc:true,
   had:"¿Cuando te vio el doctor la vez pasada, necesitabas pujar muy fuerte y durante toda la evacuación?",
   hadHint:"Hacer un poco de fuerza al evacuar es normal y aquí no cuenta. El pujo es tener que pujar con mucha fuerza (contener la respiración y apretar el abdomen con todas tus fuerzas) durante toda la evacuación. Si solo pujabas un poco, contesta «No».",
   init:"En esa ocasión, ¿qué porcentaje de los días necesitabas pujar?",
@@ -3558,7 +3580,7 @@ addSgPack({
   ultima:"¿Cuándo fue la última vez que necesitaste pujar?"
 });
 addSgPack({
-  key:"tenesmo", kind:"n7", skipActual:true,
+  key:"tenesmo", kind:"n7", skipActual:true, skipReduc:true,
   had:"¿Cuando te vio el doctor la vez pasada, sentías, al terminar de evacuar, que el recto seguía lleno y que aún querías evacuar?",
   hadHint:"Lo sientes en el recto (la parte final del intestino, justo arriba del ano), no en el abdomen o la panza.",
   init:"En esa ocasión, ¿qué porcentaje de los días sentías eso?",
@@ -3616,7 +3638,7 @@ add({ id:"sg_bulto_dolor_cuando", mode:"seguimiento", section:"Síntomas desde l
   options:[{v:"Al asearme o tocarla",img:"ce_asear"},{v:"Al evacuar",img:"dcuando_durante"},{v:"En reposo",img:"ce_reposo"},{v:"En cualquier momento",img:"dcuando_cualquier"},{v:"Me despierta en la noche",img:"dcuando_noche"}],
   showIfFn: sgBultoDuele });
 function composeSgBultoAhora() {
-  if (ans("sg_bulto_tenia") !== "Sí" || ans("sg_bulto_elimino") === "Sí") return "";
+  if (ans("sg_bulto_tenia") !== "Sí" || sgSeQuito("bulto")) return "";
   const b = [];
   const sale = ans("sg_bulto_sale");
   if (/se mete sola/i.test(sale)) b.push("ahora protruye y se reduce espontáneamente");
@@ -3677,7 +3699,7 @@ function composeSgRoma() {
   const pIni = parseInt(String(ans("sg_abdominal_inicio") || ""), 10);
   const antes = isNaN(pIni) ? "" : "Roma IV antes: dolor abdominal " + (ini === "negado" ? "0%" : ini) + " de los días (" + (pIni >= 14 ? "≥1 día/semana" : "<1 día/semana") + "; resto de criterios en la nota de primera vez)";
   let ahora;
-  if (ans("sg_abdominal_elimino") === "Sí") ahora = "Roma IV ahora: sin dolor abdominal, no cumple criterios para SII";
+  if (sgSeQuito("abdominal")) ahora = "Roma IV ahora: sin dolor abdominal, no cumple criterios para SII";
   else {
     const ids = ["semana","3meses","evacuar","frecuencia","forma"].map(x => "sg_abdominal_sii_" + x);
     if (!ids.some(has)) ahora = "";
@@ -3729,18 +3751,12 @@ add({ id:"sg_comidas", mode:"seguimiento", section:"Evacuaciones de ahora", huli
 add({ id:"sg_fruta", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
   type:"mc", required:true,
   title:"¿Cuántas porciones de fruta comes al día?",
-  hint:"Una porción es más o menos lo que cabe en tu mano.",
-  image:"illus_porcion", imageClass:"q-illus",
-  imageAlt:"Una porción es más o menos lo que cabe en tu mano: una pieza de fruta o un puñado de verdura.",
-  options: FV_OPTS,
+  options: FV_FRUTA_OPTS,
   });
 add({ id:"sg_verdura", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
   type:"mc", required:true,
   title:"¿Cuántas porciones de verdura comes al día?",
-  hint:"Una porción es más o menos lo que cabe en tu mano.",
-  image:"illus_porcion", imageClass:"q-illus",
-  imageAlt:"Una porción es más o menos lo que cabe en tu mano: una pieza de fruta o un puñado de verdura.",
-  options: FV_OPTS,
+  options: FV_VERDURA_OPTS,
   });
 
 add({ id:"sg_agua", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
@@ -3752,15 +3768,11 @@ add({ id:"sg_tiempo_antes", mode:"seguimiento", section:"Evacuaciones de ahora",
   type:"mc", required:true, other:true, bootySlot:"booty_bano_tiempo",
   title:"Antes de la consulta, ¿cuánto tiempo te quedabas en el baño?", grid:2,
   hint:"Lo ideal es evacuar y levantarte, en general en menos de 5 a 10 minutos. Si puedes, apoya los pies en un banquito para que las rodillas queden un poco más altas que las caderas.",
-  image:"illus_tiempo_postura", imageClass:"q-illus",
-  imageAlt:"Mejor: evacuar en 5 a 10 minutos con los pies en un banquito y las rodillas un poco más altas que las caderas. Evita quedarte en el baño más de 20 minutos, por ejemplo con el celular.",
   options: TIEMPO_BANO_OPTS });
 add({ id:"sg_tiempo_ahora", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
   type:"mc", required:true, other:true, bootySlot:"booty_bano_tiempo",
   title:"¿Y ahora, cuánto tiempo te quedas en el baño?", grid:2,
   hint:"Lo ideal es evacuar y levantarte, en general en menos de 5 a 10 minutos. Si puedes, apoya los pies en un banquito para que las rodillas queden un poco más altas que las caderas.",
-  image:"illus_tiempo_postura", imageClass:"q-illus",
-  imageAlt:"Mejor: evacuar en 5 a 10 minutos con los pies en un banquito y las rodillas un poco más altas que las caderas. Evita quedarte en el baño más de 20 minutos, por ejemplo con el celular.",
   options: TIEMPO_BANO_OPTS });
 
 add({ id:"sg_toallas_usaba", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi",
@@ -3838,7 +3850,7 @@ const MERGED_INTO = { correo:"telefono", tiene_curp:"telefono", curp:"telefono",
   religion:"mascotas", mascotas_cual:"mascotas" };
 APP_ENF.map(e => e[0]).concat(["otro"]).forEach(k => { MERGED_INTO["app_"+k+"_med"] = "app_"+k+"_desde"; });
 Object.assign(MERGED_INTO, { moco_desde:"moco", dolor_noche:"dolor_cuando" });
-Object.assign(MERGED_INTO, { sangre_previo:"sangre_inicio", sangre_previo_desde:"sangre_inicio", sangre_episodios_anio:"sangre_inicio" });
+Object.assign(MERGED_INTO, { sangre_previo:"sangre_inicio", sangre_previo_desde:"sangre_inicio", sangre_episodios_anio:"sangre_inicio", sangre_ultimo:"sangre_inicio" });
 Object.assign(MERGED_INTO, { fuma_anios:"fuma", fuma_cant:"fuma", fuma_dejo:"fuma", alcohol_que:"alcohol", alcohol_freq:"alcohol", alcohol_cantidad:"alcohol" });
 Object.assign(MERGED_INTO, { app_vih_cd4:"app_vih_cv", app_vih_cd4_fecha:"app_vih_cv", app_vih_cv_fecha:"app_vih_cv" });
 AHF_ENF.forEach(([k]) => {
@@ -3882,13 +3894,13 @@ const BOOTY_MASK = {
   booty_fam_papa: { base:"assets/booty_icons/APROBADO_booty_fam_papa", label:"Booty papá", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_papa_t.png" },
   booty_fam_hermanos: { base:"assets/booty_icons/APROBADO_booty_fam_hermanos", label:"Booty hermana y hermano", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hermanos_t.png" },
   booty_fam_hijos: { base:"assets/booty_icons/APROBADO_booty_fam_hijos_v2", label:"Booty hija e hijo", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hijos_v2_t.png" },
-  booty_inicio_base: { base:"assets/booty_icons/APROBADO_booty_inicio_base", label:"Booty bailando", capas:["relleno","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_inicio_base_t.png" },
+  booty_inicio_base: { base:"assets/booty_icons/APROBADO_booty_inicio_base", label:"Booty bailando", capas:["relleno","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_inicio_base_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_inicio_base_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_inicio_base_linea_tira.webp", frames:80, cols:10, w:240, h:300 } },
   booty_bebe_chupon: { base:"assets/booty_icons/APROBADO_booty_bebe_chupon", label:"Booty bebé con chupón", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_bebe_chupon_t.png" },
   booty_patines: { base:"assets/booty_icons/APROBADO_booty_patines", label:"Booty patinando", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_patines_t.png" },
-  booty_fiebre: { base:"assets/booty_icons/APROBADO_booty_fiebre_v4", label:"Booty con fiebre, termómetro y bolsa de hielo" },
-  booty_peso: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_v3", label:"Booty y la pérdida de peso", sinRubor:true }, // una sola capa (v3 aprobada, bikini)
+  booty_fiebre: { base:"assets/booty_icons/APROBADO_booty_fiebre_v4", label:"Booty con fiebre, termómetro y bolsa de hielo", capas:["rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_fiebre_v4_t.png" },
+  booty_peso: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_v3", label:"Booty y la pérdida de peso", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_perdida_peso_v3_t.png" },
   // variante drag (aprobada): pacientes LGBT. Si faltara el archivo, no se muestra imagen
-  booty_bano_tiempo: { base:"assets/booty_icons/APROBADO_booty_bano_tiempo", label:"Booty en el baño", sinRubor:true },
+  booty_bano_tiempo: { base:"assets/booty_icons/APROBADO_booty_bano_tiempo", label:"Booty en el baño", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_bano_tiempo_t.png" },
   // 4 piezas aprobadas por Booty (24/11/2026, 14:18). Tres capas como v7b: relleno → rubor → línea, color de tema. Rubor vacío a propósito.
   booty_cirujano: { base:"assets/booty_icons/APROBADO_booty_cirujano_v2", label:"Booty vestido de cirujano", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_cirujano_v2_t.png" },
   booty_doxy_reloj: { base:"assets/booty_icons/APROBADO_booty_doxy_tomar", label:"Booty con pastilla y reloj", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_doxy_tomar_t.png" },
@@ -3896,18 +3908,20 @@ const BOOTY_MASK = {
   booty_sii_evacuar: { base:"assets/booty_icons/APROBADO_booty_sii_evacuar", label:"Booty en el baño, con alivio", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_evacuar_t.png" },
   // Graduado oficial (Dr. Agus 24/11/2026), en «Último grado de estudios». Tres capas como v7b: relleno (blanco) → rubor → línea, color de tema. Animado (borla).
   booty_graduacion: { base:"assets/booty_icons/APROBADO_booty_graduado", label:"Booty graduado, con birrete", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_graduado_alfa.webp" },
-  booty_perdida_peso_drag: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_drag", label:"Booty y la pérdida de peso", sinRubor:true },
+  booty_perdida_peso_drag: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_drag", label:"Booty y la pérdida de peso", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_perdida_peso_drag_t.png" },
   // Apenado v7d (oficial, Dr. Agus 24/11/2026, rubor al 45%). Tres capas: relleno → rubor → línea, color de tema, animado. Fallback: _alfa.webp, luego GIF.
   booty_apenado: { base:"assets/booty_icons/APROBADO_booty_apenado_v7d", label:"Booty apenado, cubriéndose la cara con las aletas", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_apenado_v7d_alfa.webp" },
   // Reposo oficial (Dr. Agus 24/11/2026). Tres capas como apenado v7b: relleno (blanco) → rubor → línea, color de tema, precarga sincronizada. El rubor está vacío a propósito.
-  booty_reposo: { base:"assets/booty_icons/APROBADO_booty_reposo", label:"Booty en reposo, sonriendo", capas:["relleno","rubor","linea"], fallback:"assets/booty_icons/APROBADO_booty_reposo_t.png" },
+  booty_reposo: { base:"assets/booty_icons/APROBADO_booty_reposo", label:"Booty en reposo, sonriendo", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_reposo_t.png" },
   // Dolor oficial (Dr. Agus 24/11/2026). Tres capas como apenado v7b y reposo: relleno (blanco) → rubor → línea, color de tema. El rubor está vacío a propósito.
-  booty_dolor: { base:"assets/booty_icons/APROBADO_booty_dolor", label:"Booty con gesto de dolor", capas:["relleno","rubor","linea"], fallback:"assets/booty_icons/APROBADO_booty_dolor_t.png" },
+  booty_dolor: { base:"assets/booty_icons/APROBADO_booty_dolor", label:"Booty con gesto de dolor", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_dolor_t.png" },
   booty_abrazo: { base:"assets/booty_icons/booty_abrazo", label:"Booty dando un abrazo cálido", sinRubor:true, fallback:"assets/booty_icons/booty_abrazo_t.png" },
   // Panza náuseas oficial (Dr. Agus 24/11/2026), para doxy_malestar Sí. Tres capas como v7b/reposo/dolor: relleno (blanco) → rubor → línea, color de tema. El rubor está vacío a propósito.
-  booty_panza_nauseas: { base:"assets/booty_icons/APROBADO_booty_panza_nauseas", label:"Booty con malestar intestinal, tocándose la panza", capas:["relleno","rubor","linea"], fallback:"assets/booty_icons/APROBADO_booty_panza_nauseas_t.png" },
+  booty_panza_nauseas: { base:"assets/booty_icons/APROBADO_booty_panza_nauseas", label:"Booty con malestar intestinal, tocándose la panza", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_panza_nauseas_t.png" },
   // Bailarín oficial (Dr. Agus 24/11/2026), para doxy_malestar No. Tres capas como v7b, animado 80 cuadros, fondo transparente.
-  booty_baile: { base:"assets/booty_icons/APROBADO_booty_bailarin", label:"Booty bailando, sin malestar", capas:["relleno","rubor","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_bailarin.gif" }
+  booty_baile: { base:"assets/booty_icons/APROBADO_booty_bailarin", label:"Booty bailando, sin malestar", capas:["relleno","rubor","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_bailarin.gif" },
+  // Fiesta oficial (Dr. Agus 25/11/2026): reemplaza el baile de «gracias». Apaisada 480×220, relleno + línea en color de tema, sin rubor. Confeti a color encima (excepción aprobada, no se recolorea).
+  booty_fiesta: { base:"assets/booty_icons/APROBADO_booty_fiesta", label:"Booty de fiesta, celebrando que terminaste", capas:["relleno","linea"], anim:true, ratio:"480/220", fallback:"assets/booty_icons/APROBADO_booty_fiesta.gif" }
 };
 /* Imagen de pérdida de peso (Dr. Agus 20/11/2026): LGBT -> drag; los demás (incluye hombre heterosexual,
    sin respuesta o "Prefiero no responder") -> bikini (v3).
@@ -3946,7 +3960,7 @@ function bootyMaskUrlOk(u) {
 function bootyMaskFirst(urls) {
   return urls.reduce((p, u) => p.then(got => got || (u ? bootyMaskUrlOk(u) : "")), Promise.resolve(""));
 }
-const BOOTY_ASSET_V = "20261125a";
+const BOOTY_ASSET_V = "20261125c";
 function bootyAssetUrl(path) {
   if (!path) return "";
   return path + (path.indexOf("?") >= 0 ? "&" : "?") + "v=" + BOOTY_ASSET_V;
@@ -3976,10 +3990,82 @@ function bootyAnimImgFallback(box, d) {
   im.src = urls[0];
   box.appendChild(im);
 }
+function bootyFirstFrameMask(url) {
+  if (!url) return Promise.resolve("");
+  return new Promise(resolve => {
+    const im = new Image();
+    im.onload = () => {
+      try {
+        const c = document.createElement("canvas");
+        c.width = im.naturalWidth; c.height = im.naturalHeight;
+        c.getContext("2d").drawImage(im, 0, 0);
+        resolve(c.toDataURL("image/png"));
+      } catch (e) { resolve(url); }
+    };
+    im.onerror = () => resolve(url);
+    im.src = url;
+  });
+}
+function bootyPlayTira(box, d) {
+  const t = d.tira;
+  if (!t) return false;
+  const capas = [];
+  if (t.relleno) capas.push({ url: bootyAssetUrl(t.relleno), kind: "relleno" });
+  if (t.rubor) capas.push({ url: bootyAssetUrl(t.rubor), kind: "rubor" });
+  if (t.linea) capas.push({ url: bootyAssetUrl(t.linea), kind: "linea" });
+  if (!capas.length) return false;
+  let dead = false, timer = 0;
+  const stop = () => { dead = true; if (timer) { clearTimeout(timer); timer = 0; } };
+  const watch = setInterval(() => { if (!box.isConnected) { stop(); clearInterval(watch); } }, 800);
+  Promise.all(capas.map(c => new Promise(ok => {
+    const im = new Image();
+    im.onload = () => ok(im);
+    im.onerror = () => ok(null);
+    im.src = c.url;
+  }))).then(imgs => {
+    if (dead || !imgs.some(Boolean)) return;
+    const fw = t.w, fh = t.h, cols = t.cols, n = t.frames;
+    const canvas = document.createElement("canvas");
+    canvas.className = "booty-anim-c";
+    canvas.setAttribute("aria-hidden", "true");
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(fw * dpr);
+    canvas.height = Math.round(fh * dpr);
+    const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
+    const off = document.createElement("canvas");
+    off.width = fw; off.height = fh;
+    const octx = off.getContext("2d");
+    box.appendChild(canvas);
+    box.classList.add("booty-anim-on");
+    let i = 0;
+    function tick() {
+      if (dead || !box.isConnected) { stop(); return; }
+      const tema = (getComputedStyle(box).getPropertyValue("--tema") || "").trim() || bootyTemaColor();
+      ctx.clearRect(0, 0, fw, fh);
+      imgs.forEach((im, li) => {
+        if (!im) return;
+        const col = i % cols, row = Math.floor(i / cols);
+        octx.globalCompositeOperation = "source-over";
+        octx.clearRect(0, 0, fw, fh);
+        octx.drawImage(im, col * fw, row * fh, fw, fh, 0, 0, fw, fh);
+        octx.globalCompositeOperation = "source-in";
+        octx.fillStyle = capas[li].kind === "relleno" ? "#fff" : tema;
+        octx.fillRect(0, 0, fw, fh);
+        octx.globalCompositeOperation = "source-over";
+        ctx.drawImage(off, 0, 0);
+      });
+      i = (i + 1) % n;
+      timer = setTimeout(tick, 40);
+    }
+    tick();
+  });
+  return true;
+}
 function bootyStartAnim(box, d, urls) {
   if (!d.anim) return;
   const capas = d.capas || [];
-  const fallback = () => bootyAnimImgFallback(box, d);
+  const fallback = () => { if (bootyPlayTira(box, d)) return; /* conserva máscaras en color de tema; no uses _alfa/_t en color original */ };
   if (typeof ImageDecoder === "undefined") { fallback(); return; }
   let dead = false, timer = 0;
   const stop = () => { dead = true; if (timer) { clearTimeout(timer); timer = 0; } };
@@ -4064,9 +4150,8 @@ function montarBootyBotones() {
 }
 function montarInicio() { montarBootyFx(document.getElementById("home-booty-fx")); montarBootyBotones(); }
 document.addEventListener("DOMContentLoaded", montarInicio);
-/* Gancho para la fiesta de varios Booty al dar clic en «Terminar cuestionario».
-   La pieza está pausada (Booty, 25/11/2026): cuando el Dr. Agus la apruebe, se monta aquí dentro de #booty-fiesta. */
-function bootyFiesta(host) { /* pendiente de aprobación: no hace nada todavía */ }
+/* La fiesta aprobada (25/11/2026) va en #done-booty-fx (máscaras + confeti a color). Este gancho de varios Booty queda en reserva. */
+function bootyFiesta(host) { /* la pieza de fiesta se monta en #done-booty-fx */ }
 function bootyMask(slot) {
   const d = BOOTY_MASK[slot];
   if (!d) return null;
@@ -4118,8 +4203,12 @@ function bootyMask(slot) {
   }
   if (d.capas && d.capas.length) {
     Promise.all(d.capas.map(c => bootyMaskFirst(layerUrl(c)))).then(found => {
-      if (!montarCapas(found)) bootyMaskFirst(fallbackUrls).then(montarFallback);
-      else if (d.anim) bootyStartAnim(box, d, found);
+      const mount = (maskUrls) => {
+        if (!montarCapas(maskUrls)) bootyMaskFirst(fallbackUrls).then(montarFallback);
+        else if (d.anim) bootyStartAnim(box, d, found);
+      };
+      if (d.anim) Promise.all(found.map(u => u ? bootyFirstFrameMask(u) : Promise.resolve(""))).then(mount);
+      else mount(found);
     });
     return box;
   }
@@ -4223,7 +4312,14 @@ const ABAJO = ids => Object.fromEntries(ids.map(i => [i, "down"]));
 const SG_AHORA = { pujo:"sg_pujar", tenesmo:"sg_tenesmo" };
 ["sangrado","dolor","comezon","moco","pujo","tenesmo","bulto","abdominal"].forEach(k => {
   const ids = pref("sg_"+k+"_", ["sg_"+k+"_tenia"]);
-  if (SG_AHORA[k]) { const i = ids.indexOf("sg_"+k+"_reduccion"); ids.splice(i + 1, 0, SG_AHORA[k]); }
+  if (SG_AHORA[k]) {
+    const i = ids.indexOf("sg_"+k+"_reduccion");
+    if (i >= 0) ids.splice(i + 1, 0, SG_AHORA[k]);
+    else {
+      const j = ids.indexOf("sg_"+k+"_inicio");
+      ids.splice((j >= 0 ? j + 1 : 1), 0, SG_AHORA[k]);
+    }
+  }
   defChain("sg_"+k+"_tenia", ids);
 });
 defChain("sg_tiempo_antes", ["sg_tiempo_ahora"]);
@@ -4262,7 +4358,7 @@ defChain("sexo_anonimo", ["sexo_riesgo"], ABAJO(["sexo_riesgo"]));
 // Hisopado, cáncer anal y colonoscopia: una pantalla cada uno, todo baja
 ["hisopo_anal","ca_anal_si","ca_colon_si"].forEach(id => { const hq = Q.find(q => q.id === id); if (hq && hq.chain) hq.chainAnim = ABAJO(hq.chain.map(st => st.id)); });
 // Pruebas de tamizaje (hepatitis B, C, VIH y sífilis) en una sola pantalla, bajando
-{ const TZ = ["tamizaje_hep_b","tamizaje_hep_b_res","tamizaje_vih_si","tamizaje_vih","tamizaje_vih_res","tamizaje_sifilis_si","tamizaje_sifilis","tamizaje_sifilis_res"];
+{ const TZ = ["tamizaje_hep_b","tamizaje_hep_b_res","tamizaje_hep_c_si","tamizaje_hep_c","tamizaje_hep_c_res","tamizaje_vih_si","tamizaje_vih","tamizaje_vih_res","tamizaje_sifilis_si","tamizaje_sifilis","tamizaje_sifilis_res"];
   defChain("tamizaje_hep_b_si", TZ, ABAJO(TZ)); }
 // Fiebre, pérdida de peso y ejercicio en una pantalla: todo baja
 defChain("fiebre", ["fiebre_det","fiebre_veces","fiebre_cuando","perdida_peso","perdida_peso_kg","perdida_peso_tiempo","ejercicio"],
@@ -4322,12 +4418,25 @@ function drawStep(st, sub) {
     }
   }
   else if (st.multiYear) { renderMultiYear(sub, st); }
+  else if (st.numQual || st.type === "numqual") {
+    renderNumQual(sub, st.id, st, () => refresh(true), () => { drawStep(st, sub); refresh(true); });
+    if (st.sensitive) {
+      const on = isPndToken(val(st.id));
+      const skip = el("button", { className:"btn skip" + (on ? " selected" : ""), type:"button" }); skip.textContent = PND;
+      skip.setAttribute("aria-pressed", on ? "true" : "false");
+      skip.addEventListener("click", () => { state.answers[st.id] = PND; if (state.numQual) delete state.numQual[st.id]; drawStep(st, sub); refresh(true); });
+      sub.appendChild(skip);
+    }
+  }
+  else if (st.yearInput) {
+    renderYearInput(sub, st.id, st, () => refresh(true), () => { drawStep(st, sub); refresh(true); });
+  }
   else if (st.type === "notice") { /* sin campo */ }
   else {
     const ta = st.type === "textarea", num = st.type === "number" || st.numeric;
     const inp = el(ta ? "textarea" : "input", { className:"field" + (num ? " tiempo-inp" : ""), id:"ch-" + st.id });
     if (ta) inp.rows = 3; else inp.type = "text";
-    if (num) { inp.inputMode = st.numeric ? "decimal" : "numeric"; inp.maxLength = st.numeric ? 5 : 3; }
+    if (num) { inp.inputMode = st.numeric ? "decimal" : "numeric"; if (!st.numeric) inp.setAttribute("pattern", "[0-9]*"); inp.maxLength = st.maxLen || (st.numeric ? 5 : 3); }
     inp.placeholder = st.placeholder || (num ? "0" : ""); inp.autocomplete = "off";
     inp.value = (val(st.id) === PND || (st.noRecuerdo && val(st.id) === "No me acuerdo")) ? "" : String(val(st.id) || "").replace(st.suffix ? / ?kg$/i : /$^/, "");
     inp.addEventListener("input", () => {
@@ -4491,7 +4600,7 @@ Q.forEach(q => {
    Fechas / "cuándo" abiertas: botón "No me acuerdo" (se guarda y sale en la nota solo si lo tocan).
    Campos que pueden no aplicar: botón alternativo que NO guarda texto (la nota no cambia). */
 const REQ_NR = ["cx1_cual","cx2_cual","cx3_cual","cx1_cuando","cx2_cuando","cx3_cuando","cx1_porque","cx2_porque","cx3_porque",
-  "vac_vph_anio","vac_mpox_anio","vac_menb_anio","vac_hepa_anio","vac_hepb_anio","transf_anio","sangre_ultimo",
+  "vac_vph_anio","vac_mpox_anio","vac_menb_anio","vac_hepa_anio","vac_hepb_anio","transf_anio",
   "comezon_inicio","cuerpo_extranio_inicio","meds_topicos_cual","sg_meds_ind_cual"];
 Q.forEach(q => { if (/^sg_\w+_ultima$/.test(q.id)) REQ_NR.push(q.id); });
 const REQ_ALT = { apellido2:"No tengo segundo apellido", cx1_lado:"No aplica", cx2_lado:"No aplica", cx3_lado:"No aplica",
@@ -4522,7 +4631,7 @@ Q.forEach(q => {
   if (ULTIMA_DROPDOWN_RE.test(q.id) || ULTIMA_NUM_RE.test(q.id)) {
     q.dur = ["meses","años"];
     q.haceDur = true;
-    q.haceNumInput = ULTIMA_NUM_RE.test(q.id);
+    q.haceNumInput = true;
     q.noRecuerdo = true;
     q.hint = "";
     q.placeholder = "";
@@ -4694,6 +4803,160 @@ function qNow() { return listVisible()[state.i]; }
 
 function optionValue(o) { return typeof o === "string" ? o : o.v; }
 
+function yearBounds() {
+  const now = new Date(new Date().toLocaleString("en-US", { timeZone:"America/Mexico_City" })).getFullYear();
+  const fn = parseISODate(val("fnac"));
+  return { min: fn ? fn.y : now - 120, max: now };
+}
+function yearOk(v) {
+  const s = String(v || "").trim();
+  if (!s) return false;
+  if (s === NR || isPndToken(s)) return true;
+  if (!/^\d{4}$/.test(s)) return false;
+  const y = +s, b = yearBounds();
+  return y >= b.min && y <= b.max;
+}
+function yearIssue(v) {
+  const s = String(v || "").trim();
+  if (!s || s === NR || isPndToken(s)) return "";
+  if (!/^\d{4}$/.test(s)) return "Escribe un año de 4 dígitos, por ejemplo 2015.";
+  const y = +s, b = yearBounds();
+  if (y < b.min || y > b.max) return "El año debe estar entre " + b.min + " y " + b.max + ".";
+  return "";
+}
+function parseNumQual(v) {
+  const s = String(v || "").trim();
+  if (!s) return { q:"", n:"" };
+  let m = s.match(/^Más de\s+(\d+)$/i);
+  if (m) return { q:"más de", n:m[1] };
+  m = s.match(/^Menos de\s+(\d+)$/i);
+  if (m) return { q:"menos de", n:m[1] };
+  m = s.match(/^Un número\s+(\d+)$/i);
+  if (m) return { q:"exacto", n:m[1] };
+  if (/^\d+$/.test(s)) return { q:"exacto", n:s };
+  return { q:"", n:"" };
+}
+function encNumQual(kind, n) {
+  if (!kind || !String(n || "").trim()) return "";
+  const x = String(+n);
+  if (kind === "más de") return "Más de " + x;
+  if (kind === "menos de") return "Menos de " + x;
+  return x;
+}
+function numQualOk(v) {
+  const p = parseNumQual(v);
+  return !!(p.q && p.n && /^\d+$/.test(p.n));
+}
+function composeParejas() {
+  const raw = String(val("parejas") || "").trim();
+  if (!raw || raw === PND || isPndToken(raw)) return "";
+  const p = parseNumQual(raw);
+  if (p.q === "más de") return "más de " + p.n;
+  if (p.q === "menos de") return "menos de " + p.n;
+  if (p.q === "exacto") return p.n;
+  return raw;
+}
+function renderNumQual(host, id, q, onChange, redraw) {
+  const opts = (q.qualOpts && q.qualOpts.length) ? q.qualOpts : [
+    { v:"exacto", label:"Un número" },
+    { v:"más de", label:"Más de" },
+    { v:"menos de", label:"Menos de" }
+  ];
+  const cur = parseNumQual(val(id));
+  const pndOn = isPndToken(val(id));
+  let kind = pndOn ? "" : (cur.q || (state.numQual && state.numQual[id]) || "");
+  const wrap = el("div", { className:"uf nq" });
+  const seg = el("div", { className:"uf-units nq-units" });
+  seg.setAttribute("role", "group");
+  seg.setAttribute("aria-label", "Cómo expresar el número");
+  const row = el("div", { className:"uf-num" });
+  const pre = el("label", { className:"uf-q" }); pre.htmlFor = "nq-" + id;
+  const inp = el("input", { className:"field tiempo-inp", type:"text", id:"nq-" + id });
+  inp.inputMode = "numeric"; inp.setAttribute("pattern", "[0-9]*");
+  inp.maxLength = q.maxLen || 4; inp.autocomplete = "off";
+  inp.value = kind ? (cur.n || "") : "";
+  const preOf = k => k === "más de" ? "Más de" : k === "menos de" ? "Menos de" : "Número";
+  const phOf = k => k === "más de" ? "Ej. 10" : k === "menos de" ? "Ej. 30" : (q.placeholder || "Ej. 15");
+  const pinta = () => {
+    Array.from(seg.children).forEach((b, i) => {
+      const on = opts[i].v === kind;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    pre.textContent = kind ? preOf(kind) : "";
+    inp.placeholder = phOf(kind);
+    row.hidden = !kind;
+  };
+  const clearPnd = () => {
+    if (isPndToken(val(id))) delete state.answers[id];
+    const root = host.closest(".chain-body, #q-input, .chain-in") || host.parentNode;
+    if (root) root.querySelectorAll(".btn.skip").forEach(b => { b.classList.remove("selected"); b.setAttribute("aria-pressed","false"); });
+  };
+  const guarda = () => {
+    inp.value = inp.value.replace(/\D/g, "").slice(0, q.maxLen || 4);
+    (state.numQual = state.numQual || {})[id] = kind;
+    clearPnd();
+    const enc = encNumQual(kind, inp.value);
+    if (enc) state.answers[id] = enc;
+    else delete state.answers[id];
+    if (onChange) onChange();
+  };
+  opts.forEach(o => {
+    const b = el("button", { className:"uf-u", type:"button" });
+    b.textContent = o.label;
+    b.addEventListener("click", () => {
+      const first = !kind;
+      kind = o.v;
+      (state.numQual = state.numQual || {})[id] = kind;
+      pinta();
+      if (inp.value) guarda();
+      else { clearPnd(); delete state.answers[id]; if (onChange) onChange(); }
+      if (first && !row.hidden) rvx(row, "down");
+      setTimeout(() => { try { inp.focus({ preventScroll:true }); } catch (e) {} }, first ? 220 : 0);
+    });
+    seg.appendChild(b);
+  });
+  inp.addEventListener("input", guarda);
+  row.appendChild(pre); row.appendChild(inp);
+  wrap.appendChild(seg); wrap.appendChild(row);
+  pinta();
+  host.appendChild(wrap);
+  return wrap;
+}
+function renderYearInput(host, id, q, onChange, redraw) {
+  const nrL = (q && q.noRecuerdo) ? (q.nrLabel || NR) : "";
+  const cur = String(val(id) || "");
+  const onNR = !!(nrL && cur === nrL);
+  const wrap = el("div", { className:"year-wrap" });
+  const inp = el("input", { className:"field", type:"text", id:"inp-" + id });
+  inp.inputMode = "numeric"; inp.setAttribute("pattern", "[0-9]*"); inp.maxLength = 4;
+  inp.autocomplete = "off"; inp.placeholder = (q && q.placeholder) || "Ej. 2015";
+  inp.value = onNR ? "" : cur.replace(/\D/g, "").slice(0, 4);
+  const err = el("p", { className:"q-hint pair-err" });
+  const pintaErr = () => { err.textContent = (nrL && val(id) === nrL) ? "" : yearIssue(val(id)); };
+  const guarda = () => {
+    inp.value = inp.value.replace(/\D/g, "").slice(0, 4);
+    if (inp.value) state.answers[id] = inp.value; else delete state.answers[id];
+    pintaErr();
+    if (onChange) onChange();
+  };
+  inp.addEventListener("input", guarda);
+  wrap.appendChild(inp); wrap.appendChild(err);
+  if (nrL) {
+    const nrBtn = el("button", { className:"btn skip nr-btn" + (onNR ? " selected" : ""), type:"button" });
+    nrBtn.textContent = nrL; nrBtn.setAttribute("aria-pressed", onNR ? "true" : "false");
+    nrBtn.addEventListener("click", () => {
+      if (val(id) === nrL) delete state.answers[id];
+      else { state.answers[id] = nrL; inp.value = ""; }
+      if (redraw) redraw();
+      else { pintaErr(); if (onChange) onChange(); }
+    });
+    wrap.appendChild(nrBtn);
+  }
+  pintaErr();
+  host.appendChild(wrap);
+  return wrap;
+}
 function isAnswered(q) {
   if (q.chain && !q._inChain) return chainOk(q);
   if (altOn(q)) return true;
@@ -4707,6 +4970,14 @@ function isAnswered(q) {
     return true;
   }
   if (v == null || String(v).trim() === "") return false;
+  if ((q.numQual || q.type === "numqual") && !numQualOk(v)) return false;
+  if (q.yearInput && !yearOk(v)) return false;
+  if (q.multiYear) {
+    const s = String(v || "").trim();
+    if (s === NR || isPndToken(s)) return true;
+    const ys = s.split(",").map(x => x.trim()).filter(Boolean);
+    return ys.length > 0 && ys.every(y => yearOk(y));
+  }
   if (q.type === "telcc" && !telOk(v)) return false;
   if (q.withEmail && !EMAIL_RE.test(String(val("correo") || "").trim())) return false;
   if (q.type === "telcc" && state.mode === "seguimiento" && !nombreOk()) return false;
@@ -5482,28 +5753,38 @@ function renderInput(q) {
     if (sg) {
       const top = el("div", { className:"datos-top" });
       box0.appendChild(top);
+      let fi = 0;
+      const campo = () => {
+        const w = el("div", { className:"datos-field" });
+        top.appendChild(w);
+        if (!reduced()) { w.style.setProperty("--d", (fi * 0.14) + "s"); rvx(w, "down"); }
+        fi++;
+        return w;
+      };
       const addTxt = (id, lbl, ph, required) => {
+        const box = campo();
         const l = el("label", { className:"pair-lbl" }); l.textContent = lbl; l.htmlFor = "inp-" + id;
         const ti = el("input", { className:"field", type:"text", id:"inp-" + id });
         ti.placeholder = ph; ti.value = String(val(id) || "");
         ti.autocomplete = id === "nombre" ? "given-name" : id === "apellido1" ? "family-name" : "additional-name";
         ti.addEventListener("input", () => { const v = ti.value; if (v.trim()) state.answers[id] = v; else delete state.answers[id]; updateNav(q); });
-        top.appendChild(l); top.appendChild(ti);
+        box.appendChild(l); box.appendChild(ti);
         if (!required) {
-          const h = el("p", { className:"q-hint" }); h.textContent = "Si no tienes, déjalo en blanco."; top.appendChild(h);
+          const h = el("p", { className:"q-hint" }); h.textContent = "Si no tienes, déjalo en blanco."; box.appendChild(h);
         }
       };
       addTxt("nombre", "Nombre o nombres", "Tu(s) nombre(s)", true);
       addTxt("apellido1", "Primer apellido", "Primer apellido", true);
       addTxt("apellido2", "Segundo apellido", "Segundo apellido", false);
       if (q.withFnac) {
+        const box = campo();
         const l4 = el("label", { className:"pair-lbl" }); l4.textContent = "Fecha de nacimiento"; l4.htmlFor = "inp-fnac-d";
         const edad = el("p", { className:"q-hint", id:"edad-calc" });
         const err = el("p", { className:"fnac-err" });
         const mis = el("p", { className:"fnac-curp-hint" });
         const stF = { err, edad, mismatch: mis, manual: !state.fnacFromCurp };
-        top.appendChild(l4);
-        syncFnac = renderFnacRow(top, q, stF);
+        box.appendChild(l4);
+        syncFnac = renderFnacRow(box, q, stF);
         maybePrefillFnac = () => {
           const iso = curpFechaISO(val("curp"));
           if (!iso) { syncFnac(); return; }
@@ -5511,7 +5792,7 @@ function renderInput(q) {
             state.answers.fnac = iso; state.fnacFromCurp = true; stF.manual = false; syncFnac();
           } else syncFnac();
         };
-        top.appendChild(edad); top.appendChild(err); top.appendChild(mis);
+        box.appendChild(edad); box.appendChild(err); box.appendChild(mis);
         syncFnac();
       }
     }
@@ -5680,6 +5961,10 @@ function renderInput(q) {
       wrap.appendChild(nrB);
     }
     box.appendChild(wrap);
+  } else if (q.numQual || q.type === "numqual") {
+    renderNumQual(box, q.id, q, () => updateNav(q), () => { renderInput(q); updateNav(q); });
+  } else if (q.yearInput) {
+    renderYearInput(box, q.id, q, () => updateNav(q), () => { renderInput(q); updateNav(q); if (canProceed(q) && val(q.id) === (q.nrLabel || NR)) scheduleAdvance(); });
   } else {
     const typ = (q.type === "tel" || q.type === "email") ? q.type : "text";
     const inp = el("input", { className:"field", type:typ, id:"inp" });
@@ -5692,7 +5977,7 @@ function renderInput(q) {
     });
     box.appendChild(inp);
   }
-  if (q.noRecuerdo && !q.dur && !q.multiYear) {
+  if (q.noRecuerdo && !q.dur && !q.multiYear && !q.yearInput) {
     const nr = el("button", { className:"btn skip nr-btn", type:"button" });
     nr.textContent = "No me acuerdo";
     const on = val(q.id) === "No me acuerdo";
@@ -6065,6 +6350,7 @@ const BOOTY_ICONS_LISTOS = new Set([]);
 function slugIcon(t) { return String(t).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 40).replace(/_+$/, ""); }
 function bootyIconSlot(q, opt, raw) { return (raw && typeof raw === "object" && raw.slot) || ("booty_icon_" + q.id + "_" + slugIcon(opt)); }
 function bootyIconSrc(slot) { return IMAGES[slot] || (BOOTY_ICONS_LISTOS.has(slot) ? "assets/booty_icons/" + slot + ".png" : ""); }
+const BOOTY_OPTION_SLOT = { dx_panza_booty:"booty_panza_nauseas", dx_baile_booty:"booty_baile" };
 /* Iconos a una sola tinta en el color de tema (Dr. Agus 25/11/2026). Excepción: los que indican positivo,
    negativo o algo intermedio/indeterminado conservan su color semántico. Las fotos (Bristol, color de sangre) no cambian.
    Trazos y rellenos oscuros -> tinta del tema; rellenos claros -> un tinte claro del mismo tema; el blanco se queda. */
@@ -6122,10 +6408,14 @@ function renderChoices(box, q, multi) {
     btn.appendChild(k);
     const conIcono = (q.resIcons && RES_ICONS[opt]) || (raw && typeof raw === "object" && raw.img && IMAGES[raw.img]);
     const slotSrc = conIcono ? bootyIconSrc(bootyIconSlot(q, opt, raw)) : "";
+    const bootyOpt = (raw && typeof raw === "object" && raw.img) ? BOOTY_OPTION_SLOT[raw.img] : "";
     if (conIcono) btn.setAttribute("data-img", bootyIconSlot(q, opt, raw));
-    if (slotSrc) { const im = el("img", { className:"swatch-img booty-icon" }); im.src = slotSrc; im.alt = ""; btn.appendChild(im); }
+    if (bootyOpt && BOOTY_MASK[bootyOpt]) {
+      const m = bootyMask(bootyOpt);
+      if (m) { m.classList.add("choice-booty"); m.setAttribute("aria-hidden","true"); btn.appendChild(m); }
+    } else if (slotSrc) { const im = el("img", { className:"swatch-img booty-icon" }); im.src = slotSrc; im.alt = ""; btn.appendChild(im); }
     else if (q.resIcons && RES_ICONS[opt]) { const ic = el("span", { className:"res-ico" }); ic.innerHTML = RES_ICONS[opt]; btn.appendChild(ic); }
-    if (!slotSrc && raw && typeof raw === "object" && raw.img && IMAGES[raw.img]) {
+    if (!bootyOpt && !slotSrc && raw && typeof raw === "object" && raw.img && IMAGES[raw.img]) {
       const im = el("img", { className:"swatch-img" + (/^bristol_/.test(raw.img) ? " bristol-img" : "") });
       im.src = iconoTinta(raw.img);
       im.alt = opt;
@@ -6452,6 +6742,7 @@ function startMode(mode) {
   state.answers = {};
   state.sangreG = null; state.sangreR = null;
   state.others = {};
+  state.numQual = {};
   state.demo = false;
   state.hcSent = false;
   renderQuiz();
@@ -6590,7 +6881,6 @@ function composeFichaHuli() {
 }
 
 function compactAnswersJson() {
-  syncHepCFromB();
   if (val("sexo_anonimo") === "No") state.answers.sexo_riesgo = ["Ninguno"];
   const answers = {};
   Object.keys(state.answers).forEach(k => {
@@ -7076,7 +7366,6 @@ function composeEstadoRes() {
 }
 
 function huliFields() {
-  syncHepCFromB();
   if (val("sexo_anonimo") === "No") state.answers.sexo_riesgo = ["Ninguno"];
   const fields = [];
   const addF = (section, field, value, sourceId) => {
@@ -7121,7 +7410,7 @@ function huliFields() {
   addF("Preguntas personalizadas", "Ultimo tamizaje Sifilis referido verbalmente", composeTamiz("sifilis"), "tamizaje_sifilis_si");
   addF("Preguntas personalizadas", "Ultimo tamizaje ITS referido verbalmente", composeTamizITS(), "hisopo_anal");
   addF("Preguntas personalizadas", "Inicio de Vida Sexual", /^\d+$/.test(ans("debut") || "") ? ans("debut") + " años" : ans("debut"), "debut");
-  addF("Preguntas personalizadas", "Número de parejas sexuales", ans("parejas"), "parejas");
+  addF("Preguntas personalizadas", "Número de parejas sexuales", composeParejas(), "parejas");
   addF("Preguntas personalizadas", "Antecedente de infección de transmisión sexual", ans("its"), "its");
   addF("Preguntas personalizadas", "Tamizaje de cáncer anal", composeCa("anal"), "hisopo_anal");
   addF("Preguntas personalizadas", "Tamizaje de cáncer de colon", composeCa("colon"), "ca_colon_si");
@@ -7263,7 +7552,10 @@ function composeSangradoNote() {
   const parts = [];
   if (s === "A veces") parts.push("a veces");
   if (has("sangre_inicio")) parts.push(sangradoInicioNota());
-  if (has("sangre_ultimo")) parts.push("última ocasión " + lowerJoin(ans("sangre_ultimo")));
+  if (has("sangre_ultimo")) {
+    const su = String(val("sangre_ultimo") || "").trim();
+    if (su && su !== NR && !isPndToken(su)) parts.push("última ocasión " + lowerJoin(su));
+  }
   if (has("sangre_color")) parts.push(colorNote(ans("sangre_color")));
   const donde = dondeNote();
   if (donde) parts.push(donde);
@@ -7669,6 +7961,28 @@ function sgDespues(v) {
   if (n === 1) return (/^d/.test(u) ? "al día" : /^s/.test(u) ? "a la semana" : "al mes") + " de la consulta";
   return (/^s/.test(u) ? "a las " : "a los ") + n + " " + u + " de la consulta";
 }
+function sgNumRespuesta(id, kind) {
+  const v = val(id);
+  if (v == null || String(v).trim() === "") return null;
+  if (kind === "eva") { const n = Number(v); return isFinite(n) ? n : null; }
+  const s = String(v).trim();
+  const pct = s.match(/^(\d+(?:\.\d+)?)\s*%$/);
+  if (pct) return parseFloat(pct[1]);
+  if (s === "Ningún día" || s === "0") return 0;
+  const n = parseFloat(s.replace("%", "").replace(",", "."));
+  return isFinite(n) ? n : null;
+}
+function sgMejoriaBit(key, actualId, kind) {
+  const ini = sgNumRespuesta("sg_"+key+"_inicio", kind);
+  const now = sgNumRespuesta(actualId, kind);
+  if (ini == null || now == null) return "";
+  const unidad = kind === "eva" ? "/10" : "%";
+  if (ini === 0) return now === 0 ? "sin cambio (sigue en 0" + unidad + ")" : "";
+  const pct = Math.round((ini - now) / ini * 100);
+  if (pct > 0) return "reducción " + pct + "% (de " + ini + unidad + " a " + now + unidad + ")";
+  if (pct < 0) return "aumento " + Math.abs(pct) + "% (de " + ini + unidad + " a " + now + unidad + ")";
+  return "sin cambio (" + now + unidad + ")";
+}
 function composeSgSintomaLine(key, label, opts) {
   opts = opts || {};
   if (ans("sg_"+key+"_tenia") !== "Sí") return "";
@@ -7679,8 +7993,12 @@ function composeSgSintomaLine(key, label, opts) {
     const ini = sgN7("sg_"+key+"_inicio");
     if (ini) bits.push("inicial " + (ini === "negado" ? "0%" : ini));
   }
-  if (has("sg_"+key+"_reduccion")) bits.push("reducción " + sgPct("sg_"+key+"_reduccion"));
   const actualId = opts.actualId || ("sg_"+key+"_actual");
+  if (has("sg_"+key+"_reduccion")) bits.push("reducción " + sgPct("sg_"+key+"_reduccion"));
+  else {
+    const mej = sgMejoriaBit(key, actualId, opts.kind);
+    if (mej) bits.push(mej);
+  }
   if (opts.kind === "eva") {
     if (has(actualId)) bits.push("actual " + ans(actualId) + "/10");
   } else if (has(actualId)) {
@@ -7693,9 +8011,7 @@ function composeSgSintomaLine(key, label, opts) {
     else bits.push("todavía no disminuye");
   }
   const noBaja = ans("sg_"+key+"_bajo_cuando") === "Todavía no baja";
-  if (!noBaja && ans("sg_"+key+"_elimino") === "Sí") {
-    bits.push("se eliminó" + (has("sg_"+key+"_elimino_cuando") ? " " + sgDespues(ans("sg_"+key+"_elimino_cuando")) : ""));
-  }
+  if (!noBaja && sgSeQuito(key)) bits.push("se eliminó");
   if (!noBaja && has("sg_"+key+"_ultima")) bits.push("última ocasión " + lowerJoin(ans("sg_"+key+"_ultima")));
   if (key === "abdominal") { const sr = composeSgRoma(); if (sr) bits.push(sr); }
   if (key === "bulto") { const ba = composeSgBultoAhora(); if (ba) bits.push(ba); }
@@ -8054,7 +8370,7 @@ const SIMULADO = {
     tenesmo: "40%",
     sangre: "A veces",
     sangre_inicio: "3 meses", sangre_previo: "No",
-    sangre_ultimo: "Hace una semana",
+    sangre_ultimo: "hace 1 semana",
     sangre_color: "Rojo brillante, como si me acabara de cortar o sangrara la nariz",
     coagulos: "No",
     sangre_donde: ["Manchado en el papel"],
