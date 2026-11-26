@@ -615,6 +615,8 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 .q-title .req { font-weight: 400; }
 .q-title.notice-title { font-weight: 400; font-size: 1.0625rem; line-height: 1.5; letter-spacing: 0; text-wrap: pretty; }
 .q-title.notice-title strong { font-weight: 700; }
+.q-title.has-time-emph { font-weight: 400; }
+.q-title.has-time-emph strong { font-weight: 700; }
 .q-hint { font-weight: 400; font-size: .9375rem; line-height: 1.45; color: var(--muted); margin: 0 0 1rem; max-width: 34em; }
 .q-hint.short { font-style: italic; }
 .choice { font-weight: 400; font-size: 1.0625rem; line-height: 1.3; letter-spacing: 0; min-height: 52px; padding: 12px 16px; }
@@ -785,6 +787,8 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 .chain-step{scroll-margin:90px}
 .chain-step + .chain-step{margin-top:18px}
 .chain-lbl{display:block;margin:0 0 8px;font-weight:700;font-size:1.02rem;color:var(--ink)}
+.chain-lbl.has-time-emph{font-weight:400}
+.chain-lbl.has-time-emph strong{font-weight:700}
 .chain-hint{font-size:.88rem;color:var(--muted);margin:-4px 0 8px}
 .chain-step.rv-down,.chain-step.rv-side{display:grid;grid-template-rows:1fr;overflow:hidden;animation:rvGrow .45s ease both}
 .chain-in{min-height:0}
@@ -3364,13 +3368,21 @@ function sgSeQuito(key) {
   }
   return sgReduccionCien(key);
 }
+function sgTitleEmph(t) {
+  t = String(t || "");
+  if (t.indexOf("la vez pasada") >= 0) return "la vez pasada";
+  if (t.indexOf("En esa ocasión") >= 0) return "En esa ocasión";
+  if (t.indexOf("Ahora") >= 0) return "Ahora";
+  if (t.indexOf("ahora") >= 0) return "ahora";
+  return "";
+}
 function addSgPack(cfg) {
   const k = cfg.key;
   const pre = "sg_" + k + "_";
   add({ id: pre+"tenia", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-    type:"mc", required:true, title: cfg.had, hint: cfg.hadHint || "", options:["No","Sí"], bootySlot: cfg.bootySlot });
+    type:"mc", required:true, title: cfg.had, titleEmph: sgTitleEmph(cfg.had), hint: cfg.hadHint || "", options:["No","Sí"], bootySlot: cfg.bootySlot });
   const inicio = { id: pre+"inicio", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-    required:true, title: cfg.init, hint: cfg.initHint || "", showIf: sgTenia(k) };
+    required:true, title: cfg.init, titleEmph: sgTitleEmph(cfg.init), hint: cfg.initHint || "", showIf: sgTenia(k) };
   if (cfg.kind === "eva") {
     Object.assign(inicio, { type:"scale", eva:true, min:0, max:10, left:"0: sin dolor", right:"10: el peor dolor" });
   } else {
@@ -3383,7 +3395,7 @@ function addSgPack(cfg) {
   }
   if (!cfg.skipActual) {
     const actual = { id: pre+"actual", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
-      required:true, title: cfg.now, showIf: sgTenia(k) };
+      required:true, title: cfg.now, titleEmph: sgTitleEmph(cfg.now), showIf: sgTenia(k) };
     if (cfg.kind === "eva") {
       Object.assign(actual, { type:"scale", eva:true, min:0, max:10, left:"0: sin dolor", right:"10: el peor dolor" });
     } else {
@@ -3733,12 +3745,14 @@ add({ id:"sg_bristol", mode:"seguimiento", section:"Evacuaciones de ahora", huli
 add({ id:"sg_pujar", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi", showIf:{ id:"sg_pujo_tenia", in:["Sí"] } /* Dr. Agus 25/11/2026 */,
   required:true, type:"pct", left:"0%: nunca", right:"100%: siempre",
   title:"Ahora, de todas las veces que evacúas, ¿en qué porcentaje necesitas pujar muy fuerte y durante toda la evacuación?",
+  titleEmph:"Ahora",
   hint:"Todos necesitamos pujar un poco al evacuar. Aquí te preguntamos si necesitas pujar muy fuerte y durante toda la evacuación. No lo confundas con el tenesmo: el pujo es el esfuerzo, no la sensación de que todavía queda algo.",
   image:"illus_pujo_tenesmo", imageClass:"q-illus",
   imageAlt:"Dos recuadros: el pujo es pujar muy fuerte durante toda la evacuación; el tenesmo es la sensación de que el recto sigue lleno al terminar." });
 add({ id:"sg_tenesmo", mode:"seguimiento", section:"Evacuaciones de ahora", huli:"gi", showIf:{ id:"sg_tenesmo_tenia", in:["Sí"] } /* Dr. Agus 25/11/2026 */,
   required:true, type:"pct", left:"0%: nunca", right:"100%: siempre",
   title:"Ahora, de todas las veces que evacúas, ¿en qué porcentaje sientes, al terminar, que el recto sigue lleno y que aún quieres evacuar?",
+  titleEmph:"Ahora",
   hint:"Lo sientes en el recto (la parte final del intestino, justo arriba del ano), no en el abdomen o la panza. Si no te pasa, toca 0%. No lo confundas con pujar: esto es la sensación de que sigue lleno cuando ya terminaste.",
   image:"illus_pujo_tenesmo", imageClass:"q-illus",
   imageAlt:"Dos recuadros: el pujo es pujar muy fuerte durante toda la evacuación; el tenesmo es la sensación de que el recto sigue lleno al terminar." });
@@ -4481,8 +4495,9 @@ function renderChain(box, h) {
     const n = el("div", { className:"chain-step" }); n.hidden = true;
     const inner = el("div", { className:"chain-in" }); n.appendChild(inner);
     if (i > 0) {
-      const lb = el("div", { className:"pair-lbl chain-lbl" });
-      lb.innerHTML = escapeHtml(st.chainTitle || (st.titleFn ? st.titleFn() : st.title)) + (st.required ? ' <span class="req">*</span>' : "");
+      const rawT = st.chainTitle || (st.titleFn ? st.titleFn() : st.title);
+      const lb = el("div", { className:"pair-lbl chain-lbl" + (st.titleEmph && isTimeEmph(st.titleEmph) ? " has-time-emph" : "") });
+      lb.innerHTML = titleHtml(st, rawT) + (st.required ? ' <span class="req">*</span>' : "");
       inner.appendChild(lb);
       if (st.hint) { const hh = el("div", { className:"chain-hint" }); hh.textContent = st.hint; inner.appendChild(hh); }
     }
@@ -5384,13 +5399,9 @@ function renderQuiz() {
   $("#draft-banner").classList.toggle("hidden", !q.draft);
   $("#q-title").classList.toggle("hidden", !!q.finale || !(q.title || q.titleFn || q.introParts));
   $("#q-title").classList.toggle("notice-title", q.type === "notice");
+  $("#q-title").classList.toggle("has-time-emph", !!(q.titleEmph && isTimeEmph(q.titleEmph)));
   { const tt = q.titleFn ? q.titleFn() : q.title;
-    let th = escapeHtml(tt);
-    if (q.titleEmph) {
-      const e = escapeHtml(q.titleEmph);
-      const i = th.indexOf(e);
-      if (i >= 0) th = th.slice(0, i) + "<strong>" + e + "</strong>" + th.slice(i + e.length);
-    }
+    let th = titleHtml(q, tt);
     if (q.type === "notice" && !q.keepTitle) { const m = String(tt).match(/^([^.!?]+[.!?])(\s+[\s\S]+)$/); if (m) th = "<strong>" + escapeHtml(m[1]) + "</strong>" + escapeHtml(m[2]); }
     if (q.type === "notice" && q.imageHeading && !q.keepTitle) {
       // pantallas de explicación con dibujo: frase en negritas y el resto en bloques cortos a dos columnas
@@ -6661,6 +6672,19 @@ function el(tag, props) {
 }
 function escapeHtml(s) {
   return String(s||"").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[c]));
+}
+function isTimeEmph(s) {
+  return s === "la vez pasada" || s === "En esa ocasión" || s === "Ahora" || s === "ahora";
+}
+function titleHtml(q, raw) {
+  const tt = raw != null ? raw : (q && q.titleFn ? q.titleFn() : ((q && q.title) || ""));
+  let th = escapeHtml(tt);
+  if (q && q.titleEmph) {
+    const e = escapeHtml(q.titleEmph);
+    const i = th.indexOf(e);
+    if (i >= 0) th = th.slice(0, i) + "<strong>" + e + "</strong>" + th.slice(i + e.length);
+  }
+  return th;
 }
 
 function goNext() {
