@@ -3459,12 +3459,13 @@ add({ id:"sg_meds_otros_cual", mode:"seguimiento", section:"Desde la última con
   title:"¿Cuál usas, desde cuándo y qué tan seguido?",
   placeholder:"Por ejemplo: pomada con esteroide, desde hace 2 meses, diario",
   showIf:{ id:"sg_meds_otros", in:["Sí"] } });
-// Dilatadores (Dr. Agus 25/11/2026): Sí/No. Si contesta No, pasa directo al siguiente rubro.
-// Si contesta Sí: diámetro actual (mm), veces por semana y si duele o sangra. Va a la nota de seguimiento.
+// Dilatadores (Dr. Agus 25/11/2026; aclaración 26/11/2026): la pregunta es si el doctor
+// se los indicó, no si el paciente los usa por su cuenta. Sí/No. Si contesta No, pasa
+// al siguiente rubro. Si contesta Sí: diámetro actual (mm), veces por semana y si duele o sangra.
 add({ id:"sg_dilat", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
   type:"mc", required:true, options:["No","Sí"],
-  title:"¿Usas dilatadores anales?",
-  hint:"Son los conos o tubos que se introducen en el ano para ampliarlo poco a poco, por ejemplo después de una cirugía o por estrechez del ano." });
+  title:"¿El doctor te indicó usar dilatadores anales?",
+  hint:"Si los usas por tu cuenta, sin que el doctor te los haya indicado, responde No.\nSon los conos o tubos que se introducen en el ano para ampliarlo poco a poco, por ejemplo después de una cirugía o por estrechez del ano." });
 add({ id:"sg_dilat_mm", mode:"seguimiento", section:"Desde la última consulta", huli:"gi",
   type:"number", required:true, suffix:"mm",
   title:"¿De qué diámetro es el dilatador que usas ahora?",
@@ -8054,8 +8055,8 @@ function composeNotaSeguimiento() {
     const mo = asList("sg_dilat_molestias");
     if (mo.includes("Ninguna")) b.push("sin dolor ni sangrado");
     else if (mo.length) b.push("con " + mo.filter(x => x === "Dolor" || x === "Sangrado").map(x => x.toLowerCase()).join(" y "));
-    pad.push("Dilatadores: en uso" + (b.length ? ", " + b.join(", ") : "") + ".");
-  } else if (val("sg_dilat") === "No") pad.push("Dilatadores: no los usa.");
+    pad.push("Dilatadores: se los indicó, en uso" + (b.length ? ", " + b.join(", ") : "") + ".");
+  } else if (val("sg_dilat") === "No") pad.push("Dilatadores: no se los indicó.");
   const ind = ans("sg_banos_ind");
   if (/no me los indicó/i.test(ind || "")) pad.push("Baños de asiento: no se los indicó.");
   else if (ind) {
