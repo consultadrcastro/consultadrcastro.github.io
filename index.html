@@ -4076,6 +4076,20 @@ function bootyPlayTira(box, d) {
   });
   return true;
 }
+/* Duración (ms) de cada cuadro de un webp animado, leída de los chunks ANMF (el navegador solo la da al decodificar). */
+function bootyWebpDurs(buf) {
+  const out = [];
+  try {
+    const dv = new DataView(buf);
+    let pos = 12;
+    while (pos + 8 <= dv.byteLength) {
+      const sz = dv.getUint32(pos + 4, true);
+      if (dv.getUint32(pos, false) === 0x414E4D46) out.push(dv.getUint8(pos + 20) | (dv.getUint8(pos + 21) << 8) | (dv.getUint8(pos + 22) << 16));
+      pos += 8 + sz + (sz & 1);
+    }
+  } catch (e) { return []; }
+  return out;
+}
 function bootyStartAnim(box, d, urls) {
   if (!d.anim) return;
   const capas = d.capas || [];
@@ -4088,6 +4102,7 @@ function bootyStartAnim(box, d, urls) {
     if (!u) return Promise.resolve(null);
     return fetch(u).then(r => r.ok ? r.arrayBuffer() : Promise.reject(new Error("mask"))).then(buf => {
       const dec = new ImageDecoder({ data: buf, type: "image/webp" });
+      dec.__durs = bootyWebpDurs(buf);
       return (dec.completed ? dec.completed.catch(() => {}) : Promise.resolve()).then(() => dec);
     }).catch(() => null);
   })).then(function (decs) {
@@ -4106,40 +4121,52 @@ function bootyStartAnim(box, d, urls) {
       canvas.height = Math.round(h * dpr);
       const ctx = canvas.getContext("2d");
       ctx.scale(dpr, dpr);
-      const off = document.createElement("canvas");
-      off.width = w; off.height = h;
-      const octx = off.getContext("2d");
       box.appendChild(canvas);
       box.classList.add("booty-anim-on");
-      let i = 0;
+      /* Reloj real: cada capa elige su cuadro según el tiempo transcurrido y la duración propia de cada cuadro.
+         Así las capas (relleno con cuadros fusionados, línea a 40 ms) siguen sincronizadas y la pieza corre a su velocidad. */
+      const lay = decs.map(function (dec, li) {
+        if (!dec) return null;
+        const fc = (dec.tracks && dec.tracks.selectedTrack && dec.tracks.selectedTrack.frameCount) || n;
+        const ds = dec.__durs && dec.__durs.length === fc ? dec.__durs : null;
+        const cum = []; let acc = 0;
+        for (let k = 0; k < fc; k++) { cum.push(acc); acc += ds ? (ds[k] || 40) : 40; }
+        const off = document.createElement("canvas"); off.width = w; off.height = h;
+        return { dec: dec, kind: capas[li], cum: cum, total: acc || 40, last: -1, tema: "", off: off, octx: off.getContext("2d") };
+      });
+      const T0 = performance.now();
       function tick() {
         if (dead || !box.isConnected) { stop(); return; }
+        const t = performance.now() - T0;
         const tema = (getComputedStyle(box).getPropertyValue("--tema") || "").trim() || bootyTemaColor();
-        let delay = 40;
-        const jobs = capas.map(function (capa, li) {
-          const dec = decs[li];
-          if (!dec) return Promise.resolve(null);
-          const fc = (dec.tracks && dec.tracks.selectedTrack && dec.tracks.selectedTrack.frameCount) || n;
-          return dec.decode({ frameIndex: i % fc }).catch(() => null);
+        const jobs = lay.map(function (l) {
+          if (!l) return Promise.resolve(false);
+          const lt = t % l.total;
+          let k = l.cum.length - 1;
+          while (k > 0 && l.cum[k] > lt) k--;
+          if (k === l.last && l.tema === tema) return Promise.resolve(false);
+          return l.dec.decode({ frameIndex: k }).then(function (r) {
+            if (dead) { r.image.close(); return false; }
+            const o = l.octx;
+            o.globalCompositeOperation = "source-over";
+            o.clearRect(0, 0, w, h);
+            o.drawImage(r.image, 0, 0, w, h);
+            o.globalCompositeOperation = "source-in";
+            o.fillStyle = l.kind === "relleno" ? "#fff" : tema;
+            o.fillRect(0, 0, w, h);
+            o.globalCompositeOperation = "source-over";
+            r.image.close();
+            l.last = k; l.tema = tema;
+            return true;
+          }).catch(() => false);
         });
         Promise.all(jobs).then(function (res) {
-          if (dead || !box.isConnected) { res.forEach(r => { if (r) r.image.close(); }); return; }
-          ctx.clearRect(0, 0, w, h);
-          res.forEach(function (r, li) {
-            if (!r) return;
-            if (r.image.duration) delay = Math.max(delay, r.image.duration / 1000);
-            octx.globalCompositeOperation = "source-over";
-            octx.clearRect(0, 0, w, h);
-            octx.drawImage(r.image, 0, 0, w, h);
-            octx.globalCompositeOperation = "source-in";
-            octx.fillStyle = capas[li] === "relleno" ? "#fff" : tema;
-            octx.fillRect(0, 0, w, h);
-            octx.globalCompositeOperation = "source-over";
-            ctx.drawImage(off, 0, 0);
-            r.image.close();
-          });
-          i++;
-          timer = setTimeout(tick, Math.max(20, Math.min(delay || 40, 200)));
+          if (dead || !box.isConnected) return;
+          if (res.some(Boolean)) {
+            ctx.clearRect(0, 0, w, h);
+            lay.forEach(function (l) { if (l && l.last >= 0) ctx.drawImage(l.off, 0, 0); });
+          }
+          timer = setTimeout(tick, 40);
         });
       }
       tick();
