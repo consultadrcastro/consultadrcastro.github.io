@@ -568,6 +568,9 @@ select.field { appearance: auto; background: #fff; }
 .booty-fx .booty-mask{position:absolute;inset:0;width:100%;height:100%;margin:0}
 .booty-fx img.booty-fx-capa{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;border:0;background:transparent}
 #screen-done .booty-fx{width:min(480px,100%);aspect-ratio:480/220;margin:0 auto 10px}
+/* Fiesta v4 (27/11/2026): 480x260, colores pintados en la pieza; NO se tiñe con var(--tema) */
+#screen-done .booty-fx.booty-fiesta-color{width:100%;max-width:480px;aspect-ratio:480/260}
+.booty-fx.booty-fiesta-color img.booty-fiesta-img{display:block;width:100%;height:100%;max-width:100%;object-fit:contain;background:transparent;border:0;filter:none!important;pointer-events:none}
 .booty-mask.ratio-480-220{aspect-ratio:480/220}
 .mode-square .mode-booty{width:auto;height:68%;aspect-ratio:1;max-width:90%;background:transparent}
 .mode-square .mode-booty .booty-mask{width:100%;height:100%;margin:0}
@@ -927,7 +930,7 @@ body { font-weight: 400; font-size: 1rem; line-height: 1.5; }
 
   <section id="screen-done" class="screen hidden">
     <div class="thanks" id="thanks">
-      <div class="booty-fx" id="done-booty-fx" data-slot="booty_fiesta" data-capa-color="assets/booty_icons/APROBADO_booty_capa_confeti_fiesta_color_original.webp" role="img" aria-label="Booty de fiesta, celebrando que terminaste"></div>
+      <div class="booty-fx booty-fiesta-color" id="done-booty-fx" data-img-base="assets/booty_icons/APROBADO_booty_fiesta_v4" role="img" aria-label="Booty de fiesta, celebrando que terminaste"></div>
       <div id="booty-fiesta" hidden></div>
       <h1 tabindex="-1" id="thanks-title">Gracias</h1>
       <p id="thanks-msg">Al terminar, tus respuestas se envían al Dr. Agus.</p>
@@ -1748,6 +1751,7 @@ add({ id:"suplementos_tiempo", mode:"primera", section:"Hábito intestinal", hul
   title:"¿Cuánto tiempo llevas tomándolo?", hint:"Elige días, meses o años y luego escribe cuántos.",
   showIf:{ id:"suplementos", in:["Sí"] } });
 
+const COMEZON_NOCHE_OPTS = ["No, igual de día y de noche","Sí, más en las noches","Solo en las noches"];
 add({ id:"comezon", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true,
   title:"¿Te da comezón en el ano?",
@@ -1756,6 +1760,12 @@ add({ id:"comezon", mode:"primera", section:"Hábito intestinal", huli:"gi",
 add({ id:"comezon_inicio", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"text", dur:["días","meses","años"], required:false, hint:"Elige días, meses o años y luego escribe cuántos.",
   title:"¿Desde cuándo te da comezón?",
+  showIf:{ id:"comezon", in:["Sí","Ocasional"] } });
+
+add({ id:"comezon_noche", mode:"primera", section:"Hábito intestinal", huli:"gi",
+  type:"mc", required:true,
+  title:"¿La comezón es más en las noches?",
+  options:COMEZON_NOCHE_OPTS,
   showIf:{ id:"comezon", in:["Sí","Ocasional"] } });
 
 add({ id:"comezon_rascado", mode:"primera", section:"Hábito intestinal", huli:"gi",
@@ -3128,7 +3138,10 @@ add({ id:"debut", mode:"primera", section:"Preguntas personalizadas", huli:"pers
 add({ id:"parejas", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
   type:"numqual", required:true, numQual:true, maxLen:4,
   title:"¿Cuántas parejas sexuales has tenido en tu vida?",
-  hint:"No hay una respuesta correcta; esto solo nos ayuda a cuidarte mejor. Si no lo recuerdas con exactitud, elige «Más de» o «Menos de» y escribe un número aproximado.",
+  hint:"Escribe el número. Si no lo recuerdas con exactitud, elige «Aprox. más de» o «Aprox. menos de». No hay una respuesta correcta; esto solo nos ayuda a cuidarte mejor.",
+  /* El campo del número siempre se ve, con «Exacto» elegido; los valores guardados no cambian ("15", "Más de 30", "Menos de 10"). */
+  numAlways:true, qualDefault:"exacto",
+  qualOpts:[{ v:"exacto", label:"Exacto" }, { v:"más de", label:"Aprox. más de" }, { v:"menos de", label:"Aprox. menos de" }],
   placeholder:"Ej. 15" });
 add({ id:"its", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
   type:"check", required:true, other:true, exclusive:["Ninguna"], advanceOnExclusive:true, grid:2, itsGrid:true,
@@ -3147,7 +3160,7 @@ const CA_BLOCKS = {
   },
   colon: {
     pregunta:"¿Te has hecho colonoscopía o prueba de sangre en heces?",
-    explica:"Te explico: para buscar cáncer de colon se usan estos estudios. En la colonoscopia te sedan y revisan todo el intestino grueso por dentro con una cámara. La prueba de sangre oculta en heces es un estudio de laboratorio con una muestra de tu popó. ¿Ya entendiste en qué consisten?",
+    explica:"Te explico: para buscar cáncer de colon se usan estos estudios. En la colonoscopia, mientras estás dormido con sedación, el doctor introduce con cuidado una cámara delgada y flexible por el ano para revisar todo el intestino grueso por dentro. La prueba de sangre oculta en heces es un estudio de laboratorio con una muestra de tu popó. ¿Ya entendiste en qué consisten?",
     opciones:["Colonoscopia","Sangre oculta en heces"],
     keys:["colono","soh"],
     res:{ colono:["Normal","Pólipos","Anormal","Otro","No sé"], soh:["Negativo","Positivo","No sé"] },
@@ -3166,7 +3179,7 @@ const CA_INFO = {
     title:"Anoscopia de alta resolución: el doctor revisa el ano por dentro con un tubito y un microscopio con luz. Si ve algo raro, toma biopsias (pedacitos muy pequeños de piel) para estudiarlos. Sirve para encontrar lesiones antes de que se vuelvan cáncer. La citología anal y la PCR de VPH se toman con el hisopo que te mostramos antes." }],
   colon: [
     { image:"img_colonoscopia", heading:"Colonoscopia, ¿qué es?", alt:"Diagrama: paciente sedado acostado de lado; el colonoscopio entra por el ano y recorre el colon.",
-      title:"Colonoscopia: con sedación, el doctor mete por el ano una cámara delgada y flexible, el colonoscopio, que mide aproximadamente metro y medio, y revisa todo el intestino grueso por dentro. Si encuentra pólipos (bolitas que pueden volverse cáncer), normalmente los quita en ese momento." },
+      title:"Colonoscopia: mientras estás dormido con sedación, el doctor introduce con cuidado por el ano una cámara delgada y flexible, el colonoscopio, de aproximadamente metro y medio, para revisar todo el intestino grueso por dentro. Si encuentra pólipos (bolitas que pueden volverse cáncer), normalmente los quita en ese momento." },
     { image:"img_sangre_oculta", heading:"Sangre oculta en heces, ¿qué es?", alt:"Frasco para muestra de heces con cucharita y prueba de laboratorio.",
       title:"Sangre oculta en heces: es un estudio de laboratorio con una pequeña muestra de tu popó, que tomas tú en casa con una cucharita en un frasco. Busca sangre que no se ve a simple vista." }
   ]
@@ -3388,6 +3401,7 @@ function addSgPack(cfg) {
     }
     add(actual);
   }
+  if (cfg.afterActual) cfg.afterActual.forEach(add);
   add({ id: pre+"bajo_cuando", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
     type:"text", required:true, dur:["días","semanas","meses"], noRecuerdo:true, nrLabel:"Todavía no baja", nrFirst:true,
     title: cfg.bajo,
@@ -3553,7 +3567,10 @@ addSgPack({
   bajo:"¿Cuándo empezó a bajar la comezón, después de la consulta?",
   elimino:"¿La comezón se te quitó por completo?",
   eliminoCuando:"¿Cuándo se te quitó la comezón?",
-  ultima:"¿Cuándo fue la última vez que te dio comezón?"
+  ultima:"¿Cuándo fue la última vez que te dio comezón?",
+  afterActual:[{ id:"sg_comezon_noche", mode:"seguimiento", section:"Síntomas desde la última consulta", huli:"gi",
+    type:"mc", required:true, title:"¿Y ahora, la comezón es más en las noches?", options:COMEZON_NOCHE_OPTS,
+    showIf: sgTenia("comezon"), showIfFn: sgSiguePresente("comezon") }]
 });
 addSgPack({
   key:"moco", kind:"n7", skipReduc:true,
@@ -3826,7 +3843,7 @@ const BLOCK_OF = {};
   ["contacto", ["quien_refiere","quien_refiere_medico","hobbies","nombre","apellido1","apellido2","fnac","sexo_bio","identidad","orientacion","genero","estado_nac","estado_nac_otro","estado_res","estado_res_otro","tiene_curp","curp","telefono","correo"]],
   ["ficha", ["civil","trabajo","tipo_sangre","estudios","estudios_en","religion","mascotas","mascotas_cual","mascotas_nombres"]],
   ["motivo", ["motivo","relato"]],
-  ["habito", ["evac_dia","evac_cada","bristol","pujar_tiene","pujar","tenesmo_tiene","tenesmo","sangre","sangre_color","sangre_inicio","sangre_ultimo","coagulos","sangre_donde","moco","moco_desde","tiempo_bano","agua","comidas","fruta","verdura","dolor_evac","dolor_inicio","dolor_previo","dolor_previo_desde","dolor_episodios_anio","dolor_eva","dolor_tipo","dolor_cuando","dolor_duracion","dolor_espontaneo","dfa_duracion","dfa_entre","dfa_frecuencia","dfa_3meses","dfa_6meses","dfa_caracter","dfa_desencadena","dolor_noche","irritantes","suplementos","suplementos_cual","suplementos_tiempo","comezon","comezon_inicio","comezon_rascado","toallas","meds_topicos","meds_topicos_cual","humedad","humedad_det","aseo_vigoroso","cuerpo_extranio","cuerpo_extranio_inicio","cuerpo_extranio_tamano","cuerpo_extranio_sale","cuerpo_extranio_duele","ce_dolor_desde","ce_dolor_eva","ce_dolor_tipo","cuerpo_extranio_dolor","fiebre","fiebre_det","fiebre_veces","fiebre_cuando","perdida_peso","perdida_peso_det","perdida_peso_kg","perdida_peso_tiempo","ejercicio","sii_dolor","sii_evacuar","sii_frecuencia","sii_forma","sii_6meses"]],
+  ["habito", ["evac_dia","evac_cada","bristol","pujar_tiene","pujar","tenesmo_tiene","tenesmo","sangre","sangre_color","sangre_inicio","sangre_ultimo","coagulos","sangre_donde","moco","moco_desde","tiempo_bano","agua","comidas","fruta","verdura","dolor_evac","dolor_inicio","dolor_previo","dolor_previo_desde","dolor_episodios_anio","dolor_eva","dolor_tipo","dolor_cuando","dolor_duracion","dolor_espontaneo","dfa_duracion","dfa_entre","dfa_frecuencia","dfa_3meses","dfa_6meses","dfa_caracter","dfa_desencadena","dolor_noche","irritantes","suplementos","suplementos_cual","suplementos_tiempo","comezon","comezon_inicio","comezon_noche","comezon_rascado","toallas","meds_topicos","meds_topicos_cual","humedad","humedad_det","aseo_vigoroso","cuerpo_extranio","cuerpo_extranio_inicio","cuerpo_extranio_tamano","cuerpo_extranio_sale","cuerpo_extranio_duele","ce_dolor_desde","ce_dolor_eva","ce_dolor_tipo","cuerpo_extranio_dolor","fiebre","fiebre_det","fiebre_veces","fiebre_cuando","perdida_peso","perdida_peso_det","perdida_peso_kg","perdida_peso_tiempo","ejercicio","sii_dolor","sii_evacuar","sii_frecuencia","sii_forma","sii_6meses"]],
   ["gineco", ["fum_estado","fum","gestas","partos","partos_cesarea","abortos","macrosomia","parto_instrumentado","pap","pap_cuando","pap_conoce","pap_precancer","mamo","mamo_cuando","mamo_hallazgo"]],
   ["wexner", ["wexner_solidas","wexner_liquidas","wexner_gases","wexner_toallas","wexner_estilo"]],
   ["antecedentes", ["ahf","ahf_otros_ca"].concat(AHF_ENF.flatMap(([k]) => ["ahf_"+k+"_quien","ahf_"+k+"_edad"].concat(AHF_FAM.map(f => "ahf_"+k+"_edad_"+f[0])).concat(["ahf_"+k+"_vive","ahf_"+k+"_fallece"]))).concat(["ahf_notas","app_pat"].concat(APP_ENF.flatMap(([k]) => ["app_"+k+"_desde","app_"+k+"_med"])).concat(["app_otro_desde","app_otro_med"]).concat(["app_vih_cd4","app_vih_cd4_fecha","app_vih_cv","app_vih_cv_fecha","app_detalle","app_notas","alergias"].concat(Array.from({length:5},(_,i)=>i+1).flatMap(n=>["alerg"+n+"_cual","alerg"+n+"_reac","alerg"+n+"_otra"])).concat(["cx_tiene","cx1_tipo","cx1_cual","cx1_tecnica","cx1_lado_hernia","cx1_malla","cx1_lado","cx1_cuando","cx1_porque","cx1_compl","cx1_otra","cx2_tipo","cx2_cual","cx2_tecnica","cx2_lado_hernia","cx2_malla","cx2_lado","cx2_cuando","cx2_porque","cx2_compl","cx2_otra","cx3_tipo","cx3_cual","cx3_tecnica","cx3_lado_hernia","cx3_malla","cx3_lado","cx3_cuando","cx3_porque","cx3_compl","cx_mas","hosp","vacunas","vac_vph_tipo","vac_vph_dosis","vac_vph_anio","vac_mpox_dosis","vac_mpox_anio","vac_menb_dosis","vac_menb_anio","vac_hepa_dosis","vac_hepa_anio","vac_hepb_dosis","vac_hepb_anio","fracturas","transfusiones","transf_anio","fuma","fuma_anios","fuma_cant","fuma_dejo","alcohol","alcohol_que","alcohol_freq","drogas","droga_dur_otro","drogas_notas"])))],
@@ -3835,7 +3852,7 @@ const BLOCK_OF = {};
   ["abuso", ["abuso_aviso","abuso_sexual","abuso_edad","abuso_repetido"]],
   ["cierre", ["observaciones"]],
   ["seguimiento", ["sg_cirugia", "sg_cirugia_cuando", "sg_psyllium", "sg_psyllium_apego", "sg_banos_ind", "sg_banos_hecho", "sg_meds_ind", "sg_meds_ind_cual", "sg_meds_ind_apego", "sg_meds_otros", "sg_meds_otros_cual", "sg_dilat", "sg_dilat_mm", "sg_dilat_semana", "sg_dilat_molestias", "sg_motivo"]],
-  ["sg_sintomas", ["sg_sangrado_color", "sg_sangrado_coagulos", "sg_sangrado_donde", "sg_dolor_tipo", "sg_dolor_cuando", "sg_dolor_duracion", "sg_dolor_noche"]],
+  ["sg_sintomas", ["sg_sangrado_color", "sg_sangrado_coagulos", "sg_sangrado_donde", "sg_dolor_tipo", "sg_dolor_cuando", "sg_dolor_duracion", "sg_dolor_noche", "sg_comezon_noche"]],
   ["sg_evac", ["sg_evac_dia", "sg_evac_cada", "sg_bristol", "sg_pujar", "sg_tenesmo", "sg_comidas", "sg_fruta", "sg_verdura", "sg_agua", "sg_tiempo_antes", "sg_tiempo_ahora", "sg_toallas_usaba", "sg_toallas_suspendio"]]
 ].forEach(pair => pair[1].forEach(id => { BLOCK_OF[id] = pair[0]; }));
 // Preguntas que ya no tienen pantalla propia porque se capturan dentro de otra (pantallas combinadas).
@@ -3917,7 +3934,7 @@ const BOOTY_MASK = {
   // Bailarín oficial (Dr. Agus 24/11/2026), para doxy_malestar No. Tres capas como v7b, animado 80 cuadros, fondo transparente.
   booty_baile: { base:"assets/booty_icons/APROBADO_booty_bailarin", label:"Booty bailando, sin malestar", capas:["relleno","rubor","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_bailarin.gif" },
   // Fiesta oficial (Dr. Agus 25/11/2026): reemplaza el baile de «gracias». Apaisada 480×220, relleno + línea en color de tema, sin rubor. Confeti a color encima (excepción aprobada, no se recolorea).
-  booty_fiesta: { base:"assets/booty_icons/APROBADO_booty_fiesta", label:"Booty de fiesta, celebrando que terminaste", capas:["relleno","linea"], anim:true, ratio:"480/220", fallback:"assets/booty_icons/APROBADO_booty_fiesta.gif" }
+  booty_fiesta: { img:"assets/booty_icons/APROBADO_booty_fiesta_v4_t.webp", label:"Booty de fiesta, celebrando que terminaste", ratio:"480/260", colorOriginal:true }
 };
 /* Imagen de pérdida de peso (Dr. Agus 20/11/2026): LGBT -> drag; los demás (incluye hombre heterosexual,
    sin respuesta o "Prefiero no responder") -> bikini (v3).
@@ -4133,6 +4150,19 @@ function bootyStartAnim(box, d, urls) {
 function montarBootyFx(host) {
   if (!host) return;
   host.innerHTML = "";
+  const imgBase = host.getAttribute("data-img-base");
+  if (imgBase) {
+    /* Pieza a color tal cual (sin máscaras ni var(--tema)): webp animado con respaldo GIF/PNG. */
+    const im = el("img", { className:"booty-fiesta-img" }); im.alt = ""; im.setAttribute("aria-hidden", "true"); im.setAttribute("decoding", "async");
+    const fb = [imgBase + "_t_240.webp", imgBase + ".gif", imgBase + "_t.png"].map(bootyAssetUrl);
+    let k = 0;
+    im.onerror = () => { im.removeAttribute("srcset"); im.removeAttribute("sizes"); if (k < fb.length) im.src = fb[k++]; };
+    im.srcset = bootyAssetUrl(imgBase + "_t_240.webp") + " 240w, " + bootyAssetUrl(imgBase + "_t.webp") + " 480w";
+    im.sizes = "(max-width: 480px) 100vw, 480px";
+    im.src = bootyAssetUrl(imgBase + "_t.webp");
+    host.appendChild(im);
+    return;
+  }
   host.style.setProperty("--tema", bootyTemaColor());
   const m = bootyMask(host.getAttribute("data-slot"));
   if (m) { m.setAttribute("aria-hidden", "true"); host.appendChild(m); }
@@ -4285,7 +4315,7 @@ const ABAJO = ids => Object.fromEntries(ids.map(i => [i, "down"]));
   ["evac_dia", ["evac_cada"]],
   ["dolor_evac", ["dolor_inicio","dolor_previo","dolor_previo_desde","dolor_episodios_anio","dolor_eva","dolor_tipo","dolor_cuando","dolor_duracion","dolor_espontaneo","dfa_duracion","dfa_entre","dfa_frecuencia","dfa_3meses","dfa_6meses","dfa_caracter","dfa_desencadena"]],
   ["suplementos", ["suplementos_cual","suplementos_tiempo"]],
-  ["comezon", ["comezon_inicio","comezon_rascado"]],
+  ["comezon", ["comezon_inicio","comezon_noche","comezon_rascado"]],
   ["cuerpo_extranio", ["cuerpo_extranio_inicio","cuerpo_extranio_tamano","cuerpo_extranio_sale","cuerpo_extranio_duele","ce_dolor_desde","ce_dolor_eva","ce_dolor_tipo","cuerpo_extranio_dolor"]],
 
   ["hisopo_anal", pref("hisopo_", ["hisopo_anal"])],
@@ -4861,7 +4891,7 @@ function renderNumQual(host, id, q, onChange, redraw) {
   ];
   const cur = parseNumQual(val(id));
   const pndOn = isPndToken(val(id));
-  let kind = pndOn ? "" : (cur.q || (state.numQual && state.numQual[id]) || "");
+  let kind = pndOn ? "" : (cur.q || (state.numQual && state.numQual[id]) || q.qualDefault || "");
   const wrap = el("div", { className:"uf nq" });
   const seg = el("div", { className:"uf-units nq-units" });
   seg.setAttribute("role", "group");
@@ -4882,7 +4912,7 @@ function renderNumQual(host, id, q, onChange, redraw) {
     });
     pre.textContent = kind ? preOf(kind) : "";
     inp.placeholder = phOf(kind);
-    row.hidden = !kind;
+    row.hidden = !kind && !q.numAlways;
   };
   const clearPnd = () => {
     if (isPndToken(val(id))) delete state.answers[id];
@@ -4891,6 +4921,7 @@ function renderNumQual(host, id, q, onChange, redraw) {
   };
   const guarda = () => {
     inp.value = inp.value.replace(/\D/g, "").slice(0, q.maxLen || 4);
+    if (!kind && q.qualDefault) { kind = q.qualDefault; pinta(); }
     (state.numQual = state.numQual || {})[id] = kind;
     clearPnd();
     const enc = encNumQual(kind, inp.value);
@@ -7692,6 +7723,10 @@ function composePruritoNote() {
   const parts = [];
   if (c === "Ocasional") parts.push("ocasional");
   if (has("comezon_inicio")) parts.push(durNota(val("comezon_inicio")) || ("inició " + lowerJoin(ans("comezon_inicio"))));
+  const nz = ans("comezon_noche");
+  if (nz === "Solo en las noches") parts.push("solo nocturna");
+  else if (nz === "Sí, más en las noches") parts.push("predominio nocturno");
+  else if (nz === "No, igual de día y de noche") parts.push("sin predominio nocturno");
   if (ans("comezon_rascado") === "Sí") parts.push("conduce al rascado");
   else if (ans("comezon_rascado") === "No") parts.push("no conduce al rascado");
   return parts.join(", ") || "sí";
@@ -8027,6 +8062,12 @@ function composeSgSintomaLine(key, label, opts) {
     if (d) bits.push(d.replace(/^tipo /, ""));
     if (ans("sg_sangrado_coagulos") === "Sí") bits.push("con coágulos");
     else if (ans("sg_sangrado_coagulos") === "No") bits.push("sin coágulos");
+  }
+  if (key === "comezon") {
+    const nz = ans("sg_comezon_noche");
+    if (nz === "Solo en las noches") bits.push("solo nocturna");
+    else if (nz === "Sí, más en las noches") bits.push("predominio nocturno");
+    else if (nz === "No, igual de día y de noche") bits.push("sin predominio nocturno");
   }
   if (key === "dolor") {
     if (has("sg_dolor_tipo")) bits.push("tipo " + lowerJoin(ans("sg_dolor_tipo")));
@@ -8396,6 +8437,7 @@ const SIMULADO = {
     suplementos: "No",
     comezon: "Sí",
     comezon_inicio: "3 meses",
+    comezon_noche: "Sí, más en las noches",
     comezon_rascado: "No",
     toallas: "No",
     meds_topicos: "No",
