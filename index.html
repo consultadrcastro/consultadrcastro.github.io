@@ -3877,59 +3877,59 @@ var CHAIN_CTX = null;
 /* Animaciones de Booty teñidas con el tema: capa "línea" + capa "rubor" (máscaras blancas con alfa). Ver booty/formulario/NOTA_CONSULTA_rubor_fiebre.md v4 */
 const BOOTY_MASK = {
   // ===== Piezas aprobadas por el Dr. Agus (24-25/11/2026), integradas el 25/11/2026. Una tinta: línea en color de tema, relleno blanco. =====
-  booty_bano_asiento: { base:"assets/booty_icons/APROBADO_booty_bano_asiento_v3", label:"Booty sentado en la tina de baño de asiento", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_bano_asiento_v3_t.png" },
-  booty_pomada: { base:"assets/booty_icons/APROBADO_booty_pomada_v2", label:"Tubo de pomada", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_pomada_v2_t.png" },
+  booty_bano_asiento: { base:"assets/booty_icons/APROBADO_booty_bano_asiento_v3", label:"Booty sentado en la tina de baño de asiento", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_bano_asiento_v3_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_bano_asiento_v3_relleno_tira.webp", rubor:"assets/booty_icons/APROBADO_booty_bano_asiento_v3_rubor_tira.webp", linea:"assets/booty_icons/APROBADO_booty_bano_asiento_v3_linea_tira.webp", frames:60, cols:10, w:240, h:240, dur:40 } },
+  booty_pomada: { base:"assets/booty_icons/APROBADO_booty_pomada_v2", label:"Tubo de pomada", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_pomada_v2_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_pomada_v2_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_pomada_v2_linea_tira.webp", frames:75, cols:10, w:240, h:240, dur:40 } },
   booty_condon: { base:"assets/booty_icons/APROBADO_booty_condon", label:"Condón con carita sonriente", capas:["relleno","linea"], fallback:"assets/booty_icons/APROBADO_booty_condon_t.png" },
   booty_ejercicio: { base:"assets/booty_icons/APROBADO_booty_ejercicio_v2", label:"Booty con una mancuerna", capas:["relleno","rubor","linea"], fallback:"assets/booty_icons/APROBADO_booty_ejercicio_v2_t.png" },
-  booty_pensando: { base:"assets/booty_icons/APROBADO_booty_pensando", label:"Booty pensando", capas:["relleno","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_pensando_t.png" },
+  booty_pensando: { base:"assets/booty_icons/APROBADO_booty_pensando", label:"Booty pensando", capas:["relleno","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_pensando_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_pensando_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_pensando_linea_tira.webp", frames:75, cols:10, w:240, h:300, dur:40 } },
   // Respaldo aprobado para doxy_malestar No (la pieza principal sigue siendo el bailarín):
   booty_panza_bien: { base:"assets/booty_icons/APROBADO_booty_panza_bien", label:"Booty sobándose la panza, contento", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_panza_bien_t.png" },
-  booty_sii_frecuencia: { base:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3", label:"Booty con dolor y una escala de cuántas veces evacúa", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3_t.png" },
-  booty_sii_semana: { base:"assets/booty_icons/APROBADO_booty_sii_semana_v2", label:"Booty con dolor y un calendario de 4 semanas", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_semana_v2_t.png" },
-  booty_sii_3meses: { base:"assets/booty_icons/APROBADO_booty_sii_3meses_v2", label:"Booty con tres hojas de calendario", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_3meses_v2_t.png" },
-  booty_sii_6meses: { base:"assets/booty_icons/APROBADO_booty_sii_6meses_v2", label:"Booty con seis hojas de calendario", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_6meses_v2_t.png" },
-  booty_no_leche: { base:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2", label:"Booty rechaza una caja de leche", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2_t.png" },
-  booty_sonriendo: { base:"assets/booty_icons/APROBADO_booty_sonriendo_v3", label:"Booty sonriendo", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sonriendo_v3_t.png" },
-  booty_mascota_perro: { base:"assets/booty_icons/APROBADO_booty_mascota_perro", label:"Perrito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_perro_t.png" },
-  booty_mascota_gato: { base:"assets/booty_icons/APROBADO_booty_mascota_gato", label:"Gatito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_gato_t.png" },
-  booty_mascota_ave: { base:"assets/booty_icons/APROBADO_booty_mascota_ave", label:"Pajarito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_ave_t.png" },
-  booty_mascota_pez: { base:"assets/booty_icons/APROBADO_booty_mascota_pez", label:"Pececito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_pez_t.png" },
-  booty_mascota_conejo: { base:"assets/booty_icons/APROBADO_booty_mascota_conejo", label:"Conejito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_conejo_t.png" },
-  booty_mascota_hamster: { base:"assets/booty_icons/APROBADO_booty_mascota_hamster", label:"Hámster en su rueda", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_hamster_t.png" },
-  booty_mascota_tortuga: { base:"assets/booty_icons/APROBADO_booty_mascota_tortuga", label:"Tortuguita", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_tortuga_t.png" },
-  booty_mascota_reptil: { base:"assets/booty_icons/APROBADO_booty_mascota_reptil", label:"Lagartija", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_reptil_t.png" },
-  booty_fam_abuela: { base:"assets/booty_icons/APROBADO_booty_fam_abuela", label:"Booty abuela", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_abuela_t.png" },
-  booty_fam_abuelo: { base:"assets/booty_icons/APROBADO_booty_fam_abuelo", label:"Booty abuelo", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_abuelo_t.png" },
-  booty_fam_mama: { base:"assets/booty_icons/APROBADO_booty_fam_mama", label:"Booty mamá", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_mama_t.png" },
-  booty_fam_papa: { base:"assets/booty_icons/APROBADO_booty_fam_papa", label:"Booty papá", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_papa_t.png" },
-  booty_fam_hermanos: { base:"assets/booty_icons/APROBADO_booty_fam_hermanos", label:"Booty hermana y hermano", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hermanos_t.png" },
-  booty_fam_hijos: { base:"assets/booty_icons/APROBADO_booty_fam_hijos_v2", label:"Booty hija e hijo", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hijos_v2_t.png" },
+  booty_sii_frecuencia: { base:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3", label:"Booty con dolor y una escala de cuántas veces evacúa", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sii_frecuencia_v3_linea_tira.webp", frames:48, cols:10, w:240, h:240, dur:[[50,5],[750,1],[50,5],[750,1],[50,5],[750,1],[50,5],[750,1],[50,5],[750,1],[50,5],[750,1],[50,5],[750,1],[50,5],[750,1]] } },
+  booty_sii_semana: { base:"assets/booty_icons/APROBADO_booty_sii_semana_v2", label:"Booty con dolor y un calendario de 4 semanas", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_semana_v2_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sii_semana_v2_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sii_semana_v2_linea_tira.webp", frames:107, cols:10, w:240, h:240, dur:[[80,1],[40,52],[120,1],[40,53]] } },
+  booty_sii_3meses: { base:"assets/booty_icons/APROBADO_booty_sii_3meses_v2", label:"Booty con tres hojas de calendario", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_3meses_v2_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sii_3meses_v2_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sii_3meses_v2_linea_tira.webp", frames:100, cols:10, w:240, h:240, dur:40 } },
+  booty_sii_6meses: { base:"assets/booty_icons/APROBADO_booty_sii_6meses_v2", label:"Booty con seis hojas de calendario", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_6meses_v2_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sii_6meses_v2_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sii_6meses_v2_linea_tira.webp", frames:138, cols:10, w:240, h:240, dur:[[40,2],[80,1],[40,133],[80,1],[40,1]] } },
+  booty_no_leche: { base:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2", label:"Booty rechaza una caja de leche", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sin_lacteos_v2_linea_tira.webp", frames:50, cols:10, w:240, h:240, dur:40 } },
+  booty_sonriendo: { base:"assets/booty_icons/APROBADO_booty_sonriendo_v3", label:"Booty sonriendo", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sonriendo_v3_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sonriendo_v3_relleno_tira.webp", rubor:"assets/booty_icons/APROBADO_booty_sonriendo_v3_rubor_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sonriendo_v3_linea_tira.webp", frames:75, cols:10, w:240, h:240, dur:40 } },
+  booty_mascota_perro: { base:"assets/booty_icons/APROBADO_booty_mascota_perro", label:"Perrito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_perro_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_perro_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_perro_linea_tira.webp", frames:49, cols:10, w:240, h:240, dur:[[40,37],[80,1],[40,11]] } },
+  booty_mascota_gato: { base:"assets/booty_icons/APROBADO_booty_mascota_gato", label:"Gatito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_gato_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_gato_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_gato_linea_tira.webp", frames:47, cols:10, w:240, h:240, dur:[[320,1],[40,22],[640,1],[40,22],[280,1]] } },
+  booty_mascota_ave: { base:"assets/booty_icons/APROBADO_booty_mascota_ave", label:"Pajarito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_ave_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_ave_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_ave_linea_tira.webp", frames:44, cols:10, w:240, h:240, dur:[[200,1],[40,37],[80,1],[40,4],[80,1]] } },
+  booty_mascota_pez: { base:"assets/booty_icons/APROBADO_booty_mascota_pez", label:"Pececito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_pez_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_pez_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_pez_linea_tira.webp", frames:50, cols:10, w:240, h:240, dur:40 } },
+  booty_mascota_conejo: { base:"assets/booty_icons/APROBADO_booty_mascota_conejo", label:"Conejito", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_conejo_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_conejo_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_conejo_linea_tira.webp", frames:58, cols:10, w:240, h:240, dur:[[40,37],[80,1],[40,13],[80,1],[40,6]] } },
+  booty_mascota_hamster: { base:"assets/booty_icons/APROBADO_booty_mascota_hamster", label:"Hámster en su rueda", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_hamster_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_hamster_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_hamster_linea_tira.webp", frames:40, cols:10, w:240, h:240, dur:40 } },
+  booty_mascota_tortuga: { base:"assets/booty_icons/APROBADO_booty_mascota_tortuga", label:"Tortuguita", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_tortuga_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_tortuga_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_tortuga_linea_tira.webp", frames:71, cols:10, w:240, h:240, dur:[[440,1],[40,69],[400,1]] } },
+  booty_mascota_reptil: { base:"assets/booty_icons/APROBADO_booty_mascota_reptil", label:"Lagartija", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_mascota_reptil_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_mascota_reptil_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_mascota_reptil_linea_tira.webp", frames:60, cols:10, w:240, h:240, dur:40 } },
+  booty_fam_abuela: { base:"assets/booty_icons/APROBADO_booty_fam_abuela", label:"Booty abuela", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_abuela_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_fam_abuela_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_fam_abuela_linea_tira.webp", frames:48, cols:10, w:240, h:270, dur:[[40,12],[80,1],[40,23],[80,1],[40,11]] } },
+  booty_fam_abuelo: { base:"assets/booty_icons/APROBADO_booty_fam_abuelo", label:"Booty abuelo", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_abuelo_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_fam_abuelo_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_fam_abuelo_linea_tira.webp", frames:48, cols:10, w:240, h:270, dur:[[40,12],[80,1],[40,23],[80,1],[40,11]] } },
+  booty_fam_mama: { base:"assets/booty_icons/APROBADO_booty_fam_mama", label:"Booty mamá", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_mama_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_fam_mama_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_fam_mama_linea_tira.webp", frames:48, cols:10, w:240, h:270, dur:[[40,12],[80,1],[40,23],[80,1],[40,11]] } },
+  booty_fam_papa: { base:"assets/booty_icons/APROBADO_booty_fam_papa", label:"Booty papá", capas:["relleno","linea"], anim:true, ratio:"480/540", fallback:"assets/booty_icons/APROBADO_booty_fam_papa_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_fam_papa_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_fam_papa_linea_tira.webp", frames:48, cols:10, w:240, h:270, dur:[[40,12],[80,1],[40,23],[80,1],[40,11]] } },
+  booty_fam_hermanos: { base:"assets/booty_icons/APROBADO_booty_fam_hermanos", label:"Booty hermana y hermano", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hermanos_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_fam_hermanos_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_fam_hermanos_linea_tira.webp", frames:48, cols:10, w:240, h:144, dur:[[40,12],[80,1],[40,23],[80,1],[40,11]] } },
+  booty_fam_hijos: { base:"assets/booty_icons/APROBADO_booty_fam_hijos_v2", label:"Booty hija e hijo", capas:["relleno","linea"], anim:true, ratio:"480/288", fallback:"assets/booty_icons/APROBADO_booty_fam_hijos_v2_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_fam_hijos_v2_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_fam_hijos_v2_linea_tira.webp", frames:48, cols:10, w:240, h:144, dur:[[40,12],[80,1],[40,23],[80,1],[40,11]] } },
   booty_inicio_base: { base:"assets/booty_icons/APROBADO_booty_inicio_base", label:"Booty bailando", capas:["relleno","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_inicio_base_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_inicio_base_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_inicio_base_linea_tira.webp", frames:80, cols:10, w:240, h:300 } },
   booty_bebe_chupon: { base:"assets/booty_icons/APROBADO_booty_bebe_chupon", label:"Booty bebé con chupón", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_bebe_chupon_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_bebe_chupon_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_bebe_chupon_linea_tira.webp", frames:50, cols:10, w:240, h:240 } },
   booty_patines: { base:"assets/booty_icons/APROBADO_booty_patines", label:"Booty patinando", capas:["relleno","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_patines_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_patines_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_patines_linea_tira.webp", frames:50, cols:10, w:240, h:240 } },
-  booty_fiebre: { base:"assets/booty_icons/APROBADO_booty_fiebre_v4", label:"Booty con fiebre, termómetro y bolsa de hielo", capas:["rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_fiebre_v4_t.png" },
-  booty_peso: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_v3", label:"Booty y la pérdida de peso", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_perdida_peso_v3_t.png" },
+  booty_fiebre: { base:"assets/booty_icons/APROBADO_booty_fiebre_v4", label:"Booty con fiebre, termómetro y bolsa de hielo", capas:["rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_fiebre_v4_t.png", tira:{ rubor:"assets/booty_icons/APROBADO_booty_fiebre_v4_rubor_tira.webp", linea:"assets/booty_icons/APROBADO_booty_fiebre_v4_linea_tira.webp", frames:100, cols:10, w:240, h:240, dur:40 } },
+  booty_peso: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_v3", label:"Booty y la pérdida de peso", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_perdida_peso_v3_t.png", tira:{ linea:"assets/booty_icons/APROBADO_booty_perdida_peso_v3_linea_tira.webp", frames:90, cols:10, w:240, h:240, dur:[[400,1],[40,88],[80,1]] } },
   // variante drag (aprobada): pacientes LGBT. Si faltara el archivo, no se muestra imagen
-  booty_bano_tiempo: { base:"assets/booty_icons/APROBADO_booty_bano_tiempo", label:"Booty en el baño", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_bano_tiempo_t.png" },
+  booty_bano_tiempo: { base:"assets/booty_icons/APROBADO_booty_bano_tiempo", label:"Booty en el baño", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_bano_tiempo_t.png", tira:{ linea:"assets/booty_icons/APROBADO_booty_bano_tiempo_linea_tira.webp", frames:100, cols:10, w:240, h:240, dur:40 } },
   // 4 piezas aprobadas por Booty (24/11/2026, 14:18). Tres capas como v7b: relleno → rubor → línea, color de tema. Rubor vacío a propósito.
-  booty_cirujano: { base:"assets/booty_icons/APROBADO_booty_cirujano_v2", label:"Booty vestido de cirujano", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_cirujano_v2_t.png" },
-  booty_doxy_reloj: { base:"assets/booty_icons/APROBADO_booty_doxy_tomar", label:"Booty con pastilla y reloj", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_doxy_tomar_t.png" },
-  booty_sii_dolor: { base:"assets/booty_icons/APROBADO_booty_sii_dolor", label:"Booty con dolor de panza tipo cólico", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_dolor_t.png" },
-  booty_sii_evacuar: { base:"assets/booty_icons/APROBADO_booty_sii_evacuar", label:"Booty en el baño, con alivio", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_evacuar_t.png" },
+  booty_cirujano: { base:"assets/booty_icons/APROBADO_booty_cirujano_v2", label:"Booty vestido de cirujano", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_cirujano_v2_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_cirujano_v2_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_cirujano_v2_linea_tira.webp", frames:74, cols:10, w:240, h:240, dur:[[40,37],[80,1],[40,36]] } },
+  booty_doxy_reloj: { base:"assets/booty_icons/APROBADO_booty_doxy_tomar", label:"Booty con pastilla y reloj", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_doxy_tomar_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_doxy_tomar_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_doxy_tomar_linea_tira.webp", frames:50, cols:10, w:240, h:240, dur:40 } },
+  booty_sii_dolor: { base:"assets/booty_icons/APROBADO_booty_sii_dolor", label:"Booty con dolor de panza tipo cólico", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_dolor_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sii_dolor_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sii_dolor_linea_tira.webp", frames:50, cols:10, w:240, h:240, dur:40 } },
+  booty_sii_evacuar: { base:"assets/booty_icons/APROBADO_booty_sii_evacuar", label:"Booty en el baño, con alivio", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_sii_evacuar_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_sii_evacuar_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_sii_evacuar_linea_tira.webp", frames:50, cols:10, w:240, h:240, dur:40 } },
   // Graduado oficial (Dr. Agus 24/11/2026), en «Último grado de estudios». Tres capas como v7b: relleno (blanco) → rubor → línea, color de tema. Animado (borla).
-  booty_graduacion: { base:"assets/booty_icons/APROBADO_booty_graduado", label:"Booty graduado, con birrete", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_graduado_alfa.webp" },
-  booty_perdida_peso_drag: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_drag", label:"Booty y la pérdida de peso", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_perdida_peso_drag_t.png" },
+  booty_graduacion: { base:"assets/booty_icons/APROBADO_booty_graduado", label:"Booty graduado, con birrete", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_graduado_alfa.webp", tira:{ relleno:"assets/booty_icons/APROBADO_booty_graduado_relleno_tira.webp", rubor:"assets/booty_icons/APROBADO_booty_graduado_rubor_tira.webp", linea:"assets/booty_icons/APROBADO_booty_graduado_linea_tira.webp", frames:75, cols:10, w:240, h:240, dur:40 } },
+  booty_perdida_peso_drag: { base:"assets/booty_icons/APROBADO_booty_perdida_peso_drag", label:"Booty y la pérdida de peso", capas:["linea"], anim:true, sinRubor:true, fallback:"assets/booty_icons/APROBADO_booty_perdida_peso_drag_t.png", tira:{ linea:"assets/booty_icons/APROBADO_booty_perdida_peso_drag_linea_tira.webp", frames:90, cols:10, w:240, h:240, dur:[[400,1],[40,88],[80,1]] } },
   // Apenado v7d (oficial, Dr. Agus 24/11/2026, rubor al 45%). Tres capas: relleno → rubor → línea, color de tema, animado. Fallback: _alfa.webp, luego GIF.
-  booty_apenado: { base:"assets/booty_icons/APROBADO_booty_apenado_v7d", label:"Booty apenado, cubriéndose la cara con las aletas", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_apenado_v7d_alfa.webp" },
+  booty_apenado: { base:"assets/booty_icons/APROBADO_booty_apenado_v7d", label:"Booty apenado, cubriéndose la cara con las aletas", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_apenado_v7d_alfa.webp", tira:{ relleno:"assets/booty_icons/APROBADO_booty_apenado_v7d_relleno_tira.webp", rubor:"assets/booty_icons/APROBADO_booty_apenado_v7d_rubor_tira.webp", linea:"assets/booty_icons/APROBADO_booty_apenado_v7d_linea_tira.webp", frames:50, cols:10, w:240, h:240, dur:40 } },
   // Reposo oficial (Dr. Agus 24/11/2026). Tres capas como apenado v7b: relleno (blanco) → rubor → línea, color de tema, precarga sincronizada. El rubor está vacío a propósito.
-  booty_reposo: { base:"assets/booty_icons/APROBADO_booty_reposo", label:"Booty en reposo, sonriendo", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_reposo_t.png" },
+  booty_reposo: { base:"assets/booty_icons/APROBADO_booty_reposo", label:"Booty en reposo, sonriendo", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_reposo_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_reposo_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_reposo_linea_tira.webp", frames:74, cols:10, w:240, h:240, dur:[[40,37],[80,1],[40,36]] } },
   // Dolor oficial (Dr. Agus 24/11/2026). Tres capas como apenado v7b y reposo: relleno (blanco) → rubor → línea, color de tema. El rubor está vacío a propósito.
-  booty_dolor: { base:"assets/booty_icons/APROBADO_booty_dolor", label:"Booty con gesto de dolor", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_dolor_t.png" },
+  booty_dolor: { base:"assets/booty_icons/APROBADO_booty_dolor", label:"Booty con gesto de dolor", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_dolor_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_dolor_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_dolor_linea_tira.webp", frames:74, cols:10, w:240, h:240, dur:[[40,37],[80,1],[40,36]] } },
   booty_abrazo: { base:"assets/booty_icons/booty_abrazo", label:"Booty dando un abrazo cálido", sinRubor:true, fallback:"assets/booty_icons/booty_abrazo_t.png" },
   // Panza náuseas oficial (Dr. Agus 24/11/2026), para doxy_malestar Sí. Tres capas como v7b/reposo/dolor: relleno (blanco) → rubor → línea, color de tema. El rubor está vacío a propósito.
-  booty_panza_nauseas: { base:"assets/booty_icons/APROBADO_booty_panza_nauseas", label:"Booty con malestar intestinal, tocándose la panza", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_panza_nauseas_t.png" },
+  booty_panza_nauseas: { base:"assets/booty_icons/APROBADO_booty_panza_nauseas", label:"Booty con malestar intestinal, tocándose la panza", capas:["relleno","rubor","linea"], anim:true, fallback:"assets/booty_icons/APROBADO_booty_panza_nauseas_t.png", tira:{ relleno:"assets/booty_icons/APROBADO_booty_panza_nauseas_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_panza_nauseas_linea_tira.webp", frames:50, cols:10, w:240, h:240, dur:40 } },
   // Bailarín oficial (Dr. Agus 24/11/2026), para doxy_malestar No. Tres capas como v7b, animado 80 cuadros, fondo transparente.
-  booty_baile: { base:"assets/booty_icons/APROBADO_booty_bailarin", label:"Booty bailando, sin malestar", capas:["relleno","rubor","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_bailarin.gif" },
+  booty_baile: { base:"assets/booty_icons/APROBADO_booty_bailarin", label:"Booty bailando, sin malestar", capas:["relleno","rubor","linea"], anim:true, ratio:"480/600", fallback:"assets/booty_icons/APROBADO_booty_bailarin.gif", tira:{ relleno:"assets/booty_icons/APROBADO_booty_bailarin_relleno_tira.webp", linea:"assets/booty_icons/APROBADO_booty_bailarin_linea_tira.webp", frames:80, cols:10, w:240, h:300, dur:40 } },
   // Fiesta oficial (Dr. Agus 25/11/2026): reemplaza el baile de «gracias». Apaisada 480×220, relleno + línea en color de tema, sin rubor. Confeti a color encima (excepción aprobada, no se recolorea).
   booty_fiesta: { img:"assets/booty_icons/APROBADO_booty_fiesta_v4_t.webp", label:"Booty de fiesta, celebrando que terminaste", ratio:"480/260", colorOriginal:true }
 };
@@ -4035,6 +4035,9 @@ function bootyPlayTira(box, d) {
   }))).then(imgs => {
     if (dead || !imgs.some(Boolean)) return;
     const fw = t.w, fh = t.h, cols = t.cols, n = t.frames;
+    /* t.dur: ms fijos por cuadro (40 por omisión) o lista [[ms, cuadros], ...] cuando la pieza trae pausas. */
+    let durs = null;
+    if (Array.isArray(t.dur)) { durs = []; t.dur.forEach(p => { for (let q = 0; q < p[1]; q++) durs.push(p[0]); }); }
     const canvas = document.createElement("canvas");
     canvas.className = "booty-anim-c";
     canvas.setAttribute("aria-hidden", "true");
@@ -4065,12 +4068,27 @@ function bootyPlayTira(box, d) {
         octx.globalCompositeOperation = "source-over";
         ctx.drawImage(off, 0, 0);
       });
+      const ms = durs ? (durs[i] || 40) : (+t.dur || 40);
       i = (i + 1) % n;
-      timer = setTimeout(tick, 40);
+      timer = setTimeout(tick, ms);
     }
     tick();
   });
   return true;
+}
+/* Duración (ms) de cada cuadro de un webp animado, leída de los chunks ANMF (el navegador solo la da al decodificar). */
+function bootyWebpDurs(buf) {
+  const out = [];
+  try {
+    const dv = new DataView(buf);
+    let pos = 12;
+    while (pos + 8 <= dv.byteLength) {
+      const sz = dv.getUint32(pos + 4, true);
+      if (dv.getUint32(pos, false) === 0x414E4D46) out.push(dv.getUint8(pos + 20) | (dv.getUint8(pos + 21) << 8) | (dv.getUint8(pos + 22) << 16));
+      pos += 8 + sz + (sz & 1);
+    }
+  } catch (e) { return []; }
+  return out;
 }
 function bootyStartAnim(box, d, urls) {
   if (!d.anim) return;
@@ -4084,6 +4102,7 @@ function bootyStartAnim(box, d, urls) {
     if (!u) return Promise.resolve(null);
     return fetch(u).then(r => r.ok ? r.arrayBuffer() : Promise.reject(new Error("mask"))).then(buf => {
       const dec = new ImageDecoder({ data: buf, type: "image/webp" });
+      dec.__durs = bootyWebpDurs(buf);
       return (dec.completed ? dec.completed.catch(() => {}) : Promise.resolve()).then(() => dec);
     }).catch(() => null);
   })).then(function (decs) {
@@ -4102,40 +4121,52 @@ function bootyStartAnim(box, d, urls) {
       canvas.height = Math.round(h * dpr);
       const ctx = canvas.getContext("2d");
       ctx.scale(dpr, dpr);
-      const off = document.createElement("canvas");
-      off.width = w; off.height = h;
-      const octx = off.getContext("2d");
       box.appendChild(canvas);
       box.classList.add("booty-anim-on");
-      let i = 0;
+      /* Reloj real: cada capa elige su cuadro según el tiempo transcurrido y la duración propia de cada cuadro.
+         Así las capas (relleno con cuadros fusionados, línea a 40 ms) siguen sincronizadas y la pieza corre a su velocidad. */
+      const lay = decs.map(function (dec, li) {
+        if (!dec) return null;
+        const fc = (dec.tracks && dec.tracks.selectedTrack && dec.tracks.selectedTrack.frameCount) || n;
+        const ds = dec.__durs && dec.__durs.length === fc ? dec.__durs : null;
+        const cum = []; let acc = 0;
+        for (let k = 0; k < fc; k++) { cum.push(acc); acc += ds ? (ds[k] || 40) : 40; }
+        const off = document.createElement("canvas"); off.width = w; off.height = h;
+        return { dec: dec, kind: capas[li], cum: cum, total: acc || 40, last: -1, tema: "", off: off, octx: off.getContext("2d") };
+      });
+      const T0 = performance.now();
       function tick() {
         if (dead || !box.isConnected) { stop(); return; }
+        const t = performance.now() - T0;
         const tema = (getComputedStyle(box).getPropertyValue("--tema") || "").trim() || bootyTemaColor();
-        let delay = 40;
-        const jobs = capas.map(function (capa, li) {
-          const dec = decs[li];
-          if (!dec) return Promise.resolve(null);
-          const fc = (dec.tracks && dec.tracks.selectedTrack && dec.tracks.selectedTrack.frameCount) || n;
-          return dec.decode({ frameIndex: i % fc }).catch(() => null);
+        const jobs = lay.map(function (l) {
+          if (!l) return Promise.resolve(false);
+          const lt = t % l.total;
+          let k = l.cum.length - 1;
+          while (k > 0 && l.cum[k] > lt) k--;
+          if (k === l.last && l.tema === tema) return Promise.resolve(false);
+          return l.dec.decode({ frameIndex: k }).then(function (r) {
+            if (dead) { r.image.close(); return false; }
+            const o = l.octx;
+            o.globalCompositeOperation = "source-over";
+            o.clearRect(0, 0, w, h);
+            o.drawImage(r.image, 0, 0, w, h);
+            o.globalCompositeOperation = "source-in";
+            o.fillStyle = l.kind === "relleno" ? "#fff" : tema;
+            o.fillRect(0, 0, w, h);
+            o.globalCompositeOperation = "source-over";
+            r.image.close();
+            l.last = k; l.tema = tema;
+            return true;
+          }).catch(() => false);
         });
         Promise.all(jobs).then(function (res) {
-          if (dead || !box.isConnected) { res.forEach(r => { if (r) r.image.close(); }); return; }
-          ctx.clearRect(0, 0, w, h);
-          res.forEach(function (r, li) {
-            if (!r) return;
-            if (r.image.duration) delay = Math.max(delay, r.image.duration / 1000);
-            octx.globalCompositeOperation = "source-over";
-            octx.clearRect(0, 0, w, h);
-            octx.drawImage(r.image, 0, 0, w, h);
-            octx.globalCompositeOperation = "source-in";
-            octx.fillStyle = capas[li] === "relleno" ? "#fff" : tema;
-            octx.fillRect(0, 0, w, h);
-            octx.globalCompositeOperation = "source-over";
-            ctx.drawImage(off, 0, 0);
-            r.image.close();
-          });
-          i++;
-          timer = setTimeout(tick, Math.max(20, Math.min(delay || 40, 200)));
+          if (dead || !box.isConnected) return;
+          if (res.some(Boolean)) {
+            ctx.clearRect(0, 0, w, h);
+            lay.forEach(function (l) { if (l && l.last >= 0) ctx.drawImage(l.off, 0, 0); });
+          }
+          timer = setTimeout(tick, 40);
         });
       }
       tick();
