@@ -1751,7 +1751,7 @@ add({ id:"suplementos_tiempo", mode:"primera", section:"Hábito intestinal", hul
   title:"¿Cuánto tiempo llevas tomándolo?", hint:"Elige días, meses o años y luego escribe cuántos.",
   showIf:{ id:"suplementos", in:["Sí"] } });
 
-const COMEZON_NOCHE_OPTS = ["No, igual de día y de noche","Sí, más en las noches","Solo en las noches"];
+const COMEZON_NOCHE_OPTS = ["No","Sí"];
 add({ id:"comezon", mode:"primera", section:"Hábito intestinal", huli:"gi",
   type:"mc", required:true,
   title:"¿Te da comezón en el ano?",
@@ -3136,12 +3136,9 @@ add({ id:"debut", mode:"primera", section:"Preguntas personalizadas", huli:"pers
   hint:"Escribe la edad con números.",
    });
 add({ id:"parejas", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
-  type:"numqual", required:true, numQual:true, maxLen:4,
-  title:"¿Cuántas parejas sexuales has tenido en tu vida?",
-  hint:"Escribe el número. Si no lo recuerdas con exactitud, elige «Aprox. más de» o «Aprox. menos de». No hay una respuesta correcta; esto solo nos ayuda a cuidarte mejor.",
-  /* El campo del número siempre se ve, con «Exacto» elegido; los valores guardados no cambian ("15", "Más de 30", "Menos de 10"). */
-  numAlways:true, qualDefault:"exacto",
-  qualOpts:[{ v:"exacto", label:"Exacto" }, { v:"más de", label:"Aprox. más de" }, { v:"menos de", label:"Aprox. menos de" }],
+  type:"number", required:true, maxLen:4,
+  title:"¿Aproximadamente cuántas parejas sexuales has tenido en tu vida?",
+  hint:"Escribe un número aproximado; no tiene que ser exacto.",
   placeholder:"Ej. 15" });
 add({ id:"its", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
   type:"check", required:true, other:true, exclusive:["Ninguna"], advanceOnExclusive:true, grid:2, itsGrid:true,
@@ -4466,7 +4463,7 @@ function drawStep(st, sub) {
     inp.placeholder = st.placeholder || (num ? "0" : ""); inp.autocomplete = "off";
     inp.value = (val(st.id) === PND || (st.noRecuerdo && val(st.id) === "No me acuerdo")) ? "" : String(val(st.id) || "").replace(st.suffix ? / ?kg$/i : /$^/, "");
     inp.addEventListener("input", () => {
-      if (num) inp.value = st.numeric ? inp.value.replace(/[^\d.,]/g, "").slice(0, 5) : inp.value.replace(/\D/g, "").slice(0, 3);
+      if (num) inp.value = st.numeric ? inp.value.replace(/[^\d.,]/g, "").slice(0, st.maxLen || 5) : inp.value.replace(/\D/g, "").slice(0, st.maxLen || 3);
       if (inp.value.trim()) state.answers[st.id] = inp.value; else delete state.answers[st.id];
       refresh(true);
     });
@@ -7716,6 +7713,12 @@ function composeIrritantesNote() {
   return names.join(", ") || "no";
 }
 function supTxt() { const c = ans("suplementos_cual"), d = durNota(val("suplementos_tiempo")); return [c, d].filter(Boolean).join(", "); }
+function comezonNocheBit(v) {
+  if (v === "Sí" || v === "Sí, más en las noches") return "predominio nocturno";
+  if (v === "No" || v === "No, igual de día y de noche") return "sin predominio nocturno";
+  if (v === "Solo en las noches") return "solo nocturna";
+  return "";
+}
 function composePruritoNote() {
   const c = ans("comezon");
   if (!c || c === "No") return "negado";
@@ -7723,10 +7726,8 @@ function composePruritoNote() {
   const parts = [];
   if (c === "Ocasional") parts.push("ocasional");
   if (has("comezon_inicio")) parts.push(durNota(val("comezon_inicio")) || ("inició " + lowerJoin(ans("comezon_inicio"))));
-  const nz = ans("comezon_noche");
-  if (nz === "Solo en las noches") parts.push("solo nocturna");
-  else if (nz === "Sí, más en las noches") parts.push("predominio nocturno");
-  else if (nz === "No, igual de día y de noche") parts.push("sin predominio nocturno");
+  const nzBit = comezonNocheBit(ans("comezon_noche"));
+  if (nzBit) parts.push(nzBit);
   if (ans("comezon_rascado") === "Sí") parts.push("conduce al rascado");
   else if (ans("comezon_rascado") === "No") parts.push("no conduce al rascado");
   return parts.join(", ") || "sí";
@@ -8064,10 +8065,8 @@ function composeSgSintomaLine(key, label, opts) {
     else if (ans("sg_sangrado_coagulos") === "No") bits.push("sin coágulos");
   }
   if (key === "comezon") {
-    const nz = ans("sg_comezon_noche");
-    if (nz === "Solo en las noches") bits.push("solo nocturna");
-    else if (nz === "Sí, más en las noches") bits.push("predominio nocturno");
-    else if (nz === "No, igual de día y de noche") bits.push("sin predominio nocturno");
+    const nzBit = comezonNocheBit(ans("sg_comezon_noche"));
+    if (nzBit) bits.push(nzBit);
   }
   if (key === "dolor") {
     if (has("sg_dolor_tipo")) bits.push("tipo " + lowerJoin(ans("sg_dolor_tipo")));
@@ -8437,7 +8436,7 @@ const SIMULADO = {
     suplementos: "No",
     comezon: "Sí",
     comezon_inicio: "3 meses",
-    comezon_noche: "Sí, más en las noches",
+    comezon_noche: "Sí",
     comezon_rascado: "No",
     toallas: "No",
     meds_topicos: "No",
@@ -8496,7 +8495,7 @@ const SIMULADO = {
     tamizaje_sifilis_si: "Sí", tamizaje_sifilis: "hace 4 meses", tamizaje_sifilis_res: "Negativo",
     hisopo_anal: "Sí", hisopo_cual: ["Perfil de ITS (clamidia, gonorrea y otras)"], hisopo_its_cuando: "hace 4 meses", hisopo_its_res: "Negativo",
     debut: "17",
-    parejas: "Más de 30",
+    parejas: "30",
     its: ["Gonorrea"],
     ca_anal_si: "No", ca_colon_si: "No sé", ca_colon_entendio: "Sí, ya entendí", ca_colon_si2: "No",
     trabajo_sexual_recibido: "No",
