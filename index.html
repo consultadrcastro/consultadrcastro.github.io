@@ -4632,6 +4632,7 @@ const REQ_ALT = { apellido2:"No tengo segundo apellido", cx1_lado:"No aplica", c
 const REQ_CAMBIADAS = [];
 Q.forEach(q => {
   if (q.required || q.type === "notice") return;
+  if (q.id === "abuso_sexual") return; // P7, 27/11/2026: se puede saltar; el add() ya trae required:false y «Prefiero no responder»
   if (MERGED_INTO[q.id]) return;                                   // se exigen dentro de su pantalla compuesta
   if (q.showIfFn && /=>\s*false/.test(String(q.showIfFn))) return; // preguntas retiradas (nunca se muestran)
   q.required = true; REQ_CAMBIADAS.push(q.id);
