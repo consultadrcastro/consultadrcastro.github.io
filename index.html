@@ -2956,7 +2956,8 @@ add({ id:"prep", mode:"primera", section:"Preguntas personalizadas", huli:"perso
   title:"¿Usas PrEP?",
   hint:"Profilaxis previa a la exposición para VIH.",
   options:[{v:"No uso",img:"prep_no"},{v:"Diario",img:"prep_diario"},{v:"A demanda",img:"prep_demanda"},{v:"Inyectable",img:"prep_inyectable"}],
-  showIfFn: muestraSexualidadAnal });
+  /* Si ya dijo que vive con VIH, no se pregunta por PrEP (Dr. Agus 28/11/2026). */
+  showIfFn: () => muestraSexualidadAnal() && !viveConVih() });
 add({ id:"doxy_pep", mode:"primera", section:"Preguntas personalizadas", huli:"personalizadas",
   type:"mc", required:true, title:"¿Usas Doxy PEP?",
   hint:"Doxiciclina después de una exposición, para reducir el riesgo de algunas infecciones de transmisión sexual.",
@@ -6961,6 +6962,8 @@ function compactAnswersJson() {
     if (v) others[k] = v;
   });
   if (ans("lub_usa")) answers.lubricante = composeLubricanteList();
+  /* Preguntas saltadas (p. ej. PrEP si ya vive con VIH) no se envían, igual que el resto de preguntas ocultas. */
+  if (viveConVih()) delete answers.prep;
   const payload = { modo: state.mode || "", answers: answers };
   if (Object.keys(others).length) payload.others = others;
   return JSON.stringify(payload);
@@ -7484,7 +7487,7 @@ function huliFields() {
   { const v = composeSexoRiesgo(); if (v) addF("Preguntas personalizadas", "Sexo de riesgo", v); }
   { const v = composeFistingDoble(); if (v) addF("Preguntas personalizadas", "Recepción anal con fisting o doble recepción", v); }
   addF("Preguntas personalizadas", "Orientación Sexual", ans("orientacion"), "orientacion");
-  addF("Preguntas personalizadas", "PrEP", String(ans("prep") || "").replace(/^No uso$/, "No usa"), "prep");
+  if (!viveConVih()) addF("Preguntas personalizadas", "PrEP", String(ans("prep") || "").replace(/^No uso$/, "No usa"), "prep");
   addF("Preguntas personalizadas", "Lubricante", composeLubricanteHuli(), declined("lubricante") || declined("lub_usa") ? "lubricante" : null);
   { const v = composeEnema(); if (v) addF("Preguntas personalizadas", "Enema", v); }
   addF("Preguntas personalizadas", "Anorreceptivo", ans("anorreceptivo"), "anorreceptivo");
