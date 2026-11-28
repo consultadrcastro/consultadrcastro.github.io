@@ -63,6 +63,11 @@ ol.items li::marker{font-weight:700;color:var(--purple)}
 .date{color:var(--orange);font-weight:700;white-space:nowrap}
 .group{margin:22px 0 8px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--purple);font-weight:700}
 .kicker{margin:10px 0 6px;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green-dark)}
+.fold-btn{width:100%;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;font:700 .82rem var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--purple);background:transparent;border:0;border-bottom:2px solid var(--green);padding:8px 0;cursor:pointer}
+.fold-btn::after{content:"+";flex:none;font-size:1.15rem;letter-spacing:0;color:var(--green-dark);text-transform:none}
+.fold-btn[aria-expanded="true"]::after{content:"\2013"}
+.fold-btn:hover{color:var(--green-dark)}
+.fold-panel{margin-top:8px}
 .more-btn{margin-top:8px;display:inline-flex;align-items:center;font:600 .85rem var(--font);color:var(--green-dark);background:#fff;border:1px solid #cfc6d8;border-radius:999px;padding:6px 12px;cursor:pointer}
 .more-btn:hover{border-color:var(--purple);color:var(--purple)}
 .more-list{margin-top:12px;padding:12px 14px 4px;background:var(--green-soft);border-radius:12px;border-left:3px solid var(--purple)}
@@ -130,7 +135,9 @@ a.url{word-break:break-all}
   .grid2 .sec:first-child{padding-top:10px}
   a{color:var(--green-dark);text-decoration:none}
   .more-btn{display:none!important}
-  .more-list[hidden]{display:block!important}
+  .more-list[hidden],.fold-panel[hidden]{display:block!important}
+  .fold-btn{pointer-events:none}
+  .fold-btn::after{content:none}
   .group{break-after:avoid;page-break-after:avoid}
   .foot{margin-top:8px;padding-top:6px;font-size:7.5pt}
 }

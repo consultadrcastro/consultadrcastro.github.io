@@ -26,6 +26,15 @@
   window.addEventListener('resize',onScroll);
   links.forEach(function(a){a.addEventListener('click',function(){lock=Date.now()+900;setActive(a.getAttribute('href').slice(1));});});
   onScroll();
+  document.querySelectorAll('.fold-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var panel=document.getElementById(btn.getAttribute('aria-controls'));
+      var open=btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded',open?'false':'true');
+      if(open)panel.setAttribute('hidden','');
+      else panel.removeAttribute('hidden');
+    });
+  });
   document.querySelectorAll('.more-btn').forEach(function(btn){
     var label=btn.textContent;
     btn.addEventListener('click',function(){
